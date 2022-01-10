@@ -8,6 +8,9 @@ import { Center, VStack } from "@chakra-ui/react";
 import { newsFeedArray } from "./newsFeed";
 import { AppContext } from "../../context/app";
 import { useContext } from "react";
+import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -18,10 +21,26 @@ const breakpointColumnsObj = {
 
 export default function NewsFeed() {
   const context = useContext(AppContext);
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
 
   const { setSelectedNews } = context as any;
 
-  const handleClick = (news: any) => () => {
+  const handleClick = (news: any) => async () => {
+    if (!publicKey) throw new WalletNotConnectedError();
+
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: publicKey,
+        toPubkey: Keypair.generate().publicKey,
+        lamports: 1,
+      })
+    );
+
+    const signature = await sendTransaction(transaction, connection);
+
+    await connection.confirmTransaction(signature, "processed");
+
     setSelectedNews(news);
   };
 
@@ -77,7 +96,6 @@ const style = `
 
   .outer-container {
     width:100vw;
-    height:100vh;
     padding:30px;
     background-color:#222;
   }
