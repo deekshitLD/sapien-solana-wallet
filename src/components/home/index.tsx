@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
+import { useRouter } from "next/dist/client/router";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -23,10 +24,15 @@ export default function NewsFeed() {
   const context = useContext(AppContext);
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
+  const router = useRouter();
 
   const { setSelectedNews } = context as any;
 
-  const handleClick = (news: any) => async () => {
+  const handleClick = (news: any) => () => {
+    wallet(news);
+  };
+
+  const wallet = async (news: any) => {
     if (!publicKey) throw new WalletNotConnectedError();
 
     const transaction = new Transaction().add(
@@ -39,9 +45,10 @@ export default function NewsFeed() {
 
     const signature = await sendTransaction(transaction, connection);
 
-    await connection.confirmTransaction(signature, "processed");
-
+    router.push("/news");
     setSelectedNews(news);
+
+    await connection.confirmTransaction(signature, "processed");
   };
 
   return (
@@ -54,20 +61,19 @@ export default function NewsFeed() {
           columnClassName="my-masonry-grid_column"
         >
           {newsFeedArray.map((news: any, index: number) => (
-            <Link key={index} href="/news">
-              <Center
-                bg="black !important"
-                color="white"
-                padding={10}
-                onClick={handleClick(news)}
-                className="news-item"
-              >
-                <VStack>
-                  <img width="250px" src={`${news.img}`}></img>
-                  <h3>{news.title}</h3>
-                </VStack>
-              </Center>
-            </Link>
+            <Center
+              key={index}
+              bg="black !important"
+              color="white"
+              padding={10}
+              onClick={handleClick(news)}
+              className="news-item"
+            >
+              <VStack>
+                <img width="250px" src={`${news.img}`}></img>
+                <h3>{news.title}</h3>
+              </VStack>
+            </Center>
           ))}
         </Masonry>
       </div>
