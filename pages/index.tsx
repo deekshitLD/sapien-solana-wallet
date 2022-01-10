@@ -27,7 +27,7 @@ const Index: NextPage = () => {
         </div>
 
         <Link href="news-list">
-          <Button color="white" bg="black" mt="30px">
+          <Button _hover={{ bg: "grey" }} color="white" bg="black" mt="30px">
             Go to news
           </Button>
         </Link>
