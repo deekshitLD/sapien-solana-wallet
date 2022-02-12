@@ -8,6 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Button } from "@chakra-ui/react";
+import { SignMessageButton } from "../src/components/signMessageButton";
 
 const Index: NextPage = () => {
   return (
@@ -32,6 +33,10 @@ const Index: NextPage = () => {
           </Button>
         </Link>
       </main>
+
+      <div>
+        <SignMessageButton />
+      </div>
     </div>
   );
 };
