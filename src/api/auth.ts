@@ -6,17 +6,16 @@ interface signMessageProps {
   message: any;
   signature: any;
 }
-export const verifyMessage = ({
+export const verifyMessage = async ({
   publicKey,
   message,
   signature,
 }: signMessageProps) => {
-  axios({
+  let response = await axios({
     method: "post",
     url: config.baseURL + "auth/login",
     data: { publicKey, message, signature },
     // responseType: 'stream'
-  }).then(function (response) {
-    console.log(response);
   });
+  return response;
 };

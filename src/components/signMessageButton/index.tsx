@@ -23,11 +23,12 @@ export const SignMessageButton: FC = () => {
       console.log("publicKey", message.toString());
 
       // Verify that the bytes were signed using the private key that matches the known public key
-      let res = verifyMessage({
+      let res = await verifyMessage({
         publicKey: publicKey.toBytes(),
         message: message,
         signature: signature,
       });
+      localStorage.setItem("token", res.data.authToken);
 
       alert(`Message signature: ${bs58.encode(signature)}`);
     } catch (error: any) {
