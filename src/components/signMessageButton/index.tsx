@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import bs58 from "bs58";
 import React, { FC, useCallback } from "react";
@@ -37,12 +38,8 @@ export const SignMessageButton: FC = () => {
   }, [publicKey, signMessage]);
 
   return signMessage ? (
-    <button
-      onClick={onClick}
-      disabled={!publicKey}
-      style={{ background: "red" }}
-    >
+    <Button onClick={onClick} disabled={!publicKey}>
       Sign Message
-    </button>
+    </Button>
   ) : null;
 };

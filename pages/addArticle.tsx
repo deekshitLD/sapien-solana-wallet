@@ -71,7 +71,7 @@ const AddArticle = () => {
         <Editor content={content} setContent={setContent} />
       </Box>
       <Flex justifyContent={"center"}>
-        <Stack direction="row" spacing={4}>
+        <Stack direction="row" spacing={4} color={"white"}>
           <Button variant={"outline"} onClick={handleSaveAsDraft}>
             Save as draft
           </Button>

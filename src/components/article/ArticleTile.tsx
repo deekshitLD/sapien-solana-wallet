@@ -39,6 +39,10 @@ const articleTile = ({ id, title, content }: articleTileProps) => {
       margin={5}
       maxWidth={"15rem"}
       position={"relative"}
+      _hover={{
+        transform: "scale(1.05)",
+        boxShadow: "2px 7px 0.8px 10px #888888 ",
+      }}
     >
       <Flex direction={"column"} justifyContent={"space-between"}>
         <Text fontSize="xl" noOfLines={3} marginTop={2} marginBottom={5}>

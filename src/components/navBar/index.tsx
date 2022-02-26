@@ -11,9 +11,16 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <Flex bg="white" padding={"1.5rem"}>
+        <Flex bg="black" padding={"1.5rem"} color={"white"}>
           <Link href="/">
-            <Flex alignItems={"flex-end"}>
+            <Flex
+              alignItems={"flex-end"}
+              _hover={{
+                cursor: "pointer",
+                bg: "purple.600",
+                borderRadius: "10px",
+              }}
+            >
               <Image
                 src="/Sapiens News.jpeg"
                 alt="Sapiens news logo"

@@ -15,6 +15,10 @@ a {
   box-sizing: border-box;
 }
 
+.ck {
+  background: #323232;
+}
 .ck-content {
   min-height: 400px;
+  background: #323232;
 }
