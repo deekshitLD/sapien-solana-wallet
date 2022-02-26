@@ -7,7 +7,7 @@ import { listArticles } from "../src/api/article";
 
 import { NextPage } from "next";
 import Layout from "../src/components/Layout";
-
+import { Spinner } from "@chakra-ui/react";
 const articleList = () => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
@@ -26,7 +26,7 @@ const articleList = () => {
           </Button>
         </Link>
       </Flex>
-      <Flex alignItems={"stretch"} justifyContent={"space-between"}>
+      <Flex alignItems={"stretch"} wrap={"wrap"}>
         {console.log(articles)}
         {articles.length > 0 ? (
           articles.map((item: any) => {
@@ -40,7 +40,11 @@ const articleList = () => {
             );
           })
         ) : (
-          <>Loading...</>
+          <>
+            <div style={{ margin: "auto" }}>
+              <Spinner size="xl" />
+            </div>
+          </>
         )}
       </Flex>
     </Flex>
