@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { AddIcon } from "@chakra-ui/icons";
 import ArticleTile from "../src/components/article/ArticleTile";
@@ -10,10 +10,22 @@ import Layout from "../src/components/Layout";
 import { Spinner } from "@chakra-ui/react";
 const articleList = () => {
   const [articles, setArticles] = useState([]);
+  const toast = useToast();
   useEffect(() => {
-    listArticles().then((res: any) => {
-      setArticles(res.data);
-    });
+    listArticles()
+      .then((res: any) => {
+        setArticles(res.data);
+      })
+      .catch((err: any) => {
+        toast({
+          position: "top",
+          title: `${err.message}`,
+          description: "Something went wrong.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      });
   }, []);
   return (
     <Flex flexDirection={"column"} padding={20}>

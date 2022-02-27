@@ -23,9 +23,11 @@ import { getArticle, updateArticle } from "../src/api/article";
 import { ObjectID } from "bson";
 import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
+import Alert from "../src/components/common/Alert";
 const AddArticle = () => {
   const [content, setContent] = useState({});
   const [heading, setHeading] = useState("");
+  const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
   const router = useRouter();
   const toast = useToast();
@@ -42,25 +44,66 @@ const AddArticle = () => {
       : "";
   }, []);
 
+  const checkUnsavedChanges = () => {
+    if (content.length > 0 || heading.length > 0) {
+      setShowUnsavedAlert(true);
+    } else {
+      router.push("/articleList");
+    }
+  };
   const handleSaveAsDraft = async () => {
     // let res = await addArticle();
-    if (articleId) {
-      const res = await updateArticle({ id: articleId, heading, content });
-      if (res.status === 200) {
-        toast({
-          position: "top",
-          title: "Changes saved.",
-          description: "Successfully saved changes.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      }
+    if (!content || heading.length <= 0) {
+      toast({
+        position: "top",
+        title: "Cannot save empty article",
+        description: "Title and content required.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     } else {
-      const id = new ObjectID();
-      updateArticle({ id: id.toString(), heading, content });
-      router.query.articleId = id.toString();
-      router.push(router);
+      if (articleId) {
+        const res = await updateArticle({ id: articleId, heading, content });
+        if (res.status === 200) {
+          toast({
+            position: "top",
+            title: "Changes saved.",
+            description: "Successfully saved changes.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } else {
+        const id = new ObjectID();
+        const res = await updateArticle({
+          id: id.toString(),
+          heading,
+          content,
+        });
+        if (res.status === 200) {
+          toast({
+            position: "top",
+            title: "Added article",
+            description: "Successfully added article",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          router.query.articleId = id.toString();
+          router.push(router);
+        } else {
+          toast({
+            position: "top",
+            title: "Error",
+            description: "Something went wrong",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
     }
   };
   const handlePublishForVoting = () => {
@@ -78,7 +121,7 @@ const AddArticle = () => {
         >
           <Button
             leftIcon={<ArrowLeftIcon />}
-            onClick={() => router.push("/articleList")}
+            onClick={checkUnsavedChanges}
             style={{ borderRadius: "0.2rem 0 0 0.2rem" }}
           >
             My Articles
@@ -131,6 +174,16 @@ const AddArticle = () => {
           </Button>
         </Stack>
       </Flex>
+      {showUnsavedAlert && (
+        <Alert
+          title={"Unsaved changes"}
+          dialogue={`Are you sure you want to discard unsaved changes and go back?`}
+          isOpen={showUnsavedAlert}
+          confirmBtnLabel={"Proceed"}
+          setIsOpen={setShowUnsavedAlert}
+          onConfirm={() => router.push("/articleList")}
+        />
+      )}
     </>
   );
 };
