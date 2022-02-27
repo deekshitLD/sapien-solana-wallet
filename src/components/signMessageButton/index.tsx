@@ -3,12 +3,14 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import bs58 from "bs58";
 import React, { FC, useCallback } from "react";
 import { sign } from "tweetnacl";
+import router from "next/router";
+import { useToast } from "@chakra-ui/react";
 
 import { verifyMessage } from "../../api/auth";
 
 export const SignMessageButton: FC = () => {
   const { publicKey, signMessage } = useWallet();
-
+  const toast = useToast();
   const onClick = useCallback(async () => {
     try {
       // `publicKey` will be null if the wallet isn't connected
@@ -18,7 +20,7 @@ export const SignMessageButton: FC = () => {
         throw new Error("Wallet does not support message signing!");
 
       // Encode anything as bytes
-      const message = new TextEncoder().encode("Hello, world!");
+      const message = new TextEncoder().encode("Login with wallet");
       // Sign the bytes using the wallet
       const signature = await signMessage(message);
       console.log("publicKey", message.toString());
@@ -30,8 +32,16 @@ export const SignMessageButton: FC = () => {
         signature: signature,
       });
       localStorage.setItem("token", res.data.authToken);
-
-      alert(`Message signature: ${bs58.encode(signature)}`);
+      toast({
+        position: "top",
+        title: "Login successful.",
+        // description: "Successfully saved changes.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      router.push("/articleList");
+      // alert(`Message signature: ${bs58.encode(signature)}`);
     } catch (error: any) {
       alert(`Signing failed: ${error?.message}`);
     }
@@ -39,7 +49,7 @@ export const SignMessageButton: FC = () => {
 
   return signMessage ? (
     <Button onClick={onClick} disabled={!publicKey}>
-      Sign Message
+      Login to start writing
     </Button>
   ) : null;
 };

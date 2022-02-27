@@ -21,12 +21,14 @@ const articleTile = ({ id, title, content }: articleTileProps) => {
     const res = await removeArticle(id);
     if (res.status === 200) {
       toast({
+        position: "top",
         title: "Article deleted.",
         description: "Successfully deleted article.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
+      setDeleteAlert(false);
       console.log("Removed succesfully");
     }
   };

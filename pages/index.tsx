@@ -4,9 +4,10 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import { SignMessageButton } from "../src/components/signMessageButton";
 import { Heading } from "@chakra-ui/react";
+import router from "next/router";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -70,7 +71,21 @@ const Index: NextPage = () => {
         <div style={{ position: "absolute", top: 0, right: 0, margin: 10 }}>
           <WalletMultiButton />
         </div>
-        <SignMessageButton />
+        <Box margin={"10px"}>
+          {localStorage.getItem("token") ? (
+            <>
+              <Button
+                onClick={() => {
+                  router.push("/articleList");
+                }}
+              >
+                My articles
+              </Button>
+            </>
+          ) : (
+            <SignMessageButton />
+          )}
+        </Box>
       </main>
 
       <div></div>
