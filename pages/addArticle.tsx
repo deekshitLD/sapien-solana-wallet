@@ -20,12 +20,16 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { getArticle, updateArticle } from "../src/api/article";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { ObjectID } from "bson";
 import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import Alert from "../src/components/common/Alert";
+
+import { addToSolanaProgram } from "../src/solanaProgram";
 const AddArticle = () => {
-  const [content, setContent] = useState({});
+  const wallet = useWallet();
+  const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
@@ -51,6 +55,7 @@ const AddArticle = () => {
       router.push("/articleList");
     }
   };
+
   const handleSaveAsDraft = async () => {
     // let res = await addArticle();
     if (!content || heading.length <= 0) {
@@ -106,6 +111,7 @@ const AddArticle = () => {
       }
     }
   };
+
   const handlePublishForVoting = () => {
     console.log("Publish for voting");
   };
@@ -128,6 +134,20 @@ const AddArticle = () => {
           </Button>
 
           <ButtonGroup variant="outline" spacing="0">
+            <Button
+              onClick={() => addToSolanaProgram(wallet, articleId)}
+              variant={mode === "Preview" ? "solid" : "outline"}
+              style={{ borderRadius: "2rem 0 0 2rem" }}
+            >
+              Add to solana pgm
+            </Button>
+            <Button
+              onClick={() => addToSolanaProgram(wallet, articleId)}
+              variant={mode === "Preview" ? "solid" : "outline"}
+              style={{ borderRadius: "2rem 0 0 2rem" }}
+            >
+              Push to vote
+            </Button>
             <Button
               onClick={() => setMode("Preview")}
               variant={mode === "Preview" ? "solid" : "outline"}
