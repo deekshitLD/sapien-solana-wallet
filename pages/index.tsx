@@ -47,7 +47,7 @@ const Index: NextPage = () => {
 
     let uint8ArrMessage = new Uint8Array(publicKey.split(""));
     const address = bs58.encode(uint8ArrMessage);
-    console.log("TYPE OF address", address);
+
     return address;
   };
   return (
@@ -132,7 +132,7 @@ const Index: NextPage = () => {
             // @ts-ignore
             // console.log(realms);
 
-            let TOKEN_PGM_ID = new PublicKey(
+            let TOKEN_PROGRAM_ID = new PublicKey(
               "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
             );
             let mintPubkey = new PublicKey(

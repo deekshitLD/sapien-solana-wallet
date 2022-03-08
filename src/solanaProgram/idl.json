@@ -37,6 +37,21 @@
           "isSigner": true
         },
         {
+          "name": "newstoken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -61,6 +76,21 @@
           "name": "authority",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "newstoken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": false,
+          "isSigner": false
         },
         {
           "name": "systemProgram",
@@ -107,6 +137,6 @@
     }
   ],
   "metadata": {
-    "address": "3Z8eqLzepWH6UmqFyU9mDsjQp6QepLURqHSBFwmJLdCh"
+    "address": "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
   }
 }

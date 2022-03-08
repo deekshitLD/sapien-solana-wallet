@@ -19,14 +19,18 @@ import Editor from "../src/components/article/Editor";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { getArticle, updateArticle } from "../src/api/article";
+import {
+  getArticle,
+  updateArticle,
+  getArticleUnderVoting,
+} from "../src/api/article";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ObjectID } from "bson";
 import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import Alert from "../src/components/common/Alert";
 
-import { addToSolanaProgram } from "../src/solanaProgram";
+import { addToSolanaProgram, pushArticleToVoting } from "../src/solanaProgram";
 const AddArticle = () => {
   const wallet = useWallet();
   const [content, setContent] = useState("");
@@ -69,7 +73,16 @@ const AddArticle = () => {
       });
     } else {
       if (articleId) {
-        const res = await updateArticle({ id: articleId, heading, content });
+        const reportAccountPublicKey = await addToSolanaProgram(
+          wallet,
+          articleId
+        );
+        const res = await updateArticle({
+          id: articleId,
+          heading,
+          content,
+          reportAccountPublicKey,
+        });
         if (res.status === 200) {
           toast({
             position: "top",
@@ -82,10 +95,15 @@ const AddArticle = () => {
         }
       } else {
         const id = new ObjectID();
+        const reportAccountPublicKey = await addToSolanaProgram(
+          wallet,
+          id.toString()
+        );
         const res = await updateArticle({
           id: id.toString(),
           heading,
           content,
+          reportAccountPublicKey,
         });
         if (res.status === 200) {
           toast({
@@ -112,8 +130,85 @@ const AddArticle = () => {
     }
   };
 
-  const handlePublishForVoting = () => {
-    console.log("Publish for voting");
+  const handlePublishForVoting = async () => {
+    if (!content || heading.length <= 0) {
+      toast({
+        position: "top",
+        title: "Cannot save empty article",
+        description: "Title and content required.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      if (articleId) {
+        const res = await pushArticleToVoting(wallet, articleId);
+
+        if (res) {
+          toast({
+            position: "top",
+            title: "Changes saved.",
+            description: "Successfully saved changes.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } else {
+        const id = new ObjectID();
+        const reportAccountPublicKey = await addToSolanaProgram(
+          wallet,
+          id.toString()
+        );
+        const res = await updateArticle({
+          id: id.toString(),
+          heading,
+          content,
+          reportAccountPublicKey,
+        });
+        if (res.status === 200) {
+          // toast({
+          //   position: "top",
+          //   title: "Added article",
+          //   description: "Successfully added article",
+          //   status: "success",
+          //   duration: 5000,
+          //   isClosable: true,
+          // });
+          const res = await pushArticleToVoting(wallet, id.toString());
+          if (res) {
+            toast({
+              position: "top",
+              title: "Added article",
+              description: "Successfully added article",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+            router.query.articleId = id.toString();
+            router.push(router);
+          } else {
+            toast({
+              position: "top",
+              title: "Error",
+              description: "Something went wrong",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          }
+        } else {
+          toast({
+            position: "top",
+            title: "Error",
+            description: "Something went wrong",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
+    }
   };
   return (
     <>
@@ -134,20 +229,6 @@ const AddArticle = () => {
           </Button>
 
           <ButtonGroup variant="outline" spacing="0">
-            <Button
-              onClick={() => addToSolanaProgram(wallet, articleId)}
-              variant={mode === "Preview" ? "solid" : "outline"}
-              style={{ borderRadius: "2rem 0 0 2rem" }}
-            >
-              Add to solana pgm
-            </Button>
-            <Button
-              onClick={() => addToSolanaProgram(wallet, articleId)}
-              variant={mode === "Preview" ? "solid" : "outline"}
-              style={{ borderRadius: "2rem 0 0 2rem" }}
-            >
-              Push to vote
-            </Button>
             <Button
               onClick={() => setMode("Preview")}
               variant={mode === "Preview" ? "solid" : "outline"}
@@ -186,6 +267,9 @@ const AddArticle = () => {
       </Container>
       <Flex justifyContent={"center"}>
         <Stack direction="row" spacing={4} color={"white"}>
+          <Button variant={"outline"} onClick={() => getArticleUnderVoting()}>
+            Test
+          </Button>
           <Button variant={"outline"} onClick={handleSaveAsDraft}>
             Save as draft
           </Button>

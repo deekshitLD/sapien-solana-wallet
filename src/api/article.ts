@@ -37,3 +37,12 @@ export const removeArticle = async (id: any) => {
   });
   return response;
 };
+
+export const getArticleUnderVoting = async () => {
+  let response = await axios({
+    method: "get",
+    url: config.baseURL + `article/voting`,
+    // responseType: 'stream'
+  });
+  return response;
+};
