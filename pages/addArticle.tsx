@@ -30,7 +30,12 @@ import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import Alert from "../src/components/common/Alert";
 
-import { addToSolanaProgram, pushArticleToVoting } from "../src/solanaProgram";
+import {
+  addToSolanaProgram,
+  pushArticleToVoting,
+  initializeArticleAccount,
+  updateOrAddArticle,
+} from "../src/solanaProgram";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
@@ -43,6 +48,7 @@ const AddArticle = () => {
   );
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
+  const [reportAccountPublicKey, setReportAccountPublicKey] = useState<any>();
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
   const router = useRouter();
@@ -56,6 +62,7 @@ const AddArticle = () => {
           console.log(res);
           setHeading(res.data.heading);
           setContent(res.data.content);
+          setReportAccountPublicKey(res.data.reportAccountPublicKey);
         })
       : "";
   }, []);
@@ -81,17 +88,14 @@ const AddArticle = () => {
       });
     } else {
       if (articleId) {
-        console.log("Wallet adapter stuff: ", walletAdapter);
-        const reportAccountPublicKey = await addToSolanaProgram(
-          wallet,
-          articleId
-        );
+        await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
         const res = await updateArticle({
           id: articleId,
           heading,
           content,
           reportAccountPublicKey,
         });
+
         if (res.status === 200) {
           toast({
             position: "top",
@@ -103,38 +107,43 @@ const AddArticle = () => {
           });
         }
       } else {
+        console.log("NEW ARTICLE, generating id.....");
         const id = new ObjectID();
-        const reportAccountPublicKey = await addToSolanaProgram(
+        const TempreportAccountPublicKey = await initializeArticleAccount(
           wallet,
-          id.toString()
+          articleId
         );
-        // const res = await updateArticle({
-        //   id: id.toString(),
-        //   heading,
-        //   content,
-        //   reportAccountPublicKey,
-        // });
-        // if (res.status === 200) {
-        //   toast({
-        //     position: "top",
-        //     title: "Added article",
-        //     description: "Successfully added article",
-        //     status: "success",
-        //     duration: 5000,
-        //     isClosable: true,
-        //   });
-        //   router.query.articleId = id.toString();
-        //   router.push(router);
-        // } else {
-        //   toast({
-        //     position: "top",
-        //     title: "Error",
-        //     description: "Something went wrong",
-        //     status: "error",
-        //     duration: 5000,
-        //     isClosable: true,
-        //   });
-        // }
+        setReportAccountPublicKey(TempreportAccountPublicKey);
+
+        await updateOrAddArticle(wallet, articleId, TempreportAccountPublicKey);
+
+        const res = await updateArticle({
+          id: id.toString(),
+          heading,
+          content,
+          TempreportAccountPublicKey,
+        });
+        if (res.status === 200) {
+          toast({
+            position: "top",
+            title: "Added article",
+            description: "Successfully added article",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          router.query.articleId = id.toString();
+          router.push(router);
+        } else {
+          toast({
+            position: "top",
+            title: "Error",
+            description: "Something went wrong",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     }
   };
