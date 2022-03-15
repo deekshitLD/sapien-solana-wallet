@@ -44,10 +44,15 @@ async function getProvider(wallet: any) {
 }
 
 const getParameters = () => {};
-export const pushArticleToVoting = async (wallet: any, id: any) => {
+
+export const pushArticleToVoting = async (
+  wallet: any,
+  id: any,
+  reportAccount: any
+) => {
   const provider = await getProvider(wallet);
-  const programID = new PublicKey(
-    "3Z8eqLzepWH6UmqFyU9mDsjQp6QepLURqHSBFwmJLdCh"
+  const programID = new anchor.web3.PublicKey(
+    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
   );
 
   const program = new Program(idl, programID, provider);
@@ -55,11 +60,21 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
   console.log("The provder", provider);
   const { SystemProgram, Keypair } = web3;
   /* create an account  */
-  const reportAccount = {
-    publicKey: new PublicKey("J74UtXHDxgzfvaorBDxh9V3SSJ1fcASVX1UBc7XXDb2"),
-  };
 
-  const paymentAmout = 100000000;
+  // const paymentAmout = 100000000 >>> 0;
+  function ToInteger(x: any) {
+    x = Number(x);
+    return x < 0 ? Math.ceil(x) : Math.floor(x);
+  }
+  function modulo(a: any, b: any) {
+    return a - Math.floor(a / b) * b;
+  }
+  function ToUint32(x: any) {
+    // return modulo(ToInteger(x), Math.pow(2, 32));
+    return x >>> 0;
+  }
+  const paymentAmout = ToUint32(100000000);
+  console.log("Payment Amount is: ", paymentAmout, typeof paymentAmout);
   let fromAccount: any;
   let treasuryAccount: any;
   const connection = new Connection("https://api.devnet.solana.com");
@@ -85,7 +100,7 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
     /* interact with the program via rpc */
     await program.rpc.pushForVote(id, paymentAmout, {
       accounts: {
-        reportAccount: reportAccount.publicKey,
+        reportAccount: reportAccount,
         authority: provider.wallet.publicKey,
         newstoken: splToken.TOKEN_PROGRAM_ID,
         from: fromAccount.address,
@@ -94,15 +109,11 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
       },
       signers: [],
     });
-
-    const account = await program.account.reportAccount.fetch(
-      reportAccount.publicKey
-    );
-
-    return account;
+    return true;
     // setValue(account.count.toString());
   } catch (err) {
     console.log("Transaction error: ", err);
+    return false;
   }
 };
 
@@ -212,9 +223,9 @@ export const updateOrAddArticle = async (
     console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
   }
   try {
-    await program.rpc.updateReport("Sapiens", {
+    await program.rpc.updateReport(id.toString(), {
       accounts: {
-        reportAccount: reportAccount.publicKey,
+        reportAccount: reportAccount,
         authority: provider.wallet.publicKey,
         newstoken: splToken.TOKEN_PROGRAM_ID,
         from: fromAccount.address,
@@ -224,9 +235,7 @@ export const updateOrAddArticle = async (
       signers: [],
     });
 
-    const account = await program.account.reportAccount.fetch(
-      reportAccount.publicKey
-    );
+    const account = await program.account.reportAccount.fetch(reportAccount);
 
     console.log("account: ", account.uri);
 

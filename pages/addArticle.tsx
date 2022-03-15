@@ -111,17 +111,17 @@ const AddArticle = () => {
         const id = new ObjectID();
         const TempreportAccountPublicKey = await initializeArticleAccount(
           wallet,
-          articleId
+          id
         );
         setReportAccountPublicKey(TempreportAccountPublicKey);
 
-        await updateOrAddArticle(wallet, articleId, TempreportAccountPublicKey);
+        await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
 
         const res = await updateArticle({
           id: id.toString(),
           heading,
           content,
-          TempreportAccountPublicKey,
+          reportAccountPublicKey: TempreportAccountPublicKey,
         });
         if (res.status === 200) {
           toast({
@@ -160,9 +160,13 @@ const AddArticle = () => {
       });
     } else {
       if (articleId) {
-        const res = await pushArticleToVoting(wallet, articleId);
+        const status = await pushArticleToVoting(
+          wallet,
+          articleId,
+          reportAccountPublicKey
+        );
 
-        if (res) {
+        if (status) {
           toast({
             position: "top",
             title: "Changes saved.",
@@ -174,15 +178,18 @@ const AddArticle = () => {
         }
       } else {
         const id = new ObjectID();
-        const reportAccountPublicKey = await addToSolanaProgram(
+
+        const TempreportAccountPublicKey = await initializeArticleAccount(
           wallet,
-          id.toString()
+          id
         );
+        setReportAccountPublicKey(TempreportAccountPublicKey);
+
         const res = await updateArticle({
           id: id.toString(),
           heading,
           content,
-          reportAccountPublicKey,
+          reportAccountPublicKey: TempreportAccountPublicKey,
         });
         if (res.status === 200) {
           // toast({
@@ -193,8 +200,12 @@ const AddArticle = () => {
           //   duration: 5000,
           //   isClosable: true,
           // });
-          const res = await pushArticleToVoting(wallet, id.toString());
-          if (res) {
+          const status = await pushArticleToVoting(
+            wallet,
+            id.toString(),
+            TempreportAccountPublicKey
+          );
+          if (status) {
             toast({
               position: "top",
               title: "Added article",
