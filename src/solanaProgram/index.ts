@@ -43,6 +43,7 @@ async function getProvider(wallet: any) {
   return provider;
 }
 
+const getParameters = () => {};
 export const pushArticleToVoting = async (wallet: any, id: any) => {
   const provider = await getProvider(wallet);
   const programID = new PublicKey(
@@ -59,12 +60,36 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
   };
 
   const paymentAmout = 100000000;
+  let fromAccount: any;
+  let treasuryAccount: any;
+  const connection = new Connection("https://api.devnet.solana.com");
+  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+  try {
+    fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      provider.wallet.publicKey
+    );
+
+    treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
+    );
+  } catch (err) {
+    console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
+  }
   try {
     /* interact with the program via rpc */
     await program.rpc.pushForVote(id, paymentAmout, {
       accounts: {
         reportAccount: reportAccount.publicKey,
         authority: provider.wallet.publicKey,
+        newstoken: splToken.TOKEN_PROGRAM_ID,
+        from: fromAccount.address,
+        treasury: treasuryAccount.address,
         systemProgram: SystemProgram.programId,
       },
       signers: [],
@@ -81,7 +106,141 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
   }
 };
 
-export const addToSolanaProgram = async (wallet: any, id: any) => {
+export const initializeArticleAccount = async (wallet: any, id: any) => {
+  // ------------------- Initialize all parameters -------------------------------------
+  const provider: Provider = await getProvider(wallet);
+  anchor.setProvider(provider);
+
+  const { SystemProgram, Keypair } = web3;
+
+  const reportAccount = Keypair.generate();
+  const programID = new anchor.web3.PublicKey(
+    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+  );
+
+  const program = new anchor.Program(idl, programID, provider);
+
+  const connection = new Connection("https://api.devnet.solana.com");
+  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+
+  let fromAccount: any;
+  let treasuryAccount: any;
+
+  try {
+    fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      provider.wallet.publicKey
+    );
+
+    treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
+    );
+  } catch (err) {
+    console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
+  }
+  // ------------------- Initialize all parameters -------------------------------------
+
+  try {
+    /* Initialize account for article for first time, interact with the program via rpc */
+
+    await program.rpc.initialize({
+      accounts: {
+        reportAccount: reportAccount.publicKey,
+        authority: provider.wallet.publicKey,
+        newstoken: splToken.TOKEN_PROGRAM_ID,
+        from: fromAccount.address,
+        treasury: treasuryAccount.address,
+        systemProgram: SystemProgram.programId,
+      },
+      signers: [reportAccount],
+    });
+
+    const account = await program.account.reportAccount.fetch(
+      reportAccount.publicKey
+    );
+
+    console.log("account: ", account);
+    return reportAccount.publicKey;
+    // setValue(account.count.toString());
+  } catch (err) {
+    console.log("Transaction error: ", err);
+  }
+};
+
+export const updateOrAddArticle = async (
+  wallet: any,
+  id: any,
+  reportAccount: any
+) => {
+  const provider: Provider = await getProvider(wallet);
+  anchor.setProvider(provider);
+
+  const { SystemProgram, Keypair } = web3;
+
+  const programID = new anchor.web3.PublicKey(
+    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+  );
+
+  const program = new anchor.Program(idl, programID, provider);
+
+  const connection = new Connection("https://api.devnet.solana.com");
+  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+
+  let fromAccount: any;
+  let treasuryAccount: any;
+
+  try {
+    fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      provider.wallet.publicKey
+    );
+
+    treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
+    );
+  } catch (err) {
+    console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
+  }
+  try {
+    await program.rpc.updateReport("Sapiens", {
+      accounts: {
+        reportAccount: reportAccount.publicKey,
+        authority: provider.wallet.publicKey,
+        newstoken: splToken.TOKEN_PROGRAM_ID,
+        from: fromAccount.address,
+        treasury: treasuryAccount.address,
+        systemProgram: SystemProgram.programId,
+      },
+      signers: [],
+    });
+
+    const account = await program.account.reportAccount.fetch(
+      reportAccount.publicKey
+    );
+
+    console.log("account: ", account.uri);
+
+    // setValue(account.count.toString());
+  } catch (err) {
+    console.log("Transaction error: ", err);
+  }
+};
+
+export const addToSolanaProgram = async (
+  wallet: any,
+  id: any,
+  reportAccount?: any
+) => {
   console.log("IDL", idl);
   console.log("wallet is : ", wallet);
   const provider: Provider = await getProvider(wallet);
@@ -90,9 +249,11 @@ export const addToSolanaProgram = async (wallet: any, id: any) => {
   console.log("Provider is : ", provider);
 
   const { SystemProgram, Keypair } = web3;
-  /* create an account  */
-  const reportAccount = Keypair.generate();
 
+  if (reportAccount === undefined) {
+    /* create an account  */
+    reportAccount = Keypair.generate();
+  }
   // const programID = new PublicKey(
   //   "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
   // );
@@ -129,55 +290,25 @@ export const addToSolanaProgram = async (wallet: any, id: any) => {
   } catch (err) {
     console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
   }
-  try {
-    /* interact with the program via rpc */
 
-    await program.rpc.initialize({
-      accounts: {
-        reportAccount: reportAccount.publicKey,
-        authority: provider.wallet.publicKey,
-        newstoken: splToken.TOKEN_PROGRAM_ID,
-        from: fromAccount.address,
-        treasury: treasuryAccount.address,
-        systemProgram: SystemProgram.programId,
-      },
-      signers: [reportAccount],
-    });
-
-    const account = await program.account.reportAccount.fetch(
-      reportAccount.publicKey
-    );
-
-    console.log("account: ", account);
-    // setValue(account.count.toString());
-  } catch (err) {
-    console.log("Transaction error: ", err);
-  }
-
-  try {
-    await program.rpc.updateReport("Sapiens", {
-      accounts: {
-        reportAccount: reportAccount.publicKey,
-        authority: provider.wallet.publicKey,
-        newstoken: splToken.TOKEN_PROGRAM_ID,
-        from: fromAccount.address,
-        treasury: treasuryAccount.address,
-        systemProgram: SystemProgram.programId,
-      },
-      signers: [],
-    });
-
-    const account = await program.account.reportAccount.fetch(
-      reportAccount.publicKey
-    );
-
-    console.log("account: ", account.uri);
-    return reportAccount.publicKey;
-    // setValue(account.count.toString());
-  } catch (err) {
-    console.log("Transaction error: ", err);
-  }
-
+  // if (!reportAccount) {
+  //   initializeArticleAccount(
+  //     program,
+  //     reportAccount,
+  //     provider,
+  //     fromAccount,
+  //     treasuryAccount,
+  //     SystemProgram
+  //   );
+  // }
+  // updateOrAddArticle(
+  //   program,
+  //   reportAccount,
+  //   provider,
+  //   fromAccount,
+  //   treasuryAccount,
+  //   SystemProgram
+  // );
   // const paymentAmout = 100000;
   // try {
   //   /* interact with the program via rpc */
