@@ -12,7 +12,7 @@ interface articleTileProps {
   title: string;
   content: any;
 }
-const articleTile = ({ id, title, content }: articleTileProps) => {
+const ArticleTile = ({ id, title, content }: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const toast = useToast();
   const handleDelete = async (e: any) => {
@@ -92,4 +92,4 @@ const articleTile = ({ id, title, content }: articleTileProps) => {
   );
 };
 
-export default articleTile;
+export default ArticleTile;

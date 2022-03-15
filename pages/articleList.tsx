@@ -8,7 +8,8 @@ import { listArticles } from "../src/api/article";
 import { NextPage } from "next";
 import Layout from "../src/components/Layout";
 import { Spinner } from "@chakra-ui/react";
-const articleList = () => {
+
+const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const toast = useToast();
   useEffect(() => {
@@ -63,7 +64,7 @@ const articleList = () => {
   );
 };
 
-articleList.getLayout = function getLayout(page: NextPage) {
+ArticleList.getLayout = function getLayout(page: NextPage) {
   return <Layout>{page}</Layout>;
 };
-export default articleList;
+export default ArticleList;
