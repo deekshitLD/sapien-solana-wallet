@@ -160,22 +160,63 @@ const AddArticle = () => {
       });
     } else {
       if (articleId) {
-        const status = await pushArticleToVoting(
-          wallet,
-          articleId,
-          reportAccountPublicKey
-        );
-
-        if (status) {
+        const res = await updateArticle({
+          id: articleId,
+          heading,
+          content,
+          reportAccountPublicKey,
+        });
+        if (res.status === 200) {
+          const status = await pushArticleToVoting(
+            wallet,
+            articleId,
+            reportAccountPublicKey
+          );
+          if (status) {
+            toast({
+              position: "top",
+              title: "Added article",
+              description: "Successfully added article",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              position: "top",
+              title: "Error",
+              description: "Something went wrong",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          }
+        } else {
           toast({
             position: "top",
-            title: "Changes saved.",
-            description: "Successfully saved changes.",
-            status: "success",
+            title: "Error",
+            description: "Something went wrong",
+            status: "error",
             duration: 5000,
             isClosable: true,
           });
         }
+        // const status = await pushArticleToVoting(
+        //   wallet,
+        //   articleId,
+        //   reportAccountPublicKey
+        // );
+
+        // if (status) {
+        //   toast({
+        //     position: "top",
+        //     title: "Changes saved.",
+        //     description: "Successfully saved changes.",
+        //     status: "success",
+        //     duration: 5000,
+        //     isClosable: true,
+        //   });
+        // }
       } else {
         const id = new ObjectID();
 
@@ -192,14 +233,6 @@ const AddArticle = () => {
           reportAccountPublicKey: TempreportAccountPublicKey,
         });
         if (res.status === 200) {
-          // toast({
-          //   position: "top",
-          //   title: "Added article",
-          //   description: "Successfully added article",
-          //   status: "success",
-          //   duration: 5000,
-          //   isClosable: true,
-          // });
           const status = await pushArticleToVoting(
             wallet,
             id.toString(),

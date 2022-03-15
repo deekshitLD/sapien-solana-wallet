@@ -61,7 +61,7 @@ export const pushArticleToVoting = async (
   const { SystemProgram, Keypair } = web3;
   /* create an account  */
 
-  // const paymentAmout = 100000000 >>> 0;
+  const paymentAmount = 100000000;
   function ToInteger(x: any) {
     x = Number(x);
     return x < 0 ? Math.ceil(x) : Math.floor(x);
@@ -73,8 +73,8 @@ export const pushArticleToVoting = async (
     // return modulo(ToInteger(x), Math.pow(2, 32));
     return x >>> 0;
   }
-  const paymentAmout = ToUint32(100000000);
-  console.log("Payment Amount is: ", paymentAmout, typeof paymentAmout);
+  // const paymentAmout = ToUint32(100000000);
+  console.log("Payment Amount is: ", paymentAmount, typeof paymentAmount);
   let fromAccount: any;
   let treasuryAccount: any;
   const connection = new Connection("https://api.devnet.solana.com");
@@ -98,9 +98,9 @@ export const pushArticleToVoting = async (
   }
   try {
     /* interact with the program via rpc */
-    await program.rpc.pushForVote(id, paymentAmout, {
+    await program.rpc.pushForVote(id.toString(), paymentAmount, {
       accounts: {
-        reportAccount: reportAccount,
+        reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,
         newstoken: splToken.TOKEN_PROGRAM_ID,
         from: fromAccount.address,
@@ -250,6 +250,7 @@ export const addToSolanaProgram = async (
   id: any,
   reportAccount?: any
 ) => {
+  console.log();
   console.log("IDL", idl);
   console.log("wallet is : ", wallet);
   const provider: Provider = await getProvider(wallet);
