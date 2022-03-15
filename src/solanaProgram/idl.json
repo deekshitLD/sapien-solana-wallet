@@ -16,6 +16,21 @@
           "isSigner": true
         },
         {
+          "name": "newstoken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -33,7 +48,7 @@
         },
         {
           "name": "authority",
-          "isMut": false,
+          "isMut": true,
           "isSigner": true
         },
         {
@@ -43,12 +58,12 @@
         },
         {
           "name": "from",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

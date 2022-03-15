@@ -1,7 +1,9 @@
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { Program, Provider, web3 } from "@project-serum/anchor";
 // import idl from "./idl.json";
-const splToken = require("@solana/spl-token");
+// const splToken = require("@solana/spl-token");
+import * as splToken from "@solana/spl-token";
+
 import bs58 from "bs58";
 import * as solanaweb3 from "@solana/web3.js";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
@@ -18,6 +20,7 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 require("@solana/wallet-adapter-react-ui/styles.css");
 import * as anchor from "@project-serum/anchor";
+// import { TOKEN_PROGRAM_ID } from "@solana/spl-governance";
 const idl = require("./idl.json");
 const wallets = [
   /* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
@@ -30,6 +33,7 @@ async function getProvider(wallet: any) {
   const opts: any = {
     preflightCommitment: "processed",
   };
+  console.log("Wallet passed inside is ", wallet);
   /* create the provider and return it to the caller */
   /* network set to local network for now */
   const network = "https://api.devnet.solana.com";
@@ -47,6 +51,7 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
 
   const program = new Program(idl, programID, provider);
 
+  console.log("The provder", provider);
   const { SystemProgram, Keypair } = web3;
   /* create an account  */
   const reportAccount = {
@@ -77,30 +82,53 @@ export const pushArticleToVoting = async (wallet: any, id: any) => {
 };
 
 export const addToSolanaProgram = async (wallet: any, id: any) => {
-  console.log(idl);
-  const provider = await getProvider(wallet);
+  console.log("IDL", idl);
+  console.log("wallet is : ", wallet);
+  const provider: Provider = await getProvider(wallet);
+  // const provider = anchor.Provider.env();
+  anchor.setProvider(provider);
+  console.log("Provider is : ", provider);
 
   const { SystemProgram, Keypair } = web3;
   /* create an account  */
   const reportAccount = Keypair.generate();
 
-  const programID = new PublicKey(
+  // const programID = new PublicKey(
+  //   "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+  // );
+
+  const programID = new anchor.web3.PublicKey(
     "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
   );
 
-  const program = new Program(idl, programID, provider);
-  console.log("The program id is", programID);
-  console.log("The program is", program);
-  console.log("The report accont is", reportAccount);
-  console.log(
-    "The TokenInstructions token TOKEN_PGM_ID is",
-    new PublicKey(TokenInstructions.TOKEN_PROGRAM_ID)
-  );
-  console.log("program.programId", program.programId);
-  console.log(
-    "treasury",
-    new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
-  );
+  const program = new anchor.Program(idl, programID, provider);
+
+  // const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+  const connection = new Connection("https://api.devnet.solana.com");
+  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+
+  // let mintAccount = await splToken.getMint(connection, mint);
+
+  let fromAccount: any;
+  let treasuryAccount: any;
+
+  try {
+    fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      provider.wallet.publicKey
+    );
+
+    treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet,
+      mint,
+      new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
+    );
+  } catch (err) {
+    console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
+  }
   try {
     /* interact with the program via rpc */
 
@@ -108,9 +136,9 @@ export const addToSolanaProgram = async (wallet: any, id: any) => {
       accounts: {
         reportAccount: reportAccount.publicKey,
         authority: provider.wallet.publicKey,
-        // newstoken: splToken.TOKEN_PROGRAM_ID,
-        // from: provider.wallet.publicKey,
-        // treasury: new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7"),
+        newstoken: splToken.TOKEN_PROGRAM_ID,
+        from: fromAccount.address,
+        treasury: treasuryAccount.address,
         systemProgram: SystemProgram.programId,
       },
       signers: [reportAccount],
@@ -127,18 +155,13 @@ export const addToSolanaProgram = async (wallet: any, id: any) => {
   }
 
   try {
-    /* interact with the program via rpc */
-    const uint8Arr = new Uint8Array(
-      bs58.decode("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
-    );
-    const fromWallet = solanaweb3.Keypair.fromSecretKey(uint8Arr);
     await program.rpc.updateReport("Sapiens", {
       accounts: {
         reportAccount: reportAccount.publicKey,
         authority: provider.wallet.publicKey,
-        newstoken: TokenInstructions.TOKEN_PROGRAM_ID,
-        from: provider.wallet.publicKey,
-        treasury: new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7"),
+        newstoken: splToken.TOKEN_PROGRAM_ID,
+        from: fromAccount.address,
+        treasury: treasuryAccount.address,
         systemProgram: SystemProgram.programId,
       },
       signers: [],

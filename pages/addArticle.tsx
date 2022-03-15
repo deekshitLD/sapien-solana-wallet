@@ -24,15 +24,23 @@ import {
   updateArticle,
   getArticleUnderVoting,
 } from "../src/api/article";
-import { useWallet } from "@solana/wallet-adapter-react";
+import * as walletAdapter from "@solana/wallet-adapter-react";
 import { ObjectID } from "bson";
 import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import Alert from "../src/components/common/Alert";
 
 import { addToSolanaProgram, pushArticleToVoting } from "../src/solanaProgram";
+import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 const AddArticle = () => {
-  const wallet = useWallet();
+  const wallet = walletAdapter.useWallet();
+  console.log("Wallet adapter is ", walletAdapter);
+  console.log(
+    "USE wallet is",
+    useWallet(),
+    "useAnchorWallet is ",
+    useAnchorWallet()
+  );
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
@@ -73,6 +81,7 @@ const AddArticle = () => {
       });
     } else {
       if (articleId) {
+        console.log("Wallet adapter stuff: ", walletAdapter);
         const reportAccountPublicKey = await addToSolanaProgram(
           wallet,
           articleId
@@ -99,33 +108,33 @@ const AddArticle = () => {
           wallet,
           id.toString()
         );
-        const res = await updateArticle({
-          id: id.toString(),
-          heading,
-          content,
-          reportAccountPublicKey,
-        });
-        if (res.status === 200) {
-          toast({
-            position: "top",
-            title: "Added article",
-            description: "Successfully added article",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-          router.query.articleId = id.toString();
-          router.push(router);
-        } else {
-          toast({
-            position: "top",
-            title: "Error",
-            description: "Something went wrong",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
+        // const res = await updateArticle({
+        //   id: id.toString(),
+        //   heading,
+        //   content,
+        //   reportAccountPublicKey,
+        // });
+        // if (res.status === 200) {
+        //   toast({
+        //     position: "top",
+        //     title: "Added article",
+        //     description: "Successfully added article",
+        //     status: "success",
+        //     duration: 5000,
+        //     isClosable: true,
+        //   });
+        //   router.query.articleId = id.toString();
+        //   router.push(router);
+        // } else {
+        //   toast({
+        //     position: "top",
+        //     title: "Error",
+        //     description: "Something went wrong",
+        //     status: "error",
+        //     duration: 5000,
+        //     isClosable: true,
+        //   });
+        // }
       }
     }
   };
