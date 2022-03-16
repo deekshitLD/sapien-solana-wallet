@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { Box, Flex, Spacer, Text, useToast } from "@chakra-ui/react";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -7,7 +7,10 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
+
 const Navbar = () => {
+  const toast = useToast();
+
   return (
     <>
       <nav>

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/link-passhref */
 
+import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -25,13 +26,19 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import * as splToken from "@solana/spl-token";
 import Image from "next/image";
 
+import { UserContext } from "../src/components/HOC/withAuth";
+
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 
 const Index: NextPage = () => {
-  const { publicKey } = useWallet();
+  const wallet = useWallet();
+  const { publicKey } = wallet;
+
+  const { value }: any = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = value;
   const convertBS58 = (publicKey: any) => {
     // let utf8Encode = new TextEncoder();
 
@@ -50,6 +57,14 @@ const Index: NextPage = () => {
 
     return address;
   };
+
+  useEffect(() => {
+    if (wallet.connected && localStorage.getItem("token")) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [wallet, localStorage]);
   return (
     <div>
       <Head>
@@ -81,11 +96,7 @@ const Index: NextPage = () => {
           The 🌎 of Un-biased media
         </Heading>
 
-        {!publicKey ? (
-          <Heading as="h3" size="lg" color={"white"} margin={10}>
-            Connect wallet to get started
-          </Heading>
-        ) : (
+        {loggedIn ? (
           <>
             <Link href="news-list">
               <Button
@@ -98,12 +109,16 @@ const Index: NextPage = () => {
               </Button>
             </Link>
           </>
+        ) : (
+          <Heading as="h3" size="lg" color={"white"} margin={10}>
+            Connect wallet to get started
+          </Heading>
         )}
         <div style={{ position: "absolute", top: 0, right: 0, margin: 10 }}>
           <WalletMultiButton />
         </div>
         <Box margin={"10px"}>
-          {localStorage.getItem("token") && publicKey ? (
+          {loggedIn && (
             <>
               <Button
                 onClick={() => {
@@ -113,11 +128,9 @@ const Index: NextPage = () => {
                 My articles
               </Button>
             </>
-          ) : (
-            <SignMessageButton />
           )}
         </Box>
-        <Button
+        {/* <Button
           onClick={async () => {
             const connection = new Connection(
               "https://api.devnet.solana.com",
@@ -160,7 +173,7 @@ const Index: NextPage = () => {
           }}
         >
           Test
-        </Button>
+        </Button> */}
       </main>
 
       <div></div>

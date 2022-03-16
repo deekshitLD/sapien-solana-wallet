@@ -13,6 +13,7 @@ import {
   ButtonGroup,
   HStack,
   Spacer,
+  Spinner,
 } from "@chakra-ui/react";
 import Editor from "../src/components/article/Editor";
 
@@ -48,7 +49,9 @@ const AddArticle = () => {
   );
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
+  const [loading, setLoading] = useState(true);
   const [reportAccountPublicKey, setReportAccountPublicKey] = useState<any>();
+  const [articleStatus, setArticleStatus] = useState("");
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
   const router = useRouter();
@@ -63,12 +66,22 @@ const AddArticle = () => {
           setHeading(res.data.heading);
           setContent(res.data.content);
           setReportAccountPublicKey(res.data.reportAccountPublicKey);
+          setArticleStatus(res.data.status);
+          setLoading(false);
         })
       : "";
   }, []);
 
+  useEffect(() => {
+    if (articleStatus === "VOTING") {
+      setMode("Preview");
+    }
+  }, [articleStatus]);
   const checkUnsavedChanges = () => {
-    if (content.length > 0 || heading.length > 0) {
+    if (
+      articleStatus === "DRAFT" &&
+      (content.length > 0 || heading.length > 0)
+    ) {
       setShowUnsavedAlert(true);
     } else {
       router.push("/articleList");
@@ -291,27 +304,38 @@ const AddArticle = () => {
           </Button>
 
           <ButtonGroup variant="outline" spacing="0">
-            <Button
-              onClick={() => setMode("Preview")}
-              variant={mode === "Preview" ? "solid" : "outline"}
-              style={{ borderRadius: "2rem 0 0 2rem" }}
-            >
-              Preview
-            </Button>
-            <Button
-              onClick={() => setMode("Edit")}
-              variant={mode === "Edit" ? "solid" : "outline"}
-              style={{ borderRadius: "0 2rem 2rem 0" }}
-            >
-              Edit
-            </Button>
+            {articleStatus === "DRAFT" && (
+              <>
+                <Button
+                  onClick={() => setMode("Preview")}
+                  variant={mode === "Preview" ? "solid" : "outline"}
+                  style={{ borderRadius: "2rem 0 0 2rem" }}
+                >
+                  Preview
+                </Button>
+                <Button
+                  onClick={() => setMode("Edit")}
+                  variant={mode === "Edit" ? "solid" : "outline"}
+                  style={{ borderRadius: "0 2rem 2rem 0" }}
+                >
+                  Edit
+                </Button>
+              </>
+            )}
           </ButtonGroup>
           {/* <Box></Box> */}
           {/* <Spacer /> */}
         </Flex>
       </VStack>
       <Container maxW="container.lg">
-        {mode === "Edit" && (
+        {loading && (
+          <>
+            <div style={{ margin: "auto" }}>
+              <Spinner size="xl" />
+            </div>
+          </>
+        )}
+        {mode === "Edit" && articleStatus === "DRAFT" && (
           <>
             <Input
               margin={"50px 0 50px 0"}

@@ -1,70 +1,19 @@
 {
   "version": "0.1.0",
-  "name": "newsreport",
+  "name": "articlepublishing",
   "instructions": [
     {
       "name": "initialize",
       "accounts": [
         {
-          "name": "reportAccount",
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
           "isMut": true,
           "isSigner": true
-        },
-        {
-          "name": "authority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "newstoken",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "from",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "treasury",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "updateReport",
-      "accounts": [
-        {
-          "name": "reportAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "authority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "newstoken",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "from",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "treasury",
-          "isMut": true,
-          "isSigner": false
         },
         {
           "name": "systemProgram",
@@ -74,84 +23,79 @@
       ],
       "args": [
         {
-          "name": "reportUri",
-          "type": "string"
+          "name": "publisherAccountBump",
+          "type": "u8"
         }
       ]
     },
     {
-      "name": "pushForVote",
+      "name": "publishArticle",
       "accounts": [
         {
-          "name": "reportAccount",
+          "name": "publisherAccount",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "authority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "newstoken",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "from",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "treasury",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],
       "args": [
         {
-          "name": "reportUri",
+          "name": "articleUri",
           "type": "string"
         },
         {
-          "name": "payamt",
-          "type": "u32"
+          "name": "draftAccount",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "censorArticle",
+      "accounts": [
+        {
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "articleUri",
+          "type": "string"
+        },
+        {
+          "name": "draftAccount",
+          "type": "publicKey"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "ReportAccount",
+      "name": "ArticleState",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "uri",
+            "name": "articleuri",
             "type": "string"
           },
           {
-            "name": "authority",
+            "name": "draftaccount",
             "type": "publicKey"
           },
           {
-            "name": "status",
+            "name": "articlestate",
             "type": "u8"
           },
           {
-            "name": "readpayment",
-            "type": "u32"
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
     }
   ],
   "metadata": {
-    "address": "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+    "address": "xpqf8AFoskZT2AfYUdSjvWRn2niqEcvTS1wrKQpuBia"
   }
 }

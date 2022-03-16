@@ -1,3 +1,4 @@
+import { PublicKey } from "@solana/web3.js";
 import axios from "axios";
 import config from "../config";
 
@@ -18,4 +19,49 @@ export const verifyMessage = async ({
     // responseType: 'stream'
   });
   return response;
+};
+
+const tokenMintAddress = new PublicKey(
+  "FCrUzx3LzTB58UTew7tCkE7jry93x3Fv8TTPzUwzVNZU"
+);
+
+export const checkSapiensTokenBalance = async (walletAddress: PublicKey) => {
+  const response = await axios({
+    url: `https://api.devnet.solana.com`,
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    data: [
+      {
+        jsonrpc: "2.0",
+        id: 1,
+        method: "getTokenAccountsByOwner",
+        params: [
+          walletAddress,
+          {
+            mint: tokenMintAddress,
+          },
+          {
+            encoding: "jsonParsed",
+          },
+        ],
+      },
+      // {
+      //   jsonrpc: "2.0",
+      //   id: 1,
+      //   method: "getTokenAccountsByOwner",
+      //   params: [
+      //     walletAddress2,
+      //     {
+      //       mint: tokenMintAddress2,
+      //     },
+      //     {
+      //       encoding: "jsonParsed",
+      //     },
+      //   ],
+      // },
+    ],
+  });
+
+  return response?.data[0]?.result?.value[0]?.account?.data?.parsed?.info
+    ?.tokenAmount.uiAmount;
 };

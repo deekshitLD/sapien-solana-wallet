@@ -63,6 +63,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
         }}
         onChange={(event: any, editor: any) => {
           const data = editor.getData();
+          console.log("DATA is: ", data);
           setContent(data);
         }}
       />

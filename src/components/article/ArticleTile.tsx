@@ -11,8 +11,16 @@ interface articleTileProps {
   id: string;
   title: string;
   content: any;
+  userHasSapienToken: any;
+  articleUnderVote: any;
 }
-const ArticleTile = ({ id, title, content }: articleTileProps) => {
+const ArticleTile = ({
+  id,
+  title,
+  content,
+  userHasSapienToken,
+  articleUnderVote,
+}: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const toast = useToast();
   const handleDelete = async (e: any) => {
@@ -45,6 +53,9 @@ const ArticleTile = ({ id, title, content }: articleTileProps) => {
         transform: "scale(1.05)",
         boxShadow: "2px 7px 0.8px 10px #888888 ",
       }}
+      onClick={() => {
+        router.push(`/addArticle/?articleId=${id}`);
+      }}
     >
       <Flex direction={"column"} justifyContent={"space-between"}>
         <Text fontSize="xl" noOfLines={3} marginTop={2} marginBottom={5}>
@@ -54,30 +65,32 @@ const ArticleTile = ({ id, title, content }: articleTileProps) => {
           {parse(content)}
         </Text>
       </Flex>
-      <HStack
-        spacing="10px"
-        margin={"8px 5px 0 0"}
-        position={"absolute"}
-        top={0}
-        right={0}
-      >
-        <IconButton
-          aria-label={`Edit article ${title}`}
-          icon={<EditIcon />}
-          onClick={() => {
-            router.push(`/addArticle/?articleId=${id}`);
-          }}
-          colorScheme={"teal"}
-          variant="outline"
-        />
-        <IconButton
-          aria-label={`Delete article ${title}`}
-          icon={<DeleteIcon />}
-          onClick={() => setDeleteAlert((prevValue) => !prevValue)}
-          variant="solid"
-          colorScheme={"red"}
-        />
-      </HStack>
+      {!articleUnderVote && (
+        <HStack
+          spacing="10px"
+          margin={"8px 5px 0 0"}
+          position={"absolute"}
+          top={0}
+          right={0}
+        >
+          <IconButton
+            aria-label={`Edit article ${title}`}
+            icon={<EditIcon />}
+            onClick={() => {
+              router.push(`/addArticle/?articleId=${id}`);
+            }}
+            colorScheme={"teal"}
+            variant="outline"
+          />
+          <IconButton
+            aria-label={`Delete article ${title}`}
+            icon={<DeleteIcon />}
+            onClick={() => setDeleteAlert((prevValue) => !prevValue)}
+            variant="solid"
+            colorScheme={"red"}
+          />
+        </HStack>
+      )}
       {deleteAlert && (
         <Alert
           title={"Delete Article"}
