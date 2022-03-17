@@ -21,9 +21,54 @@ export const verifyMessage = async ({
   return response;
 };
 
-const tokenMintAddress = new PublicKey(
+const sapienTokenMintAddress = new PublicKey(
   "FCrUzx3LzTB58UTew7tCkE7jry93x3Fv8TTPzUwzVNZU"
 );
+
+const newsTokenMintAddress = new PublicKey(
+  "3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo"
+);
+
+export const checkNewsTokenBalance = async (walletAddress: any) => {
+  const response = await axios({
+    url: `https://api.devnet.solana.com`,
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    data: [
+      {
+        jsonrpc: "2.0",
+        id: 1,
+        method: "getTokenAccountsByOwner",
+        params: [
+          walletAddress,
+          {
+            mint: newsTokenMintAddress,
+          },
+          {
+            encoding: "jsonParsed",
+          },
+        ],
+      },
+      // {
+      //   jsonrpc: "2.0",
+      //   id: 1,
+      //   method: "getTokenAccountsByOwner",
+      //   params: [
+      //     walletAddress2,
+      //     {
+      //       mint: tokenMintAddress2,
+      //     },
+      //     {
+      //       encoding: "jsonParsed",
+      //     },
+      //   ],
+      // },
+    ],
+  });
+  console.log(response);
+  return response?.data[0]?.result?.value[0]?.account?.data?.parsed?.info
+    ?.tokenAmount.uiAmount;
+};
 
 export const checkSapiensTokenBalance = async (walletAddress: PublicKey) => {
   const response = await axios({
@@ -38,7 +83,7 @@ export const checkSapiensTokenBalance = async (walletAddress: PublicKey) => {
         params: [
           walletAddress,
           {
-            mint: tokenMintAddress,
+            mint: sapienTokenMintAddress,
           },
           {
             encoding: "jsonParsed",

@@ -46,6 +46,9 @@ import {
 
 import { sendInstruction } from "../src/solanaProgram/governance/transactionInstruction";
 import { PublicKey } from "@solana/web3.js";
+
+import { checkNewsTokenBalance } from "../src/api/auth";
+
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
   console.log("Wallet adapter is ", walletAdapter);
@@ -103,76 +106,90 @@ const AddArticle = () => {
 
   const handleSaveAsDraft = async () => {
     // let res = await addArticle();
-    if (!content || heading.length <= 0) {
+    const res = await checkNewsTokenBalance(wallet.publicKey);
+    console.log("News token balance is", res);
+    if (res == undefined) {
       toast({
         position: "top",
-        title: "Cannot save empty article",
-        description: "Title and content required.",
+        title: "Insufficient News token balance",
+        description: "You need News token to pulish article. Use faucet :)",
         status: "error",
         duration: 5000,
         isClosable: true,
       });
+      return;
     } else {
-      if (articleId) {
-        await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
-        const res = await updateArticle({
-          id: articleId,
-          heading,
-          content,
-          reportAccountPublicKey,
+      if (!content || heading.length <= 0) {
+        toast({
+          position: "top",
+          title: "Cannot save empty article",
+          description: "Title and content required.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
         });
-
-        if (res.status === 200) {
-          toast({
-            position: "top",
-            title: "Changes saved.",
-            description: "Successfully saved changes.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-          router.push("/articleList");
-        }
       } else {
-        console.log("NEW ARTICLE, generating id.....");
-        const id = new ObjectID();
-        const TempreportAccountPublicKey = await initializeArticleAccount(
-          wallet,
-          id
-        );
-        console.log(
-          "Report account public key generated",
-          TempreportAccountPublicKey
-        );
-        setReportAccountPublicKey(TempreportAccountPublicKey);
-
-        await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
-
-        const res = await updateArticle({
-          id: id.toString(),
-          heading,
-          content,
-          reportAccountPublicKey: TempreportAccountPublicKey,
-        });
-        if (res.status === 200) {
-          toast({
-            position: "top",
-            title: "Added article",
-            description: "Successfully added article",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
+        if (articleId) {
+          await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
+          const res = await updateArticle({
+            id: articleId,
+            heading,
+            content,
+            reportAccountPublicKey,
           });
-          router.push("/articleList");
+
+          if (res.status === 200) {
+            toast({
+              position: "top",
+              title: "Changes saved.",
+              description: "Successfully saved changes.",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+            router.push("/articleList");
+          }
         } else {
-          toast({
-            position: "top",
-            title: "Error",
-            description: "Something went wrong",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
+          console.log("NEW ARTICLE, generating id.....");
+          const id = new ObjectID();
+          const TempreportAccountPublicKey = await initializeArticleAccount(
+            wallet,
+            id
+          );
+          console.log(
+            "Report account public key generated",
+            TempreportAccountPublicKey
+          );
+          setReportAccountPublicKey(TempreportAccountPublicKey);
+
+          await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
+
+          const res = await updateArticle({
+            id: id.toString(),
+            heading,
+            content,
+            reportAccountPublicKey: TempreportAccountPublicKey,
           });
+          if (res.status === 200) {
+            toast({
+              position: "top",
+              title: "Added article",
+              description: "Successfully added article",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+            router.push("/articleList");
+          } else {
+            toast({
+              position: "top",
+              title: "Error",
+              description: "Something went wrong",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          }
         }
       }
     }
