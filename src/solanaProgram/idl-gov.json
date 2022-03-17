@@ -1,0 +1,101 @@
+{
+  "version": "0.1.0",
+  "name": "articlepublishing",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "publisherAccountBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "publishArticle",
+      "accounts": [
+        {
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "articleUri",
+          "type": "string"
+        },
+        {
+          "name": "draftAccount",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "censorArticle",
+      "accounts": [
+        {
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "articleUri",
+          "type": "string"
+        },
+        {
+          "name": "draftAccount",
+          "type": "publicKey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ArticleState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "articleuri",
+            "type": "string"
+          },
+          {
+            "name": "draftaccount",
+            "type": "publicKey"
+          },
+          {
+            "name": "articlestate",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "xpqf8AFoskZT2AfYUdSjvWRn2niqEcvTS1wrKQpuBia"
+  }
+}

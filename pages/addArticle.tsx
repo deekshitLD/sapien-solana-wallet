@@ -38,6 +38,8 @@ import {
   updateOrAddArticle,
 } from "../src/solanaProgram";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
+
+import { sendInstruction } from "../src/solanaProgram/governance/transactionInstruction";
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
   console.log("Wallet adapter is ", walletAdapter);
@@ -69,7 +71,7 @@ const AddArticle = () => {
           setArticleStatus(res.data.status);
           setLoading(false);
         })
-      : "";
+      : setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -82,6 +84,8 @@ const AddArticle = () => {
       articleStatus === "DRAFT" &&
       (content.length > 0 || heading.length > 0)
     ) {
+      setShowUnsavedAlert(true);
+    } else if (!articleId && (content.length > 0 || heading.length > 0)) {
       setShowUnsavedAlert(true);
     } else {
       router.push("/articleList");
@@ -118,6 +122,7 @@ const AddArticle = () => {
             duration: 5000,
             isClosable: true,
           });
+          router.push("/articleList");
         }
       } else {
         console.log("NEW ARTICLE, generating id.....");
@@ -145,8 +150,7 @@ const AddArticle = () => {
             duration: 5000,
             isClosable: true,
           });
-          router.query.articleId = id.toString();
-          router.push(router);
+          router.push("/articleList");
         } else {
           toast({
             position: "top",
@@ -261,7 +265,7 @@ const AddArticle = () => {
               isClosable: true,
             });
             router.query.articleId = id.toString();
-            router.push(router);
+            router.push("/articleList");
           } else {
             toast({
               position: "top",
@@ -300,11 +304,11 @@ const AddArticle = () => {
             onClick={checkUnsavedChanges}
             style={{ borderRadius: "0.2rem 0 0 0.2rem" }}
           >
-            My Articles
+            Article list
           </Button>
 
           <ButtonGroup variant="outline" spacing="0">
-            {articleStatus === "DRAFT" && (
+            {(articleStatus === "DRAFT" || !articleId) && (
               <>
                 <Button
                   onClick={() => setMode("Preview")}
@@ -335,7 +339,7 @@ const AddArticle = () => {
             </div>
           </>
         )}
-        {mode === "Edit" && articleStatus === "DRAFT" && (
+        {mode === "Edit" && (articleStatus === "DRAFT" || !articleId) && (
           <>
             <Input
               margin={"50px 0 50px 0"}
@@ -353,15 +357,32 @@ const AddArticle = () => {
       </Container>
       <Flex justifyContent={"center"}>
         <Stack direction="row" spacing={4} color={"white"}>
-          <Button variant={"outline"} onClick={() => getArticleUnderVoting()}>
-            Test
-          </Button>
-          <Button variant={"outline"} onClick={handleSaveAsDraft}>
-            Save as draft
-          </Button>
-          <Button variant={"solid"} onClick={handlePublishForVoting}>
-            Publish for voting
-          </Button>
+          {((articleId && articleStatus === "DRAFT") || !articleId) && (
+            <>
+              <Button
+                variant={"outline"}
+                onClick={() => getArticleUnderVoting()}
+              >
+                Test
+              </Button>
+              <Button variant={"outline"} onClick={handleSaveAsDraft}>
+                Save as draft
+              </Button>
+              <Button variant={"solid"} onClick={handlePublishForVoting}>
+                Publish for voting
+              </Button>
+            </>
+          )}
+
+          {articleId && articleStatus === "VOTING" && (
+            <Button
+              onClick={() => {
+                sendInstruction(wallet, reportAccountPublicKey, articleId);
+              }}
+            >
+              Publish KAro
+            </Button>
+          )}
         </Stack>
       </Flex>
       {showUnsavedAlert && (
