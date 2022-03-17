@@ -13,4 +13,8 @@ export const theme = extendTheme({
   components: {
     Button,
   },
+  fonts: {
+    heading: "Playfair Display",
+    body: "Playfair Display",
+  },
 });
