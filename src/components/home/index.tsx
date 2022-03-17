@@ -103,7 +103,7 @@ const style = `
   .outer-container {
     width:100vw;
     padding:30px;
-    background-color:#222;
+    background-color:#fff;
   }
 
   .title {

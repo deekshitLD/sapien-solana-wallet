@@ -28,7 +28,7 @@ export default function Index() {
 
 const style = `
     body {
-        background-color: #222;
+        background-color: #fff;
         color:white;
     }
 `;

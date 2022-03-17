@@ -391,12 +391,6 @@ const AddArticle = () => {
         <Stack direction="row" spacing={4} color={"white"}>
           {((articleId && articleStatus === "DRAFT") || !articleId) && (
             <>
-              <Button
-                variant={"outline"}
-                onClick={() => getArticleUnderVoting()}
-              >
-                Test
-              </Button>
               <Button variant={"outline"} onClick={handleSaveAsDraft}>
                 Save as draft
               </Button>
