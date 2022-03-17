@@ -3,7 +3,7 @@
   "name": "articlepublishing",
   "instructions": [
     {
-      "name": "publishArticle",
+      "name": "initialize",
       "accounts": [
         {
           "name": "publisherAccount",
@@ -25,7 +25,19 @@
         {
           "name": "publisherAccountBump",
           "type": "u8"
-        },
+        }
+      ]
+    },
+    {
+      "name": "publishArticle",
+      "accounts": [
+        {
+          "name": "publisherAccount",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
         {
           "name": "articleUri",
           "type": "string"
@@ -43,19 +55,18 @@
           "name": "publisherAccount",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "author",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "articleUri",
+          "type": "string"
+        },
+        {
+          "name": "draftAccount",
+          "type": "publicKey"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -73,10 +84,6 @@
             "type": "publicKey"
           },
           {
-            "name": "author",
-            "type": "publicKey"
-          },
-          {
             "name": "articlestate",
             "type": "u8"
           },
@@ -89,6 +96,6 @@
     }
   ],
   "metadata": {
-    "address": "F8nQoxzzpdxyZy9EcK8yoPiEZHjYdixWhPUe4xaVwoHd"
+    "address": "xpqf8AFoskZT2AfYUdSjvWRn2niqEcvTS1wrKQpuBia"
   }
 }

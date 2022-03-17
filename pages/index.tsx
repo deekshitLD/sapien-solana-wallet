@@ -94,9 +94,14 @@ const Index: NextPage = () => {
 
         {loggedIn ? (
           <>
-            <Link href="news-list">
-              <Button mt="30px">Read news</Button>
-            </Link>
+            <Button
+              mt="30px"
+              onClick={() => {
+                router.push("/faucet");
+              }}
+            >
+              Get tokens
+            </Button>
           </>
         ) : (
           <Heading as="h3" size="lg" margin={10}>
@@ -110,26 +115,24 @@ const Index: NextPage = () => {
           {loggedIn && (
             <>
               <ButtonGroup direction="row" align="center">
+                <Button onClick={() => router.push("/news-list")}>
+                  Read news
+                </Button>
+
                 <Button
                   onClick={() => {
                     router.push("/articleList");
                   }}
                 >
-                  My articles
+                  Post an article
                 </Button>
-                <Button
-                  onClick={() => {
-                    router.push("/faucet");
-                  }}
-                >
-                  Faucet
-                </Button>
+
                 <Button
                   onClick={() => {
                     router.push("/votingList");
                   }}
                 >
-                  Under voting
+                  Vote on articles
                 </Button>
               </ButtonGroup>
             </>

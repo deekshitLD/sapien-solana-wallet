@@ -406,7 +406,7 @@ const AddArticle = () => {
                 handlePublishArticle(wallet, reportAccountPublicKey, articleId);
               }}
             >
-              Publish KAro
+              Publish
             </Button>
           )}
         </Stack>
@@ -424,7 +424,9 @@ const AddArticle = () => {
       {showInfoModal && (
         <InfoModal
           title="Instructions to publish"
-          content={"Please go to mango"}
+          content={
+            "Please go to governance by clicking 'Go to vote' below. Connect wallet and deposit you Sapien tokens. Then click on program with id 'F8nQoxzzpdxyZy9EcK8yoPiEZHjYdixWhPUe4xaVwoHd'."
+          }
           isOpen={showInfoModal}
           onClose={closeInfoModal}
           instructions={instructions}
