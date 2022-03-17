@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import { useRouter } from "next/router";
 
-const protectedRoutes = ["/addArticle", "/articleList"];
+const protectedRoutes = ["/addArticle", "/articleList", "/faucet"];
 import { Box, Flex, Spacer, Text, useToast } from "@chakra-ui/react";
 
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";

@@ -20,14 +20,13 @@ interface articleTileProps {
   id: string;
   title: string;
   content: any;
-  userHasSapienToken: any;
   articleUnderVote: any;
 }
 const ArticleTile = ({
   id,
   title,
   content,
-  userHasSapienToken,
+
   articleUnderVote,
 }: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
@@ -57,8 +56,8 @@ const ArticleTile = ({
       alignItems={"flex-start"}
       padding={5}
       _hover={{
-        transform: "scale(1.05)",
-        border: "2px solid white",
+        // transform: "scale(1.01)",
+        border: "1px solid black",
         cursor: "pointer",
         borderRadius: "50px",
       }}
@@ -98,6 +97,7 @@ const ArticleTile = ({
         maxWidth={"15rem"}
         maxHeight={"15rem"}
         minHeight={"15rem"}
+        minWidth={"15rem"}
         overflow="hidden"
         position={"relative"}
         onClick={() => {

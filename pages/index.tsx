@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, ButtonGroup } from "@chakra-ui/react";
 import { SignMessageButton } from "../src/components/signMessageButton";
 import { Heading } from "@chakra-ui/react";
 import router from "next/router";
@@ -109,13 +109,29 @@ const Index: NextPage = () => {
         <Box margin={"10px"}>
           {loggedIn && (
             <>
-              <Button
-                onClick={() => {
-                  router.push("/articleList");
-                }}
-              >
-                My articles
-              </Button>
+              <ButtonGroup direction="row" align="center">
+                <Button
+                  onClick={() => {
+                    router.push("/articleList");
+                  }}
+                >
+                  My articles
+                </Button>
+                <Button
+                  onClick={() => {
+                    router.push("/faucet");
+                  }}
+                >
+                  Faucet
+                </Button>
+                <Button
+                  onClick={() => {
+                    router.push("/votingList");
+                  }}
+                >
+                  Under voting
+                </Button>
+              </ButtonGroup>
             </>
           )}
         </Box>

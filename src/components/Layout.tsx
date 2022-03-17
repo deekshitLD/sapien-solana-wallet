@@ -1,13 +1,17 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import Navbar from "./navBar";
 import Image from "next/image";
+import { useRouter } from "next/router";
 const Layout = ({ children }: any) => {
+  const router = useRouter();
+
   return (
     <div
-      style={{ backgroundColor: "black", color: "white", minHeight: "100vh" }}
+      style={{ backgroundColor: "white", color: "black", minHeight: "100vh" }}
     >
       <Navbar />
+      {/* <Button onClick={() => router.back()}>Back</Button> */}
       {children}
       <footer
         style={{
