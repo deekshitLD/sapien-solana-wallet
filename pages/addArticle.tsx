@@ -63,7 +63,7 @@ const AddArticle = () => {
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const [instructions, setInstructions] = useState([]);
+  const [instructions, setInstructions] = useState({});
 
   const router = useRouter();
   const toast = useToast();
@@ -409,7 +409,7 @@ const AddArticle = () => {
       {showInfoModal && (
         <InfoModal
           title="Instructions to publish"
-          content={"Publish instrutions"}
+          content={"Please go to mango"}
           isOpen={showInfoModal}
           onClose={closeInfoModal}
           instructions={instructions}

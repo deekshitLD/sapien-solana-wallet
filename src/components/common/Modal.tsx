@@ -30,8 +30,7 @@ const InfoModal = ({
   onClose,
   instructions,
 }: InfoModalProps) => {
-  const { initializeInstruction, publishArticleInstruction } = instructions;
-  const { hasCopied, onCopy } = useClipboard(initializeInstruction);
+  const { publishArticleInstruction } = instructions;
   const { hasCopied: hasCopiedPublished, onCopy: onCopyPublished } =
     useClipboard(publishArticleInstruction);
   return (
@@ -43,7 +42,7 @@ const InfoModal = ({
           <ModalCloseButton />
           <ModalBody>
             {content}
-            <Heading mb={4} as={"h3"} size={"md"}>
+            {/* <Heading mb={4} as={"h3"} size={"md"}>
               Initialize Instruction
             </Heading>
             <Flex mb={2}>
@@ -55,7 +54,7 @@ const InfoModal = ({
               <Button onClick={onCopy} ml={2}>
                 {hasCopied ? "Copied" : "Copy"}
               </Button>
-            </Flex>
+            </Flex> */}
             <Divider />
             <Heading mt={5} as={"h3"} size={"md"}>
               Publish article Instruction

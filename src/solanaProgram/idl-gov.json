@@ -3,7 +3,7 @@
   "name": "articlepublishing",
   "instructions": [
     {
-      "name": "initialize",
+      "name": "publishArticle",
       "accounts": [
         {
           "name": "publisherAccount",
@@ -25,29 +25,7 @@
         {
           "name": "publisherAccountBump",
           "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "publishArticle",
-      "accounts": [
-        {
-          "name": "publisherAccount",
-          "isMut": true,
-          "isSigner": false
         },
-        {
-          "name": "author",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
         {
           "name": "articleUri",
           "type": "string"
@@ -77,16 +55,7 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "articleUri",
-          "type": "string"
-        },
-        {
-          "name": "draftAccount",
-          "type": "publicKey"
-        }
-      ]
+      "args": []
     }
   ],
   "accounts": [
@@ -101,6 +70,10 @@
           },
           {
             "name": "draftaccount",
+            "type": "publicKey"
+          },
+          {
+            "name": "author",
             "type": "publicKey"
           },
           {

@@ -37,7 +37,6 @@ export const sendInstruction = async (
   articleId: any
 ) => {
   let finalInstructions = {
-    initializeInstruction: "",
     publishArticleInstruction: "",
   };
   const provider = await getProvider(wallet);
@@ -65,31 +64,32 @@ export const sendInstruction = async (
   programAuthorityBump = _programAuthorityBump;
 
   const publisherAccount = Keypair.generate();
-  try {
-    /* Initialize account for article for first time, interact with the program via rpc */
+  // try {
+  //   /* Initialize account for article for first time, interact with the program via rpc */
 
-    const initializeInstruction = await program.instruction.initialize(
-      programAuthorityBump,
-      {
-        accounts: {
-          publisherAccount: publisherAccount.publicKey,
-          author: wallet.publicKey,
-          systemProgram: SystemProgram.programId,
-        },
-        signers: [],
-      }
-    );
+  //   const initializeInstruction = await program.instruction.initialize(
+  //     programAuthorityBump,
+  //     {
+  //       accounts: {
+  //         publisherAccount: publisherAccount.publicKey,
+  //         author: wallet.publicKey,
+  //         systemProgram: SystemProgram.programId,
+  //       },
+  //       signers: [],
+  //     }
+  //   );
 
-    let serialized = serializeInstructionToBase64(initializeInstruction);
+  //   let serialized = serializeInstructionToBase64(initializeInstruction);
 
-    console.log("Serialized instruction is  :", serialized.toString());
-    finalInstructions.initializeInstruction = serialized;
-  } catch (err) {
-    console.log("Transaction error: ", err);
-  }
+  //   console.log("Serialized instruction is  :", serialized.toString());
+  //   finalInstructions.initializeInstruction = serialized;
+  // } catch (err) {
+  //   console.log("Transaction error: ", err);
+  // }
 
   try {
     const publishArticleInstruction = await program.instruction.publishArticle(
+      programAuthorityBump,
       articleId,
       new PublicKey(reportAccount),
       {
