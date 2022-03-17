@@ -31,15 +31,21 @@ import Preview from "../src/components/article/Preview";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import Alert from "../src/components/common/Alert";
 
+import InfoModal from "../src/components/common/Modal";
 import {
   addToSolanaProgram,
   pushArticleToVoting,
   initializeArticleAccount,
   updateOrAddArticle,
 } from "../src/solanaProgram";
-import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
+import {
+  useAnchorWallet,
+  useWallet,
+  WalletContextState,
+} from "@solana/wallet-adapter-react";
 
 import { sendInstruction } from "../src/solanaProgram/governance/transactionInstruction";
+import { PublicKey } from "@solana/web3.js";
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
   console.log("Wallet adapter is ", walletAdapter);
@@ -56,6 +62,9 @@ const AddArticle = () => {
   const [articleStatus, setArticleStatus] = useState("");
   const [showUnsavedAlert, setShowUnsavedAlert] = useState(false);
   const [mode, setMode] = useState("Edit");
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [instructions, setInstructions] = useState([]);
+
   const router = useRouter();
   const toast = useToast();
 
@@ -218,22 +227,6 @@ const AddArticle = () => {
             isClosable: true,
           });
         }
-        // const status = await pushArticleToVoting(
-        //   wallet,
-        //   articleId,
-        //   reportAccountPublicKey
-        // );
-
-        // if (status) {
-        //   toast({
-        //     position: "top",
-        //     title: "Changes saved.",
-        //     description: "Successfully saved changes.",
-        //     status: "success",
-        //     duration: 5000,
-        //     isClosable: true,
-        //   });
-        // }
       } else {
         const id = new ObjectID();
 
@@ -288,6 +281,24 @@ const AddArticle = () => {
         }
       }
     }
+  };
+
+  const handlePublishArticle = async (
+    wallet: WalletContextState,
+    reportAccountPublicKey: PublicKey,
+    articleId: string | string[]
+  ) => {
+    const res: any = await sendInstruction(
+      wallet,
+      reportAccountPublicKey,
+      articleId
+    );
+    setInstructions(res);
+    setShowInfoModal(true);
+  };
+
+  const closeInfoModal = () => {
+    setShowInfoModal(false);
   };
   return (
     <>
@@ -377,7 +388,7 @@ const AddArticle = () => {
           {articleId && articleStatus === "VOTING" && (
             <Button
               onClick={() => {
-                sendInstruction(wallet, reportAccountPublicKey, articleId);
+                handlePublishArticle(wallet, reportAccountPublicKey, articleId);
               }}
             >
               Publish KAro
@@ -393,6 +404,15 @@ const AddArticle = () => {
           confirmBtnLabel={"Proceed"}
           setIsOpen={setShowUnsavedAlert}
           onConfirm={() => router.push("/articleList")}
+        />
+      )}
+      {showInfoModal && (
+        <InfoModal
+          title="Instructions to publish"
+          content={"Publish instrutions"}
+          isOpen={showInfoModal}
+          onClose={closeInfoModal}
+          instructions={instructions}
         />
       )}
     </>

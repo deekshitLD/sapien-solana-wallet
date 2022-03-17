@@ -35,6 +35,16 @@
           "name": "publisherAccount",
           "isMut": true,
           "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
         }
       ],
       "args": [
@@ -54,6 +64,16 @@
         {
           "name": "publisherAccount",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
           "isSigner": false
         }
       ],
@@ -96,6 +116,6 @@
     }
   ],
   "metadata": {
-    "address": "xpqf8AFoskZT2AfYUdSjvWRn2niqEcvTS1wrKQpuBia"
+    "address": "F8nQoxzzpdxyZy9EcK8yoPiEZHjYdixWhPUe4xaVwoHd"
   }
 }

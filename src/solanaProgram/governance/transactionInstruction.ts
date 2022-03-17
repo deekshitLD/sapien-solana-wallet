@@ -36,18 +36,13 @@ export const sendInstruction = async (
   reportAccount: any,
   articleId: any
 ) => {
-  const args = process.argv.slice(2);
-
+  let finalInstructions = {
+    initializeInstruction: "",
+    publishArticleInstruction: "",
+  };
   const provider = await getProvider(wallet);
   const connection = new Connection("https://api.devnet.solana.com");
   //   const user = getLocalKeyypair(process.env.SOLANA_WALLET_FILEPATH);
-
-  const tx = new Transaction();
-  let transaction = new Transaction();
-
-  const signers = [wallet];
-
-  let sendTx = true;
 
   const programID = new web3.PublicKey(
     "xpqf8AFoskZT2AfYUdSjvWRn2niqEcvTS1wrKQpuBia"
@@ -58,205 +53,60 @@ export const sendInstruction = async (
 
   const program = new Program(idl, programID, provider);
 
-  let fromAccount: any;
-  let treasuryAccount: any;
+  let programAuthority;
+  let programAuthorityBump;
 
-  try {
-    fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
-      connection,
-      wallet,
-      mint,
-      wallet.publicKey
+  const [_programAuthority, _programAuthorityBump] =
+    await web3.PublicKey.findProgramAddress(
+      [Buffer.from("author"), wallet.publicKey.toBuffer()],
+      program.programId
     );
+  programAuthority = _programAuthority;
+  programAuthorityBump = _programAuthorityBump;
 
-    // treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
-    //   connection,
-    //   wallet,
-    //   mint,
-    //   new PublicKey("6kgSK2hFDjUCS3wafYYW2VSwkjETuqHdByWddwmytyp7")
-    // );
-    console.log(
-      "WE have treasury and from accounts",
-      // treasuryAccount
-      fromAccount
-    );
-  } catch (err) {
-    console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
-  }
-  // ------------------- Initialize all parameters -------------------------------------
   const publisherAccount = Keypair.generate();
   try {
     /* Initialize account for article for first time, interact with the program via rpc */
 
-    await program.rpc.initialize({
-      accounts: {
-        publisherAccount: publisherAccount.publicKey,
-        author: wallet,
-        systemProgram: SystemProgram.programId,
-      },
-      signers: [publisherAccount],
-    });
-
-    const account = await program.account.publisherAccount.fetch(
-      publisherAccount.publicKey
+    const initializeInstruction = await program.instruction.initialize(
+      programAuthorityBump,
+      {
+        accounts: {
+          publisherAccount: publisherAccount.publicKey,
+          author: wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [],
+      }
     );
 
-    console.log("account: ", account);
-    // return reportAccount.publicKey;
-    // setValue(account.count.toString());
+    let serialized = serializeInstructionToBase64(initializeInstruction);
+
+    console.log("Serialized instruction is  :", serialized.toString());
+    finalInstructions.initializeInstruction = serialized;
   } catch (err) {
     console.log("Transaction error: ", err);
   }
 
   try {
-    const hash = await program.rpc.publishArticle(articleId, reportAccount, {
-      accounts: {
-        publisherAccount: programID,
-      },
-      signers: [],
-    });
-    const account = await program.account.publisherAccount.fetch(
-      publisherAccount.publicKey
+    const publishArticleInstruction = await program.instruction.publishArticle(
+      articleId,
+      new PublicKey(reportAccount),
+      {
+        accounts: {
+          publisherAccount: publisherAccount.publicKey,
+          author: wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [],
+      }
     );
-    console.log("Transaction hash: ", hash, "Account: ", account);
+    let serialized = serializeInstructionToBase64(publishArticleInstruction);
+    finalInstructions.publishArticleInstruction = serialized;
+
+    console.log("publishArticle Instruction serialized: ", serialized);
+    return finalInstructions;
   } catch (err) {
     console.log("Publish article error", err);
   }
-  const instructions: web3.TransactionInstruction[] = [];
-
-  const createSayByeInstructionData = () => {
-    program.rpc
-      .publishArticle(articleId, reportAccount, {
-        accounts: {
-          publisherAccount: programID,
-        },
-        signers: [],
-      })
-      .then((res) => {
-        // const dataLayout = BufferLayout.struct([
-
-        //   BufferLayout.u8('instruction'),
-        // ]);
-
-        // const data = Buffer.alloc(dataLayout.span);
-        // dataLayout.encode(
-        //   {
-        //     instruction: res,
-        //   },
-        //   data
-        // );
-
-        // return data;
-        program.account.reportAccount
-          .fetch(reportAccount.publicKey)
-          .then((acc) => {
-            console.log(acc);
-          });
-
-        return res;
-      });
-  };
-
-  // const instruction = new web3.TransactionInstruction({
-  //   keys: [{ pubkey: wallet.publicKey, isSigner: false, isWritable: true }],
-  //   programId: programID,
-  //   //    data: Buffer.alloc(0),
-  //   data: createSayByeInstructionData(),
-  // });
-
-  // // instructions.push();
-
-  // // tx.add(...instructions);
-  // tx.add(instruction);
-  // const ix = await program.rpc.publishArticle(articleId, reportAccount, {
-  //   accounts: {
-  //     publisherAccount: programID,
-  //   },
-  //   signers: [],
-  // });
-  // const txId = await sendAndConfirmTransaction(connection, tx, wallet);
-
-  // switch (Number(args[0])) {
-  // case 0: {
-  //   tx.add(
-  //     await CreateMintGovernance(
-  //       user,
-  //       user,
-  //       new PublicKey(args[1])
-  //     ),
-  //   );
-
-  //   break;
-  // }
-
-  // case 1: {
-  //   if(args.length < 3) {
-  //     throw new Error("Please provide nft mint address and containing token account address as arguments.");
-  //   }
-  //   tx.add(
-  //     await MintCommunityTokenToNftHolder(
-  //       user,
-  //       new PublicKey(args[1]),
-  //       new PublicKey(args[2]),
-  //       new PublicKey(args[3])
-  //     ),
-  //   );
-
-  //   break;
-  // }
-
-  // case 2: {
-  //   if (args.length < 2) {
-  //     throw new Error("Please provide amount to mint as argument.");
-  //   }
-
-  // sendTx = false;
-  // const amount = Number(args[1]);
-
-  // if (!isNaN(amount) || amount < 1) {
-
-  //   // const buf = serializeInstructionToBase64(ix);
-
-  //   // console.log(buf);
-  //   // return buf;
-  // } else {
-  //   throw new Error("Invalid number passed as amount.");
-  // }
-
-  //   break;
-  // }
-
-  // case 4: {
-  //   if(args.length < 3) {
-  //     throw new Error("Please provide at least token name, symbol as arguments.");
-  //   }
-
-  //   tx.add(
-  //     await CreateTokenWithMetadata(
-  //       user, user,
-  //       args[1], args[2],
-  //       args[3], Number(args[4]),
-  //       args[5] ? getLocalKeyypair(args[5]) : null,
-  //     ),
-  //   );
-
-  //   break;
-  // }
-
-  // default: {
-  //   throw new Error("No arguments provided.");
-  // }
 };
-//   const mint = new PublicKey('FCrUzx3LzTB58UTew7tCkE7jry93x3Fv8TTPzUwzVNZU')
-//   const fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
-//     connection,
-//     wallet,
-//     mint,
-//     provider.wallet.publicKey
-//   );
-// if (sendTx) {
-
-//   return txId;
-// } else {
-//   return null;
-// }

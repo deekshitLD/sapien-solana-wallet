@@ -87,12 +87,12 @@ const ArticleList = () => {
         Under draft
       </Heading>
       <Flex
-        width={"100%"}
-        alignItems={"stretch"}
+        // width={"100%"}
+        alignItems={"flex-start"}
         // wrap={"wrap"}
         // mb={10}
-        // justifyItems={"flex-start"}
-        justifyContent={"space-between"}
+        justifyItems={"flex-start"}
+        justifyContent={"space-evenly"}
       >
         {console.log(articlesInDraft)}
         {articlesInDraft.length > 0 &&
@@ -150,63 +150,67 @@ const ArticleList = () => {
         )}
       </Flex>
       <Divider />
-      <Heading as={"h2"} size="lg" textAlign={"center"} mt={10} mb={10}>
-        Under voting
-      </Heading>
-      <Flex alignItems={"stretch"} wrap={"wrap"}>
-        {console.log("Articles under vote ", articlesUnderVote)}
-        {articlesUnderVote?.length > 0 &&
-          articlesUnderVote.map((item: any) => {
-            return (
-              <ArticleTile
-                key={item._id}
-                id={item._id}
-                title={item.heading}
-                content={item.content}
-                userHasSapienToken={userHasSapienToken}
-                articleUnderVote={true}
-              />
-            );
-          })}
-        {articlesUnderVote?.length === 0 && loading === false && (
-          <>
-            <Flex
-              justifyItems={"baseline"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              flexDirection={"column"}
-              // wrap={"wrap"}
-              textAlign="center"
-              margin={"auto"}
-            >
-              <Box
-                style={{
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  background: "white",
-                  marginRight: "20px",
-                  opacity: 0.76,
-                }}
-              >
-                <Image
-                  src="/no-articles.png"
-                  alt="No articles"
-                  width={140}
-                  height={150}
-                />
-              </Box>
-              <Text fontSize="xl" color={"gray.400"} mb={10}>
-                Nothing here
-              </Text>
-            </Flex>
-          </>
-        )}
-        {loading && (
-          <Center>
-            <Spinner size={"xl"} />
-          </Center>
-        )}
-      </Flex>
+      {userHasSapienToken && (
+        <>
+          <Heading as={"h2"} size="lg" textAlign={"center"} mt={10} mb={10}>
+            Under voting
+          </Heading>
+          <Flex alignItems={"stretch"} wrap={"wrap"}>
+            {console.log("Articles under vote ", articlesUnderVote)}
+            {articlesUnderVote?.length > 0 &&
+              articlesUnderVote.map((item: any) => {
+                return (
+                  <ArticleTile
+                    key={item._id}
+                    id={item._id}
+                    title={item.heading}
+                    content={item.content}
+                    userHasSapienToken={userHasSapienToken}
+                    articleUnderVote={true}
+                  />
+                );
+              })}
+            {articlesUnderVote?.length === 0 && loading === false && (
+              <>
+                <Flex
+                  justifyItems={"baseline"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  flexDirection={"column"}
+                  // wrap={"wrap"}
+                  textAlign="center"
+                  margin={"auto"}
+                >
+                  <Box
+                    style={{
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      background: "white",
+                      marginRight: "20px",
+                      opacity: 0.76,
+                    }}
+                  >
+                    <Image
+                      src="/no-articles.png"
+                      alt="No articles"
+                      width={140}
+                      height={150}
+                    />
+                  </Box>
+                  <Text fontSize="xl" color={"gray.400"} mb={10}>
+                    Nothing here
+                  </Text>
+                </Flex>
+              </>
+            )}
+            {loading && (
+              <Center>
+                <Spinner size={"xl"} />
+              </Center>
+            )}
+          </Flex>
+        </>
+      )}
     </Flex>
   );
 };
