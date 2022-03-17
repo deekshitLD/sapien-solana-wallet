@@ -83,34 +83,23 @@ const Index: NextPage = () => {
               width={60}
               height={60}
             />
-            apiens News
+            <span style={{ position: "relative", bottom: "6px", left: "6px" }}>
+              apien News
+            </span>
           </span>
         </Heading>
-        <Heading
-          as="h2"
-          size="lg"
-          color={"white"}
-          fontFamily={"Helvetica"}
-          margin={10}
-        >
+        <Heading as="h2" size="lg" margin={10}>
           The 🌎 of Un-biased media
         </Heading>
 
         {loggedIn ? (
           <>
             <Link href="news-list">
-              <Button
-                _hover={{ bg: "violet" }}
-                color="white"
-                bg="black"
-                mt="30px"
-              >
-                Read news
-              </Button>
+              <Button mt="30px">Read news</Button>
             </Link>
           </>
         ) : (
-          <Heading as="h3" size="lg" color={"white"} margin={10}>
+          <Heading as="h3" size="lg" margin={10}>
             Connect wallet to get started
           </Heading>
         )}

@@ -5,6 +5,8 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 export const Button: ComponentStyleConfig = {
   // The styles all button have in common
   baseStyle: {
+    backgroundColor: "black",
+    color: "white",
     fontWeight: "bold",
     textTransform: "uppercase",
     borderRadius: "base", // <-- border radius is same for all variants and sizes
@@ -25,13 +27,10 @@ export const Button: ComponentStyleConfig = {
   // Two variants: outline and solid
   variants: {
     outline: {
-      border: "2px solid",
-      borderColor: "purple.500",
-      color: "purple.500",
-      _hover: { bg: "purple.500", color: "white" },
+      color: "white",
+      _hover: { bg: "#444", color: "white" },
     },
     solid: {
-      bg: "purple.500",
       color: "white",
     },
   },

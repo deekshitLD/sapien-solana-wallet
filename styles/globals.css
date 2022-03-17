@@ -25,3 +25,11 @@ a {
   min-height: 400px;
   background: #323232;
 }
+
+.wallet-adapter-button-trigger {
+  background-color: black !important;
+}
+
+.wallet-adapter-button-trigger:hover {
+  background-color: rgb(61, 61, 61) !important;
+}
