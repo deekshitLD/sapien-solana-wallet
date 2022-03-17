@@ -165,7 +165,7 @@ const Faucet = () => {
           <ModalBody>
             <input id="yourFirstCaptchaUserInput" type="text" />
             <ReCAPTCHA
-              sitekey={"6Lc0IeMeAAAAAFh4Ukwt-VYnOVeVNddWGBRelpsr"}
+              sitekey={"6Lch2uweAAAAALFqOjR-PWmtp_PvBc19BIr8hQBR"}
               onChange={onChange}
             />
           </ModalBody>
