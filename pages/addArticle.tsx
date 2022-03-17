@@ -140,6 +140,10 @@ const AddArticle = () => {
           wallet,
           id
         );
+        console.log(
+          "Report account public key generated",
+          TempreportAccountPublicKey
+        );
         setReportAccountPublicKey(TempreportAccountPublicKey);
 
         await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);

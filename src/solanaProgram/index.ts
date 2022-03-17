@@ -52,7 +52,7 @@ export const pushArticleToVoting = async (
 ) => {
   const provider = await getProvider(wallet);
   const programID = new anchor.web3.PublicKey(
-    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
   );
 
   const program = new Program(idl, programID, provider);
@@ -125,8 +125,9 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   const { SystemProgram, Keypair } = web3;
 
   const reportAccount = Keypair.generate();
+  console.log("Inside initializeArticleAccount: ", reportAccount);
   const programID = new anchor.web3.PublicKey(
-    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
   );
 
   const program = new anchor.Program(idl, programID, provider);
@@ -194,7 +195,7 @@ export const updateOrAddArticle = async (
   const { SystemProgram, Keypair } = web3;
 
   const programID = new anchor.web3.PublicKey(
-    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
   );
 
   const program = new anchor.Program(idl, programID, provider);
@@ -225,7 +226,7 @@ export const updateOrAddArticle = async (
   try {
     await program.rpc.updateReport(id.toString(), {
       accounts: {
-        reportAccount: reportAccount,
+        reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,
         newstoken: splToken.TOKEN_PROGRAM_ID,
         from: fromAccount.address,
@@ -269,7 +270,7 @@ export const addToSolanaProgram = async (
   // );
 
   const programID = new anchor.web3.PublicKey(
-    "FuiSWC8pz48qFicr9FyhEDMaMot9iNLQHZmjq66tcvUp"
+    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
   );
 
   const program = new anchor.Program(idl, programID, provider);
