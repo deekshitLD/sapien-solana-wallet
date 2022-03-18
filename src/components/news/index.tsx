@@ -18,7 +18,7 @@ export default function Index() {
       <Box width="80vw" margin="auto">
         <Heading mt="20px">{selectedNews.title}</Heading>
         <Center margin="20px">{<img src={`${selectedNews.img}`}></img>}</Center>
-        <Center mb="100px" mt="20px">
+        <Center mb="100px" mt="20px" color={"black"}>
           {selectedNews.description}
         </Center>
       </Box>
