@@ -47,7 +47,7 @@ const InfoModal = ({
           <ModalBody>
             <Stack spacing={3} mb={8}>
               <Text fontSize="lg">
-                ℹ️ Please go to governance by clicking 'Go to vote' below.{" "}
+                ℹ️ Please go to governance by clicking Go to vote below.{" "}
               </Text>
               <Text fontSize={"lg"}>
                 ℹ️ Connect wallet and deposit you Sapien tokens.
@@ -55,7 +55,7 @@ const InfoModal = ({
               <Text fontSize={"lg"}>
                 {" "}
                 ℹ️ Select program with id
-                'F8nQoxzzpdxyZy9EcK8yoPiEZHjYdixWhPUe4xaVwoHd'.
+                F8nQoxzzpdxyZy9EcK8yoPiEZHjYdixWhPUe4xaVwoHd.
               </Text>
               <Text fontSize={"lg"}>
                 ℹ️ Click on Add a new proposal, enter article details and Add
