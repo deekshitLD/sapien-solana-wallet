@@ -117,7 +117,7 @@ const HomePage: any = () => {
           </Heading>
         )}
 
-        <Box margin={"10px"}>
+        {/* <Box margin={"10px"}>
           {loggedIn && (
             <>
               <ButtonGroup direction="row" align="center">
@@ -143,7 +143,7 @@ const HomePage: any = () => {
               </ButtonGroup>
             </>
           )}
-        </Box>
+        </Box> */}
       </main>
 
       <div></div>

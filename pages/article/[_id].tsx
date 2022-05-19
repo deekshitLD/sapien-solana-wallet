@@ -6,7 +6,7 @@ import { listArticles, getArticle } from "../../src/api/article";
 import { useToast, Box, Container, Heading, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Layout from "../../src/components/Layout";
-import parse from "html-react-parser";
+import Parser from "html-react-parser";
 
 const Article = () => {
   const router = useRouter();
@@ -37,11 +37,17 @@ const Article = () => {
   return (
     <Box minHeight={"100vh"} background={"brand.greyDark"} color={"white"}>
       <Container>
-        <Heading as={"h1"} mb={3}>
-          {articleData.heading}
-        </Heading>
-        {articleData.owner}
-        <Text mt={10}>{parse(articleData.content)}</Text>
+        {articleData ? (
+          <>
+            <Heading as={"h1"} mb={3}>
+              {articleData.heading}
+            </Heading>
+            {articleData.owner}
+            <Text mt={10}>{articleData.content}</Text>
+          </>
+        ) : (
+          ""
+        )}
       </Container>
     </Box>
   );

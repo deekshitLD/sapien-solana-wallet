@@ -8,7 +8,7 @@ const Layout = ({ children }: any) => {
 
   return (
     <div
-      style={{ backgroundColor: "white", color: "black", minHeight: "100vh" }}
+      style={{ backgroundColor: "#1E1E1E", color: "white", minHeight: "100vh" }}
     >
       <Navbar />
       {/* <Button onClick={() => router.back()}>Back</Button> */}

@@ -70,7 +70,7 @@ export const checkNewsTokenBalance = async (walletAddress: any) => {
     ?.tokenAmount.uiAmount;
 };
 
-export const checkSapiensTokenBalance = async (walletAddress: PublicKey) => {
+export const checkSapiensTokenBalance = async (walletAddress: any) => {
   const response = await axios({
     url: `https://api.devnet.solana.com`,
     method: "post",

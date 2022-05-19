@@ -39,7 +39,7 @@ const Navbar = () => {
         padding={"4"}
       >
         <div></div>
-        {loggedIn && (
+        {/* {loggedIn && (
           <>
             <InputGroup maxWidth={"20rem"} alignItems={"center"}>
               <Input placeholder="Search " />
@@ -48,14 +48,14 @@ const Navbar = () => {
               />
             </InputGroup>
           </>
-        )}
+        )} */}
         <HStack>
           {loggedIn && (
             <>
               <NextLink href="/" passHref>
                 <Link color={"brand.white"}> Read</Link>
               </NextLink>
-              <NextLink href="/">
+              <NextLink href="/addArticle">
                 <Link color="brand.white"> Write </Link>
               </NextLink>
               <NextLink href="/publish">

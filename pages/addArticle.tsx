@@ -47,7 +47,9 @@ import {
 import { sendInstruction } from "../src/solanaProgram/governance/transactionInstruction";
 import { PublicKey } from "@solana/web3.js";
 
-import { checkNewsTokenBalance } from "../src/api/auth";
+import { checkSapiensTokenBalance } from "../src/api/auth";
+import SaveButton from "../src/components/buttons/SaveButton";
+import PostButton from "../src/components/buttons/PostButton";
 
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
@@ -106,12 +108,12 @@ const AddArticle = () => {
 
   const handleSaveAsDraft = async () => {
     // let res = await addArticle();
-    const res = await checkNewsTokenBalance(wallet.publicKey);
-    console.log("News token balance is", res);
+    const res = await checkSapiensTokenBalance(wallet.publicKey);
+    console.log("Sapien token balance is", res);
     if (res == undefined) {
       toast({
         position: "top",
-        title: "Insufficient News token balance",
+        title: "Insufficient Sapiens token balance",
         description: "You need News token to pulish article. Use faucet :)",
         status: "error",
         duration: 5000,
@@ -323,22 +325,28 @@ const AddArticle = () => {
   };
   return (
     <>
-      <VStack spacing="24px" justifyContent={"center"}>
+      <VStack
+        spacing="24px"
+        justifyContent={"center"}
+        background={"brand.greyDark"}
+        color={"white"}
+      >
         <Heading textAlign={"center"}>Start writing </Heading>
         <Flex
           width={"60%"}
           justifyContent={"space-between"}
           flexGrow={1}
           flexBasis={0}
+          background={"brand.greyDark"}
         >
-          <Button
+          {/* <Button
             leftIcon={<ArrowLeftIcon />}
             onClick={checkUnsavedChanges}
             style={{ borderRadius: "0.2rem 0 0 0.2rem" }}
           >
             Article list
-          </Button>
-
+          </Button> */}
+          {/* 
           <ButtonGroup variant="outline" spacing="0">
             {(articleStatus === "DRAFT" || !articleId) && (
               <>
@@ -358,12 +366,12 @@ const AddArticle = () => {
                 </Button>
               </>
             )}
-          </ButtonGroup>
+          </ButtonGroup> */}
           {/* <Box></Box> */}
           {/* <Spacer /> */}
         </Flex>
       </VStack>
-      <Container maxW="container.lg">
+      <Container maxW="container.lg" background={"brand.greyDark"}>
         {loading && (
           <>
             <div style={{ margin: "auto" }}>
@@ -391,12 +399,14 @@ const AddArticle = () => {
         <Stack direction="row" spacing={4} color={"white"}>
           {((articleId && articleStatus === "DRAFT") || !articleId) && (
             <>
-              <Button variant={"outline"} onClick={handleSaveAsDraft}>
+              <SaveButton onClickFunction={handleSaveAsDraft} />
+              {/* <Button variant={"outline"} onClick={handleSaveAsDraft}>
                 Save as draft
-              </Button>
-              <Button variant={"solid"} onClick={handlePublishForVoting}>
+              </Button> */}
+              <PostButton onClickFunction={handlePublishForVoting} />
+              {/* <Button variant={"solid"} onClick={handlePublishForVoting}>
                 Publish for voting
-              </Button>
+              </Button> */}
             </>
           )}
 
