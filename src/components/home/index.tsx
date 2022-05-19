@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import Link from "next/link";
-import { Center, Grid, GridItem, VStack } from "@chakra-ui/react";
+import { Center, Grid, GridItem, VStack, Heading } from "@chakra-ui/react";
 import { newsFeedArray } from "./newsFeed";
 import { AppContext } from "../../context/app";
 import { useContext } from "react";
@@ -75,6 +75,9 @@ export default function NewsFeed() {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         > */}
+        <Heading mt="3" mb="10" size="lg" color="white">
+          Articles
+        </Heading>
         <div
           style={{
             display: "grid",
@@ -93,12 +96,16 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <ReadCard
-                  heading={item.heading}
-                  content={item.content}
-                  author={item.owner}
-                  // img={news.img}
-                />
+                <Link href={`/article/${item._id}`}>
+                  <a>
+                    <ReadCard
+                      heading={item.heading}
+                      content={item.content}
+                      author={item.owner}
+                      // img={news.img}
+                    />
+                  </a>
+                </Link>
                 {/* <img width="250px" src={`${news.img}`}></img>
                 <h3>{news.title}</h3> */}
                 {/* </VStack> */}

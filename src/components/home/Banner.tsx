@@ -7,13 +7,8 @@ const Banner = () => {
   return (
     <Box className={"banner"} width={"100%"} height={"100%"} minHeight={"80vh"}>
       <Box padding={10} width={"25%"} mt={100}>
-        <Heading>Sapiens</Heading>
-        <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled
-        </Text>
+        <Heading mb={5}>Sapiens</Heading>
+        <Text>The 🌎 of Un-biased media</Text>
         <ButtonGroup mt={"10"}>
           <ReadButton />
           <KnowMoreButton />

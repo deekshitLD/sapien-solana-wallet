@@ -80,7 +80,7 @@ const HomePage: any = () => {
 
       <main className={styles.main}>
         <Banner />
-        <Home />
+
         {/* <Heading as="h1" size="4xl">
           <span className={styles.animateCharcter}>
             {" "}
@@ -101,14 +101,15 @@ const HomePage: any = () => {
 
         {loggedIn ? (
           <>
-            <Button
+            {/* <Button
               mt="30px"
               onClick={() => {
                 router.push("/faucet");
               }}
             >
               Get tokens
-            </Button>
+            </Button> */}
+            <Home />
           </>
         ) : (
           <Heading as="h3" size="lg" margin={10}>
