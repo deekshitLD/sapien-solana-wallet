@@ -105,6 +105,12 @@ const ArticleTile = ({
         }}
       >
         <Flex direction={"column"} justifyContent={"space-between"}>
+          <img
+            width={"200px"}
+            height={"200px"}
+            alt=""
+            src={"/Sapiens News.jpeg"}
+          ></img>
           <Text fontSize="xl" noOfLines={3} marginTop={2} marginBottom={5}>
             {title}
           </Text>

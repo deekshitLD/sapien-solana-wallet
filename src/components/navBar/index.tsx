@@ -58,7 +58,7 @@ const Navbar = () => {
               <NextLink href="/addArticle">
                 <Link color="brand.white"> Write </Link>
               </NextLink>
-              <NextLink href="/publish">
+              <NextLink href="/votingList">
                 <Link color="brand.white"> Publish</Link>
               </NextLink>
             </>
