@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import Link from "next/link";
-import { Center, VStack } from "@chakra-ui/react";
+import { Center, Grid, GridItem, VStack } from "@chakra-ui/react";
 import { newsFeedArray } from "./newsFeed";
 import { AppContext } from "../../context/app";
 import { useContext } from "react";
@@ -13,6 +13,9 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRouter } from "next/dist/client/router";
 
+import { publishedArticles } from "../../api/article";
+
+import ReadCard from "./ReadCard";
 const breakpointColumnsObj = {
   default: 4,
   1100: 3,
@@ -24,6 +27,7 @@ export default function NewsFeed() {
   const context = useContext(AppContext);
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
+  const [publishedArticle, setPublishedAricles] = useState<any>([]);
   const router = useRouter();
 
   const { setSelectedNews } = context as any;
@@ -31,6 +35,17 @@ export default function NewsFeed() {
   const handleClick = (news: any) => () => {
     wallet(news);
   };
+
+  useEffect(() => {
+    publishedArticles()
+      .then((res) => {
+        console.log(res);
+        setPublishedAricles(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const wallet = async (news: any) => {
     if (!publicKey) throw new WalletNotConnectedError();
@@ -55,27 +70,43 @@ export default function NewsFeed() {
     <>
       <style>{style}</style>
       <div className="outer-container">
-        <Masonry
+        {/* <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
+        > */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "auto auto auto auto",
+          }}
         >
-          {newsFeedArray.map((news: any, index: number) => (
-            <Center
-              key={index}
-              bg="black !important"
-              color="white"
-              padding={10}
-              onClick={handleClick(news)}
-              className="news-item"
-            >
-              <VStack>
-                <img width="250px" src={`${news.img}`}></img>
-                <h3>{news.title}</h3>
-              </VStack>
-            </Center>
-          ))}
-        </Masonry>
+          {publishedArticle.length > 0 &&
+            publishedArticle.map((item: any, index: number) => (
+              <div>
+                {/* <Center
+                key={index}
+                bg="black !important"
+                color="white"
+                padding={10}
+                onClick={handleClick(news)}
+                className="news-item"
+              > */}
+                {/* <VStack> */}
+                <ReadCard
+                  heading={item.heading}
+                  content={item.content}
+                  author={item.owner}
+                  // img={news.img}
+                />
+                {/* <img width="250px" src={`${news.img}`}></img>
+                <h3>{news.title}</h3> */}
+                {/* </VStack> */}
+                {/* </Center> */}
+              </div>
+            ))}
+        </div>
+        {/* </Masonry> */}
       </div>
     </>
   );
@@ -87,7 +118,7 @@ const style = `
     display: -ms-flexbox; /* Not needed if autoprefixing */
     display: flex;
     margin-left: -30px; /* gutter size offset */
-    width: auto;
+    width: 100%;
   }
   .my-masonry-grid_column {
     padding-left: 30px; /* gutter size */
@@ -103,7 +134,7 @@ const style = `
   .outer-container {
     width:100vw;
     padding:30px;
-    background-color:#fff;
+    background-color: #000000;
   }
 
   .title {

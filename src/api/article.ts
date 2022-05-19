@@ -46,3 +46,12 @@ export const getArticleUnderVoting = async () => {
   });
   return response;
 };
+
+export const publishedArticles = async () => {
+  let response = await axios({
+    method: "get",
+    url: config.baseURL + "article/published",
+    // responseType: 'stream'
+  });
+  return response;
+};

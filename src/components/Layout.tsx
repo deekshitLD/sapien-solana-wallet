@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import Navbar from "./navBar";
 import Image from "next/image";
@@ -16,11 +16,11 @@ const Layout = ({ children }: any) => {
       <footer
         style={{
           // position: "absolute",
-          margin: "50px auto 0 auto",
+          // margin: "50px auto 0 auto",
 
           width: "100%",
           bottom: "0",
-          // background: "black",
+          background: "#1E1E1E",
           padding: "20px",
           left: 0,
           right: 0,
@@ -29,23 +29,31 @@ const Layout = ({ children }: any) => {
         }}
       >
         <Flex
-          justifyContent={"center"}
+          justifyContent={"left"}
+          textAlign={"justify"}
           wrap={"wrap"}
-          style={{
-            position: "absolute",
-            // top: "50%",  /* position the top  edge of the element at the middle of the parent */
-            left: "50%" /* position the left edge of the element at the middle of the parent */,
-
-            transform: "translate(-50%, -50%)",
-          }}
+          style={
+            {
+              // top: "50%",  /* position the top  edge of the element at the middle of the parent */
+              // left: "50%" /* position the left edge of the element at the middle of the parent */,
+              // transform: "translate(-50%, -50%)",
+            }
+          }
         >
-          <Image
-            src="/Sapiens News.jpeg"
-            alt="Sapiens news logo"
-            width={30}
-            height={30}
-          />
-          <Text>apiens News © 2022</Text>
+          <Stack spacing={3}>
+            <Text fontSize="4xl" color="brand.white">
+              Foundation
+            </Text>
+            <Text fontSize="3xl" color="brand.grey">
+              Country
+            </Text>
+            <Text fontSize="3xl" color="brand.grey">
+              Media regulation
+            </Text>
+            <Text fontSize="3xl" color="brand.grey">
+              Our Mission
+            </Text>
+          </Stack>
         </Flex>
       </footer>
     </div>

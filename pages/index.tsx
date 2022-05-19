@@ -18,6 +18,8 @@ import { useWallet } from "@solana/wallet-adapter-react";
 
 import bs58 from "bs58";
 
+import Layout from "../src/components/Layout";
+
 import Web3 from "@solana/web3.js";
 
 import * as splGovernance from "@solana/spl-governance";
@@ -32,8 +34,11 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
+import Banner from "../src/components/home/Banner";
 
-const Index: NextPage = () => {
+import Home from "../src/components/home";
+
+const HomePage: any = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
 
@@ -74,7 +79,9 @@ const Index: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <Heading as="h1" size="4xl">
+        <Banner />
+        <Home />
+        {/* <Heading as="h1" size="4xl">
           <span className={styles.animateCharcter}>
             {" "}
             <Image
@@ -90,7 +97,7 @@ const Index: NextPage = () => {
         </Heading>
         <Heading as="h2" size="lg" margin={10}>
           The 🌎 of Un-biased media
-        </Heading>
+        </Heading> */}
 
         {loggedIn ? (
           <>
@@ -108,9 +115,7 @@ const Index: NextPage = () => {
             Connect wallet to get started
           </Heading>
         )}
-        <div style={{ position: "absolute", top: 0, right: 0, margin: 10 }}>
-          <WalletMultiButton />
-        </div>
+
         <Box margin={"10px"}>
           {loggedIn && (
             <>
@@ -138,50 +143,6 @@ const Index: NextPage = () => {
             </>
           )}
         </Box>
-        {/* <Button
-          onClick={async () => {
-            const connection = new Connection(
-              "https://api.devnet.solana.com",
-              "recent"
-            );
-            const programId = new PublicKey(
-              "GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw"
-            );
-
-            const realms = await splGovernance.getRealms(connection, programId);
-            // splGovernance.serializeInstructionToBase64()
-            // @ts-ignore
-            // console.log(realms);
-
-            let TOKEN_PROGRAM_ID = new PublicKey(
-              "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-            );
-            let mintPubkey = new PublicKey(
-              "CbuK4bukpEih3SjwkeJ8VXZaGBSYTvg2Z6P6rhdNmDj9"
-            );
-            let tokenAccountPubkey = new PublicKey(
-              "3bNxnDnZdtAZLmemrRaEXFmcNeTzTcXLBbdsvWCyJ2f"
-            );
-            let pdaOwnerPubkey = new PublicKey(
-              "Fi9F5XRMX6RFbZGn5HmCmQLSyQazrN8JMJQZZNyax7JK"
-            );
-
-            let burn_instr = splToken.createBurnInstruction(
-              tokenAccountPubkey, // from (should be a token account)
-              mintPubkey, // mint
-              pdaOwnerPubkey, // owner of token account
-              1e13, // 6 decimals + 9 for 1 billion tokens
-              [], // for multisig account, leave empty.
-              TOKEN_PROGRAM_ID // always TOKEN_PROGRAM_ID
-            );
-            let base64Addr = await splGovernance.serializeInstructionToBase64(
-              burn_instr
-            );
-            console.log(base64Addr);
-          }}
-        >
-          Test
-        </Button> */}
       </main>
 
       <div></div>
@@ -189,4 +150,8 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+HomePage.getLayout = function getLayout(page: NextPage) {
+  return <Layout>{page}</Layout>;
+};
+
+export default HomePage;
