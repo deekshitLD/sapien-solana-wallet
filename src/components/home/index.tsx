@@ -86,7 +86,7 @@ export default function NewsFeed() {
         >
           {publishedArticle.length > 0 &&
             publishedArticle.map((item: any, index: number) => (
-              <div>
+              <div key={index}>
                 {/* <Center
                 key={index}
                 bg="black !important"
