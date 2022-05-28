@@ -52,7 +52,7 @@ export const pushArticleToVoting = async (
 ) => {
   const provider = await getProvider(wallet);
   const programID = new anchor.web3.PublicKey(
-    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
+    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
   );
 
   const program = new Program(idl, programID, provider);
@@ -78,7 +78,7 @@ export const pushArticleToVoting = async (
   let fromAccount: any;
   let treasuryAccount: any;
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
   try {
     fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
@@ -127,13 +127,13 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   const reportAccount = Keypair.generate();
   console.log("Inside initializeArticleAccount: ", reportAccount);
   const programID = new anchor.web3.PublicKey(
-    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
+    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
 
   let fromAccount: any;
   let treasuryAccount: any;
@@ -195,13 +195,13 @@ export const updateOrAddArticle = async (
   const { SystemProgram, Keypair } = web3;
 
   const programID = new anchor.web3.PublicKey(
-    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
+    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
 
   let fromAccount: any;
   let treasuryAccount: any;
@@ -270,14 +270,14 @@ export const addToSolanaProgram = async (
   // );
 
   const programID = new anchor.web3.PublicKey(
-    "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
+    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   // const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo");
+  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
 
   // let mintAccount = await splToken.getMint(connection, mint);
 
