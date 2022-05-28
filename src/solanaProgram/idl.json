@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "newsreport",
+  "name": "drafting",
   "instructions": [
     {
       "name": "initialize",
@@ -48,7 +48,7 @@
         },
         {
           "name": "authority",
-          "isMut": true,
+          "isMut": false,
           "isSigner": true
         },
         {
@@ -89,7 +89,7 @@
         },
         {
           "name": "authority",
-          "isMut": true,
+          "isMut": false,
           "isSigner": true
         },
         {
@@ -113,14 +113,34 @@
           "isSigner": false
         }
       ],
-      "args": [
+      "args": []
+    },
+    {
+      "name": "publish",
+      "accounts": [
         {
-          "name": "reportUri",
-          "type": "string"
+          "name": "reportAccount",
+          "isMut": true,
+          "isSigner": false
         },
         {
-          "name": "payamt",
-          "type": "u32"
+          "name": "governance",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "statusDecision",
+          "type": "u8"
+        },
+        {
+          "name": "pda",
+          "type": "publicKey"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
         }
       ]
     }
@@ -142,16 +162,9 @@
           {
             "name": "status",
             "type": "u8"
-          },
-          {
-            "name": "readpayment",
-            "type": "u32"
           }
         ]
       }
     }
-  ],
-  "metadata": {
-    "address": "7jcZwQs9pu6vru4cy1EjQyZseCE2NW29eT2vy6NRzeCo"
-  }
+  ]
 }
