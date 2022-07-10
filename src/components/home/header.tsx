@@ -20,7 +20,6 @@ const Header: React.FC = () => {
           as="h2"
           fontSize={['4xl', '5xl', '6xl', '6xl', '6xl']}
           color="white"
-          bg="orange.500"
           mb="3"
           width="fit-content"
           paddingX={['4px', '12px', '12px', '16px', '24px']}
@@ -32,7 +31,7 @@ const Header: React.FC = () => {
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
           textTransform="uppercase"
-          color="orange.500"
+          color="black"
           bg="white"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
