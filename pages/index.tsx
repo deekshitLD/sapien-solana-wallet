@@ -34,7 +34,7 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import Banner from "../src/components/home/Banner";
+import Header from "../src/components/home/header";
 
 import Home from "../src/components/home";
 
@@ -79,7 +79,7 @@ const HomePage: any = () => {
       </Head>
 
       <main className={styles.main}>
-        <Banner />
+        <Header />
 
         {/* <Heading as="h1" size="4xl">
           <span className={styles.animateCharcter}>
