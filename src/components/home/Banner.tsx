@@ -1,3 +1,5 @@
+//Changed to Component Header and also Routed to Header on Index Page
+//Hence This Component is no longer Required 
 import React from "react";
 import { Box, ButtonGroup, Heading, Text } from "@chakra-ui/react";
 import ReadButton from "../buttons/ReadButton";
