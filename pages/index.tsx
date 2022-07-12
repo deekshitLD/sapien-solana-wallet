@@ -35,8 +35,10 @@ import {
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import Header from "../src/components/home/header";
+import Footer from "../src/components/home/footer";
 
 import Home from "../src/components/home";
+
 
 const HomePage: any = () => {
   const wallet = useWallet();
@@ -101,50 +103,15 @@ const HomePage: any = () => {
 
         {loggedIn ? (
           <>
-            {/* <Button
-              mt="30px"
-              onClick={() => {
-                router.push("/faucet");
-              }}
-            >
-              Get tokens
-            </Button> */}
             <Home />
           </>
         ) : (
           <Heading as="h3" size="lg" margin={10}>
-            Connect wallet to get started
+            Connect Wallet to get Started
           </Heading>
         )}
-
-        {/* <Box margin={"10px"}>
-          {loggedIn && (
-            <>
-              <ButtonGroup direction="row" align="center">
-                <Button onClick={() => router.push("/news-list")}>
-                  Read news
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    router.push("/articleList");
-                  }}
-                >
-                  Post an article
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    router.push("/votingList");
-                  }}
-                >
-                  Vote on articles
-                </Button>
-              </ButtonGroup>
-            </>
-          )}
-        </Box> */}
       </main>
+
 
       <div></div>
     </div>

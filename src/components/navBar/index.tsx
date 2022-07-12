@@ -6,12 +6,13 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
+  Link
 } from "@chakra-ui/react";
 import { MdSearch } from "react-icons/md";
 import NextLink from "next/link";
 import React, { useEffect, useContext } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Link } from "@chakra-ui/react";
+
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -38,6 +39,7 @@ const Navbar = () => {
         background="brand.greyDark"
         padding={"4"}
       >
+
         <div></div>
         {/* {loggedIn && (
           <>
