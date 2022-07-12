@@ -98,7 +98,7 @@ export const pushArticleToVoting = async (
   }
   try {
     /* interact with the program via rpc */
-    await program.rpc.pushForVote(id.toString(), paymentAmount, {
+    await program.rpc.pushForVote({
       accounts: {
         reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,
