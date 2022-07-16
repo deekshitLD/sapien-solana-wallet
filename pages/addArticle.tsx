@@ -140,6 +140,8 @@ const AddArticle = () => {
             reportAccountPublicKey,
           });
 
+          console.log("articleID:",articleId);
+
           if (res.status === 200) {
             toast({
               position: "top",

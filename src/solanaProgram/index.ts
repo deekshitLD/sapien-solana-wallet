@@ -21,6 +21,7 @@ import {
 require("@solana/wallet-adapter-react-ui/styles.css");
 import * as anchor from "@project-serum/anchor";
 // import { TOKEN_PROGRAM_ID } from "@solana/spl-governance";
+
 const idl = require("./idl.json");
 const wallets = [
   /* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
