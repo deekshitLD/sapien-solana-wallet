@@ -165,7 +165,7 @@ const AddArticle = () => {
 
           console.log(
             "ID Generated",
-            id.toString
+            id.toString()
           );
 
           setReportAccountPublicKey(TempreportAccountPublicKey);
