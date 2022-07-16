@@ -238,7 +238,8 @@ export const updateOrAddArticle = async (
 
     const account = await program.account.reportAccount.fetch(reportAccount);
 
-    console.log("account: ", account.uri);
+    console.log("id: ", id.toString());
+    console.log("account: ", account);
 
     // setValue(account.count.toString());
   } catch (err) {
