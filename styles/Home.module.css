@@ -2,29 +2,6 @@
   padding: 0 2rem;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-  .main {
-    min-height: 100vh;
-    padding: 0rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url("../public/MoviePoster.png");
-
-    height: 50%;
-
-    /* Position and center the image to scale nicely on all screens */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    /* background-image: white; */
-  }
-}
-
-
 .footer {
   display: flex;
   flex: 1;
