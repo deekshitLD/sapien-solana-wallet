@@ -7,10 +7,10 @@ const Logo: React.FC = () => {
     <>
       <Heading as="h1" size="lg" color="orange.500" textTransform="uppercase">
         <Text display="inline" fontWeight="extrabold">
-          Interior
+          Sapien
         </Text>{' '}
         <Text display="inline" fontWeight="medium">
-          Design
+          News
         </Text>
       </Heading>
     </>

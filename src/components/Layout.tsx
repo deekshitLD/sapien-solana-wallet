@@ -18,13 +18,13 @@ const Layout = ({ children }: any) => {
           // position: "absolute",
           // margin: "50px auto 0 auto",
 
-          width: "100%",
-          bottom: "0",
-          background: "#1E1E1E",
-          padding: "20px",
-          left: 0,
-          right: 0,
-          textAlign: "center",
+          // width: "100%",
+          // bottom: "0",
+          // background: "#1E1E1E",
+          // padding: "20px",
+          // left: 0,
+          // right: 0,
+          // textAlign: "center",
           // right: "50%",
         }}
       >
@@ -40,7 +40,7 @@ const Layout = ({ children }: any) => {
             }
           }
         >
-          <Stack spacing={3}>
+          {/* <Stack spacing={3}>
             <Text fontSize="4xl" color="brand.white">
               Foundation
             </Text>
@@ -53,7 +53,7 @@ const Layout = ({ children }: any) => {
             <Text fontSize="3xl" color="brand.grey">
               Our Mission
             </Text>
-          </Stack>
+          </Stack> */}
         </Flex>
       </footer>
     </div>

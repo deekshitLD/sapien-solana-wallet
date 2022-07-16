@@ -1,12 +1,10 @@
 import React from 'react'
-import { Text, Flex, Grid, Box } from '@chakra-ui/react'
+import { Text, Flex, Grid, Box, Link } from '@chakra-ui/react'
 import Logo from './logo'
 import {
-  FaFacebookF,
   FaTwitter,
-  FaGoogle,
-  FaInstagram,
-  FaYoutube
+  FaYoutube,
+  FaDiscord
 } from 'react-icons/fa'
 
 const Footer: React.FC = () => {
@@ -30,11 +28,9 @@ const Footer: React.FC = () => {
           alignItems="center"
           mt="8"
         >
-          <Box as={FaFacebookF} size="22px" color="orange.500" mr="12px" />
-          <Box as={FaTwitter} size="22px" color="orange.500" mr="12px" />
-          <Box as={FaGoogle} size="22px" color="orange.500" mr="12px" />
-          <Box as={FaInstagram} size="22px" color="orange.500" mr="12px" />
-          <Box as={FaYoutube} size="22px" color="orange.500" />
+          <Link href="https://discord.gg/hQZmR3V5pn" ><Box as={FaDiscord} size="22px" color="orange.500" mr="12px" /></Link>
+          <Link href="https://twitter.com/SapienNews" ><Box as={FaTwitter} size="22px" color="orange.500" mr="12px" /></Link>
+          <Link href="https://www.youtube.com/channel/UCdd-cjlpn13PLg8SG-72YNg"><Box as={FaYoutube} size="22px" color="orange.500" /></Link>
         </Flex>
       </Flex>
 
@@ -65,9 +61,9 @@ const Footer: React.FC = () => {
         <Text color="orange.500" fontWeight="bold" fontSize="20px" mb="8px">
           Contact Us
         </Text>
-        <Text mb="6px">Address: C-308 New Delhi</Text>
-        <Text mb="6px">Phone: +91 9876543210</Text>
-        <Text>Email: info@colorlib.com</Text>
+        <Text mb="6px">Address: Bengaluru, Karnataka</Text>
+        <Text mb="6px">Phone: +91 #######</Text>
+        <Text>Email: SapienNews@Sapien.com</Text>
       </Flex>
 
       <Flex
@@ -78,11 +74,10 @@ const Footer: React.FC = () => {
         mt={['12', '12', '12', '0', '0']}
       >
         <Text color="orange.500" fontWeight="bold" fontSize="20px" mb="8px">
-          Newsletter
+          Read Our Whitepaper
         </Text>
         <Text mb="6px">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.{' '}
+          We are Open To Feedback and Suggestions{' '}
         </Text>
       </Flex>
     </Grid>
