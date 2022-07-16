@@ -162,6 +162,12 @@ const AddArticle = () => {
             "Report account public key generated",
             TempreportAccountPublicKey
           );
+
+          console.log(
+            "ID Generated",
+            id.toString
+          );
+
           setReportAccountPublicKey(TempreportAccountPublicKey);
 
           await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);

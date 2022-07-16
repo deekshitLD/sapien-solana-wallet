@@ -46,6 +46,7 @@ const WithAuth = (props: any) => {
               message: message,
               signature: sig,
             }).then((res: any) => {
+              localStorage.clear();
               localStorage.setItem("token", res.data.authToken);
               setLoggedIn(true);
               toast({
@@ -56,9 +57,12 @@ const WithAuth = (props: any) => {
                 duration: 5000,
                 isClosable: true,
               });
+              console.log("loggin");
             });
+            console.log("then");
           })
           .catch((err: any) => {
+            console.log("catch");
             wallet.disconnect();
             toast({
               position: "top",
@@ -75,7 +79,7 @@ const WithAuth = (props: any) => {
 
         // alert(`Message signature: ${bs58.encode(signature)}`);
       } catch (error: any) {
-        console.log(`Signing failed: ${error}`);
+        console.log(`Signing failed on A: ${error}`);
       }
     }
   }, [wallet]);

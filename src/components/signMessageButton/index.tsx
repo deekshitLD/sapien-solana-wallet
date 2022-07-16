@@ -43,7 +43,7 @@ export const SignMessageButton: FC = () => {
       router.push("/articleList");
       // alert(`Message signature: ${bs58.encode(signature)}`);
     } catch (error: any) {
-      alert(`Signing failed: ${error?.message}`);
+      alert(`Signing failed on 1: ${error?.message}`);
     }
   }, [publicKey, signMessage]);
 
