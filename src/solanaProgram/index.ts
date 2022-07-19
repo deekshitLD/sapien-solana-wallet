@@ -224,7 +224,7 @@ export const updateOrAddArticle = async (
   } catch (err) {
     console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
   }
-  console.log("id: 227");  
+  console.log("id: 227", new PublicKey(reportAccount));  
   try {
     await program.rpc.post({
       accounts: {
