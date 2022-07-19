@@ -75,6 +75,8 @@ const AddArticle = () => {
 
   const { articleId } = router.query;
 
+  console.log("AddArticle - 78");
+
   useEffect(() => {
     articleId
       ? getArticle(articleId).then((res) => {
@@ -132,7 +134,7 @@ const AddArticle = () => {
         });
       } else {
         if (articleId) {
-          await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
+//          await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
           const res = await updateArticle({
             id: articleId,
             heading,
@@ -172,7 +174,7 @@ const AddArticle = () => {
 
           setReportAccountPublicKey(TempreportAccountPublicKey);
 
-          await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
+//          await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
 
           const res = await updateArticle({
             id: id.toString(),
