@@ -22,10 +22,10 @@ export const verifyMessage = async ({
 };
 
 const sapienTokenMintAddress = new PublicKey(
-  "FCrUzx3LzTB58UTew7tCkE7jry93x3Fv8TTPzUwzVNZU"
+  "DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc"
 );
 
-const newsTokenMintAddress = new PublicKey(
+/* const newsTokenMintAddress = new PublicKey(
   "3qq7ExpwRRAAexGNpUVoFkiTfSB1uo8ezsbyAoxhyryo"
 );
 
@@ -68,7 +68,7 @@ export const checkNewsTokenBalance = async (walletAddress: any) => {
   console.log(response);
   return response?.data[0]?.result?.value[0]?.account?.data?.parsed?.info
     ?.tokenAmount.uiAmount;
-};
+}; */
 
 export const checkSapiensTokenBalance = async (walletAddress: any) => {
   const response = await axios({

@@ -49,7 +49,7 @@ export const sendInstruction = async (
   );
   const { SystemProgram, Keypair } = web3;
 
-  const mint = new PublicKey("FCrUzx3LzTB58UTew7tCkE7jry93x3Fv8TTPzUwzVNZU");
+  const mint = new PublicKey("DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc");
 
   const program = new Program(idl, programID, provider);
 
