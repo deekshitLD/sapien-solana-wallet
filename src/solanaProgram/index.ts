@@ -206,7 +206,7 @@ export const updateOrAddArticle = async (
 
   let fromAccount: any;
   let treasuryAccount: any;
-
+  console.log("id: 209");
   try {
     fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
@@ -214,7 +214,7 @@ export const updateOrAddArticle = async (
       mint,
       provider.wallet.publicKey
     );
-
+    console.log("id: 217");
     treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
       wallet,
@@ -236,7 +236,7 @@ export const updateOrAddArticle = async (
       },
       signers: [],
     });
-
+    console.log("id: 239");
     const account = await program.account.reportAccount.fetch(reportAccount);
 
     console.log("id: ", id.toString());
