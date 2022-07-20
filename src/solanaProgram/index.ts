@@ -161,6 +161,11 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   try {
     /* Initialize account for article for first time, interact with the program via rpc */
 
+    console.log("Insideinit 164");
+    console.log(reportAccount.publicKey.toString);
+    console.log(reportAccount);
+
+
     await program.rpc.initialize(id.toString(),{
       accounts: {
         reportAccount: reportAccount.publicKey,
