@@ -53,7 +53,7 @@ export const pushArticleToVoting = async (
 ) => {
   const provider = await getProvider(wallet);
   const programID = new anchor.web3.PublicKey(
-    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
+    "6mdT7qYCStq6RoRaVpJ3s8NnM4Le4aDkEh5zKQn1vKYH"
   );
 
   const program = new Program(idl, programID, provider);
@@ -79,7 +79,7 @@ export const pushArticleToVoting = async (
   let fromAccount: any;
   let treasuryAccount: any;
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
+  const mint = new PublicKey("DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc");
   try {
     fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
@@ -99,7 +99,7 @@ export const pushArticleToVoting = async (
   }
   try {
     /* interact with the program via rpc */
-    await program.rpc.pushForVote({
+    await program.rpc.post({
       accounts: {
         reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,
@@ -128,13 +128,13 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   const reportAccount = Keypair.generate();
   console.log("Inside initializeArticleAccount: ", reportAccount);
   const programID = new anchor.web3.PublicKey(
-    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
+    "6mdT7qYCStq6RoRaVpJ3s8NnM4Le4aDkEh5zKQn1vKYH"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
+  const mint = new PublicKey("DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc");
 
   let fromAccount: any;
   let treasuryAccount: any;
@@ -161,7 +161,12 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   try {
     /* Initialize account for article for first time, interact with the program via rpc */
 
-    await program.rpc.initialize({
+    console.log("Insideinit 164");
+    console.log(reportAccount.publicKey.toString);
+    console.log(reportAccount);
+
+
+    await program.rpc.initialize(id.toString(),{
       accounts: {
         reportAccount: reportAccount.publicKey,
         authority: provider.wallet.publicKey,
@@ -185,7 +190,7 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   }
 };
 
-export const updateOrAddArticle = async (
+export const publishingWithStakeandNFT = async (
   wallet: any,
   id: any,
   reportAccount: any
@@ -196,17 +201,17 @@ export const updateOrAddArticle = async (
   const { SystemProgram, Keypair } = web3;
 
   const programID = new anchor.web3.PublicKey(
-    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
+    "6mdT7qYCStq6RoRaVpJ3s8NnM4Le4aDkEh5zKQn1vKYH"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
+  const mint = new PublicKey("DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc");
 
   let fromAccount: any;
   let treasuryAccount: any;
-
+  console.log("id: 209");
   try {
     fromAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
@@ -214,7 +219,7 @@ export const updateOrAddArticle = async (
       mint,
       provider.wallet.publicKey
     );
-
+    console.log("id: 217");
     treasuryAccount = await splToken.getOrCreateAssociatedTokenAccount(
       connection,
       wallet,
@@ -224,8 +229,9 @@ export const updateOrAddArticle = async (
   } catch (err) {
     console.log("Error inside getOrCreateAssosciatedTokenAccount", err);
   }
+  console.log("id: 227", reportAccount);  
   try {
-    await program.rpc.updateReport(id.toString(), {
+    await program.rpc.publish({
       accounts: {
         reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,
@@ -236,7 +242,7 @@ export const updateOrAddArticle = async (
       },
       signers: [],
     });
-
+    console.log("id: 239");
     const account = await program.account.reportAccount.fetch(reportAccount);
 
     console.log("id: ", id.toString());
@@ -272,14 +278,14 @@ export const addToSolanaProgram = async (
   // );
 
   const programID = new anchor.web3.PublicKey(
-    "BDxFK1pXTk1FsmGmqkhZzk8ptNXvyEX6WQJcacwLDnVC"
+    "6mdT7qYCStq6RoRaVpJ3s8NnM4Le4aDkEh5zKQn1vKYH"
   );
 
   const program = new anchor.Program(idl, programID, provider);
 
   // const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
   const connection = new Connection("https://api.devnet.solana.com");
-  const mint = new PublicKey("HaE6JcfLgeeStUxSx3YfZi84hm9bmu2oxsLmRCF8xvTm");
+  const mint = new PublicKey("DWj1Tkqxp5tKf1aNT2Ci3axh7A89YwT6hDLJZJKvrJc");
 
   // let mintAccount = await splToken.getMint(connection, mint);
 

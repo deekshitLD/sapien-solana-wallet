@@ -84,6 +84,7 @@ const ArticleList = () => {
                 title={item.heading}
                 content={item.content}
                 articleUnderVote={false}
+                image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
               />
             );
           })}

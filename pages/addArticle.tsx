@@ -36,7 +36,7 @@ import {
   addToSolanaProgram,
   pushArticleToVoting,
   initializeArticleAccount,
-  updateOrAddArticle,
+  publishingWithStakeandNFT,
 } from "../src/solanaProgram";
 import {
   useAnchorWallet,
@@ -74,6 +74,8 @@ const AddArticle = () => {
   const toast = useToast();
 
   const { articleId } = router.query;
+
+  console.log("AddArticle - 78");
 
   useEffect(() => {
     articleId
@@ -132,7 +134,7 @@ const AddArticle = () => {
         });
       } else {
         if (articleId) {
-          await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
+//          await updateOrAddArticle(wallet, articleId, reportAccountPublicKey);
           const res = await updateArticle({
             id: articleId,
             heading,
@@ -172,7 +174,7 @@ const AddArticle = () => {
 
           setReportAccountPublicKey(TempreportAccountPublicKey);
 
-          await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
+//          await updateOrAddArticle(wallet, id, TempreportAccountPublicKey);
 
           const res = await updateArticle({
             id: id.toString(),
@@ -316,16 +318,58 @@ const AddArticle = () => {
 
   const handlePublishArticle = async (
     wallet: WalletContextState,
-    reportAccountPublicKey: PublicKey,
+    reportAccountPublicKey: any,
     articleId: string | string[]
   ) => {
-    const res: any = await sendInstruction(
-      wallet,
-      reportAccountPublicKey,
-      articleId
-    );
-    setInstructions(res);
-    setShowInfoModal(true);
+
+    if(reportAccountPublicKey.charAt(0) == "/"){
+      const reportAccountKey  = await initializeArticleAccount(wallet, articleId);
+      const status = await publishingWithStakeandNFT(
+        wallet,
+        articleId,
+        reportAccountKey
+      );
+        const res = await updateArticle({
+        id: articleId,
+        reportAccountPublicKey: reportAccountKey,
+      });
+    }else{
+      const reportAccountKey = new PublicKey(reportAccountPublicKey);
+      const status = await publishingWithStakeandNFT(
+        wallet,
+        articleId,
+        reportAccountKey
+      );
+    }
+
+    if (status) {
+      toast({
+        position: "top",
+        title: "Added article",
+        description: "Successfully added article",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      router.push("/votingList");
+    } else {
+      toast({
+        position: "top",
+        title: "Error",
+        description: "Something went wrong",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    // const res: any = await sendInstruction(
+    //   wallet,
+    //   reportAccountPublicKey,
+    //   articleId
+    // );
+    // setInstructions(res);
+    // setShowInfoModal(true);
   };
 
   const closeInfoModal = () => {

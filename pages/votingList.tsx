@@ -66,6 +66,7 @@ const VotingList = () => {
                     title={item.heading}
                     content={item.content}
                     articleUnderVote={true}
+                    image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />
                 );
               })}

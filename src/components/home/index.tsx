@@ -102,6 +102,7 @@ export default function NewsFeed() {
                       heading={item.heading}
                       content={item.content}
                       author={item.owner}
+                      image_url={item.image_url}
                       // img={news.img}
                     />
                   </a>
