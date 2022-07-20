@@ -319,14 +319,20 @@ const AddArticle = () => {
 
   const handlePublishArticle = async (
     wallet: WalletContextState,
-    reportAccountPublicKey: PublicKey,
+    reportAccountPublicKey: any,
     articleId: string | string[]
   ) => {
+
+    if(reportAccountPublicKey.charAt(0) == "/"){
+      const reportAccountKey  = await initializeArticleAccount(wallet , articleId);
+    }else{
+      const reportAccountKey = new PublicKey(reportAccountPublicKey);
+    }
 
     const status = await publishingWithStakeandNFT(
       wallet,
       articleId,
-      reportAccountPublicKey
+      reportAccountKey
     );
     if (status) {
       toast({
