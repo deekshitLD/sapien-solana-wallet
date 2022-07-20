@@ -21,14 +21,14 @@ interface articleTileProps {
   title: string;
   content: any;
   articleUnderVote: any;
-  img_url: string;
+  image_url: string;
 }
 const ArticleTile = ({
   id,
   title,
   content,
   articleUnderVote,
-  img_url,
+  image_url,
 }: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const toast = useToast();
@@ -110,7 +110,7 @@ const ArticleTile = ({
             width={"200px"}
             height={"200px"}
             alt=""
-            src={img_url}
+            src={image_url}
           ></img>
           <Text fontSize="xl" noOfLines={3} marginTop={2} marginBottom={5}>
             {title}
