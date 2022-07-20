@@ -60,6 +60,7 @@ const AddArticle = () => {
     "useAnchorWallet is ",
     useAnchorWallet()
   );
+  const today = new Date();
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
   const [loading, setLoading] = useState(true);
