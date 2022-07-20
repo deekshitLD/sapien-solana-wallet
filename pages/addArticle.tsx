@@ -36,7 +36,7 @@ import {
   addToSolanaProgram,
   pushArticleToVoting,
   initializeArticleAccount,
-  updateOrAddArticle,
+  publishingWithStakeandNFT,
 } from "../src/solanaProgram";
 import {
   useAnchorWallet,
