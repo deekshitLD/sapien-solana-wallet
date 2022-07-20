@@ -332,7 +332,7 @@ const AddArticle = () => {
       if(status){const res = await updateArticle({
         id: articleId,
         reportAccountPublicKey: reportAccountKey,
-      })};
+      });}
     }else{
       const reportAccountKey = new PublicKey(reportAccountPublicKey);
       const status = await publishingWithStakeandNFT(
