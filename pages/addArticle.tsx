@@ -50,7 +50,6 @@ import { PublicKey } from "@solana/web3.js";
 import { checkSapiensTokenBalance } from "../src/api/auth";
 import SaveButton from "../src/components/buttons/SaveButton";
 import PostButton from "../src/components/buttons/PostButton";
-import { publishingWithStakeandNFT } from "../src/solanaProgram";
 
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
