@@ -223,6 +223,7 @@ const AddArticle = () => {
           id: articleId,
           heading,
           content,
+          date_publish: today.toUTCString(),
           reportAccountPublicKey,
         });
         if (res.status === 200) {
@@ -273,6 +274,7 @@ const AddArticle = () => {
           id: id.toString(),
           heading,
           content,
+          date_publish: today.toUTCString(),
           reportAccountPublicKey: TempreportAccountPublicKey,
         });
         if (res.status === 200) {
@@ -332,6 +334,7 @@ const AddArticle = () => {
         const res = await updateArticle({
         id: articleId,
         reportAccountPublicKey: reportAccountKey,
+        date_publish: today.toUTCString(),
       });
     }else{
       const reportAccountKey = new PublicKey(reportAccountPublicKey);

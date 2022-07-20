@@ -47,6 +47,17 @@ export default function NewsFeed() {
       });
   }, []);
 
+  const wallet0 = useWallet();
+  const { value }: any = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = value;
+  useEffect(() => {
+    if (wallet0.connected && localStorage.getItem("token")) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [wallet0, localStorage]);
+
   const wallet = async (news: any) => {
     if (!publicKey) throw new WalletNotConnectedError();
 
@@ -96,7 +107,17 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={`/article/${item._id}`}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (``)
+                      }onClick={!loggedIn ? (
+                          toast({
+                            position: "top",
+                            title: "Login successful.",
+                            // description: "Successfully saved changes.",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                          })):(``)
+                }>
                   <a>
                     <ReadCard
                       heading={item.heading}
