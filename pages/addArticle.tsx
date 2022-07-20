@@ -322,6 +322,8 @@ const AddArticle = () => {
     articleId: string | string[]
   ) => {
 
+    const reportAccountKey = new PublicKey;
+
     if(reportAccountPublicKey.charAt(0) == "/"){
       const reportAccountKey  = await initializeArticleAccount(wallet, articleId);
       const status = await publishingWithStakeandNFT(
@@ -329,6 +331,10 @@ const AddArticle = () => {
         articleId,
         reportAccountKey
       );
+      if(status){const res = await updateArticle({
+        id: articleId,
+        reportAccountPublicKey: reportAccountKey,
+      })};
     }else{
       const reportAccountKey = new PublicKey(reportAccountPublicKey);
       const status = await publishingWithStakeandNFT(
