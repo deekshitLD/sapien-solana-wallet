@@ -185,7 +185,7 @@ export const initializeArticleAccount = async (wallet: any, id: any) => {
   }
 };
 
-export const updateOrAddArticle = async (
+export const publishingWithStakeandNFT = async (
   wallet: any,
   id: any,
   reportAccount: any
@@ -226,7 +226,7 @@ export const updateOrAddArticle = async (
   }
   console.log("id: 227", reportAccount);  
   try {
-    await program.rpc.post({
+    await program.rpc.publish({
       accounts: {
         reportAccount: new PublicKey(reportAccount),
         authority: provider.wallet.publicKey,

@@ -50,6 +50,7 @@ import { PublicKey } from "@solana/web3.js";
 import { checkSapiensTokenBalance } from "../src/api/auth";
 import SaveButton from "../src/components/buttons/SaveButton";
 import PostButton from "../src/components/buttons/PostButton";
+import { publishingWithStakeandNFT } from "../src/solanaProgram";
 
 const AddArticle = () => {
   const wallet = walletAdapter.useWallet();
@@ -321,13 +322,40 @@ const AddArticle = () => {
     reportAccountPublicKey: PublicKey,
     articleId: string | string[]
   ) => {
-    const res: any = await sendInstruction(
+
+    const status = await publishingWithStakeandNFT(
       wallet,
-      reportAccountPublicKey,
-      articleId
+      articleId,
+      reportAccountPublicKey
     );
-    setInstructions(res);
-    setShowInfoModal(true);
+    if (status) {
+      toast({
+        position: "top",
+        title: "Added article",
+        description: "Successfully added article",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      router.push("/votingList");
+    } else {
+      toast({
+        position: "top",
+        title: "Error",
+        description: "Something went wrong",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    // const res: any = await sendInstruction(
+    //   wallet,
+    //   reportAccountPublicKey,
+    //   articleId
+    // );
+    // setInstructions(res);
+    // setShowInfoModal(true);
   };
 
   const closeInfoModal = () => {
