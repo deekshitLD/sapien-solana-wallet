@@ -107,8 +107,8 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (``)
-                      }onClick={!loggedIn ? (
+                <Link href={loggedIn ? (`/article/${item._id}`) : (``)} 
+                      onClick={() => {!loggedIn ? (
                           toast({
                             position: "top",
                             title: "Login successful.",
@@ -117,7 +117,7 @@ export default function NewsFeed() {
                             duration: 5000,
                             isClosable: true,
                           })):(``)
-                }>
+                }}>
                   <a>
                     <ReadCard
                       heading={item.heading}
