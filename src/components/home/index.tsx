@@ -12,7 +12,7 @@ import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRouter } from "next/dist/client/router";
-import { UserContext } from "../src/components/HOC/withAuth";
+import { UserContext } from "../HOC/withAuth";
 import { publishedArticles } from "../../api/article";
 
 import ReadCard from "./ReadCard";
