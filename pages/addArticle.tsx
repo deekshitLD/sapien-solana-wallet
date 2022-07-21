@@ -338,7 +338,7 @@ const AddArticle = () => {
         date_publish: today.toUTCString(),
       });
       console.log("addarticle 340");
-      console.log(res);
+      console.log("here is the",res);
     }else{
       reportAccountPublicKey = new PublicKey(reportAccountPublicKey);
       const status = await publishingWithStakeandNFT(
