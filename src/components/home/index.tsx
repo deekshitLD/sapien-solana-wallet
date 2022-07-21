@@ -29,6 +29,7 @@ export default function NewsFeed() {
   const { publicKey, sendTransaction } = useWallet();
   const [publishedArticle, setPublishedAricles] = useState<any>([]);
   const router = useRouter();
+  const toast = useToast();
 
   const { setSelectedNews } = context as any;
 
@@ -77,6 +78,17 @@ export default function NewsFeed() {
     await connection.confirmTransaction(signature, "processed");
   };
 
+  const notify = ()=>{
+    toast({
+      position: "top",
+      title: "Login successful.",
+      // description: "Successfully saved changes.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+     });
+  }
+
   return (
     <>
       <style>{style}</style>
@@ -107,17 +119,7 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (``)} 
-                      onClick={() => {!loggedIn ? (
-                          toast({
-                            position: "top",
-                            title: "Login successful.",
-                            // description: "Successfully saved changes.",
-                            status: "success",
-                            duration: 5000,
-                            isClosable: true,
-                          })):(``)
-                }}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:notify(123);`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
