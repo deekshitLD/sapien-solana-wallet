@@ -326,23 +326,23 @@ const AddArticle = () => {
   ) => {
 
     if(reportAccountPublicKey.charAt(0) == "/"){
-      const reportAccountKey  = await initializeArticleAccount(wallet, articleId);
+      reportAccountPublicKey  = await initializeArticleAccount(wallet, articleId);
       const status = await publishingWithStakeandNFT(
         wallet,
         articleId,
-        reportAccountKey
+        reportAccountPublicKey
       );
         const res = await updateArticle({
         id: articleId,
-        reportAccountPublicKey: reportAccountKey,
+        reportAccountPublicKey: reportAccountPublicKey,
         date_publish: today.toUTCString(),
       });
     }else{
-      const reportAccountKey = new PublicKey(reportAccountPublicKey);
+      reportAccountPublicKey = new PublicKey(reportAccountPublicKey);
       const status = await publishingWithStakeandNFT(
         wallet,
         articleId,
-        reportAccountKey
+        reportAccountPublicKey
       );
     }
 
