@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import Link from "next/link";
-import { Center, Grid, GridItem, VStack, Heading } from "@chakra-ui/react";
+import { Center, Grid, GridItem, VStack, Heading, useToast } from "@chakra-ui/react";
 import { newsFeedArray } from "./newsFeed";
 import { AppContext } from "../../context/app";
 import { useContext } from "react";
