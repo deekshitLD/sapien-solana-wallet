@@ -101,15 +101,9 @@ const HomePage: any = () => {
           The 🌎 of Un-biased media
         </Heading> */}
 
-        {loggedIn ? (
           <>
             <Home />
           </>
-        ) : (
-          <Heading as="h3" size="lg" textAlign="center" margin={10}>
-            Connect Wallet to get Started
-          </Heading>
-        )}
       </main>
       <Footer />
       <div></div>
