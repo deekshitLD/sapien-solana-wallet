@@ -247,7 +247,7 @@ export const publishingWithStakeandNFT = async (
 
     console.log("id: ", id.toString());
     console.log("account: ", account);
-
+    return true;
     // setValue(account.count.toString());
   } catch (err) {
     console.log("Transaction error: ", err);

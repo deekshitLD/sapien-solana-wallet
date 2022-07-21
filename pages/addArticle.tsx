@@ -337,6 +337,7 @@ const AddArticle = () => {
         reportAccountPublicKey: reportAccountPublicKey,
         date_publish: today.toUTCString(),
       });
+      console.log("addarticle 340");
     }else{
       reportAccountPublicKey = new PublicKey(reportAccountPublicKey);
       const status = await publishingWithStakeandNFT(
@@ -344,7 +345,9 @@ const AddArticle = () => {
         articleId,
         reportAccountPublicKey
       );
+      console.log("addarticle 348");
     }
+
 
     if (status) {
       toast({
