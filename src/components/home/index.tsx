@@ -81,9 +81,9 @@ export default function NewsFeed() {
   const notify = ()=>{
     toast({
       position: "top",
-      title: "Login successful.",
+      title: "Connect Wallet to continue",
       // description: "Successfully saved changes.",
-      status: "success",
+      status: "error",
       duration: 5000,
       isClosable: true,
      });
@@ -119,7 +119,7 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:notify(123);`)}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:notify();`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
