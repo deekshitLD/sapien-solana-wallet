@@ -22,6 +22,7 @@ interface articleTileProps {
   content: any;
   articleUnderVote: any;
   image_url: string;
+  date_publish: string;
 }
 const ArticleTile = ({
   id,
@@ -29,6 +30,7 @@ const ArticleTile = ({
   content,
   articleUnderVote,
   image_url,
+  date_publish,
 }: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const toast = useToast();
@@ -117,6 +119,9 @@ const ArticleTile = ({
           </Text>
           <Text fontSize="sm" noOfLines={2}>
             {parse(content)}
+          </Text>
+          <Text fontSize="sm" noOfLines={2}>
+            {date_publish}
           </Text>
         </Flex>
 

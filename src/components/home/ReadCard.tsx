@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 
 const ReadCard = (props: any) => {
-  const { heading, content, author, image_url } = props;
+  const { heading, content, author, image_url, date_publish } = props;
 
   return (
     <Box p="5" maxW="300" bg="brand.greyDark">
@@ -13,6 +13,9 @@ const ReadCard = (props: any) => {
         alt=""
         src={image_url}
       ></img>
+      <Box color="brand.grey" fontWeight={"bold"} mt="3">
+          Date: {date_publish}
+      </Box>
       <Box>
         <Heading mt="3" size="lg" color="white">
           {heading}
