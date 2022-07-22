@@ -83,6 +83,7 @@ const ArticleList = () => {
                 id={item._id}
                 title={item.heading}
                 content={item.content}
+                date_publish={item.date_publish}
                 articleUnderVote={false}
                 image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
               />
