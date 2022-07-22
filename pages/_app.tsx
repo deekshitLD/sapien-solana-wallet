@@ -9,8 +9,9 @@ import WithAuth from "../src/components/HOC/withAuth";
 import "../src/api/interceptor";
 import { theme } from "../src/styles/theme";
 import { NextPage } from "next";
-//next script import. Yet to check dependency section
 import Script from "next/script";
+// glib.js
+export const GA_TRACKING_ID = process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS"]
 // Use require instead of import, and order matters
 require("../styles/globals.css");
 require("@solana/wallet-adapter-react-ui/styles.css");
@@ -40,7 +41,7 @@ const App: FC<AppProps> = ({ Component, pageProps }: any) => {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
          `}
     </Script>
     <WalletConnectionProvider>
