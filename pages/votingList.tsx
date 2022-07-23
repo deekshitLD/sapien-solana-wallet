@@ -65,7 +65,7 @@ const VotingList = () => {
                     id={item._id}
                     title={item.heading}
                     content={item.content}
-                    date_publish={!isNaN(Date(item.date_publish)) ? (Date() - Date(item.date_publish)).toString() : ""}
+                    date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
                     articleUnderVote={true}
                     image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />

@@ -22,7 +22,7 @@ interface articleTileProps {
   content: any;
   articleUnderVote: any;
   image_url: string;
-  date_publish: string;
+  date_publish: number;
 }
 const ArticleTile = ({
   id,
@@ -121,9 +121,10 @@ const ArticleTile = ({
             {parse(content)}
           </Text>
           <Text fontSize="sm" noOfLines={2}>
-          {parseInt(date_publish, 10)<(1000 * 60 * 60 * 24)? 
+          {date_publish ? (parseInt(date_publish, 10)<(1000 * 60 * 60 * 24)? 
           (parseInt(date_publish,10)/(1000 * 60 * 60 * 24)).toString()&&" days ago"
-          :(parseInt(date_publish,10)/(1000 * 60 * 60)).toString()&&" hours ago"
+          :(parseInt(date_publish,10)/(1000 * 60 * 60)).toString()&&" hours ago")
+          :""
           }
           </Text>
         </Flex>

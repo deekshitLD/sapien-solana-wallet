@@ -83,7 +83,7 @@ const ArticleList = () => {
                 id={item._id}
                 title={item.heading}
                 content={item.content}
-                date_publish={new Date(item.date_publish) ? (new Date() - new Date(item.date_publish)) : ""}
+                date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
                 articleUnderVote={false}
                 image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
               />
