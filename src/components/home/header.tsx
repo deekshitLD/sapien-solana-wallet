@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           paddingX={['4px', '12px', '12px', '16px', '24px']}
           paddingY={['4px', '4px', '12px', '12px', '16px']}
         >
-          Crypto news,<br/> minus the noise
+          Decentralized News
         </Heading>
         <Heading
           as="h3"
@@ -35,9 +35,9 @@ const Header: React.FC = () => {
           bg="white"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
-          paddingY={['8px', '8px', '14px', '14px', '14px']}
+          paddingY={['8px', '8px', '14px', '24px', '14px']}
         >
-          Decentralized Platform
+          Quality Crypto News no Noise
         </Heading>
       </Flex>
     </Grid>
