@@ -121,7 +121,8 @@ const ArticleTile = ({
             {parse(content)}
           </Text>
           <Text fontSize="sm" noOfLines={2}>
-            {date_publish}
+          {(date_publish)<(1000 * 60 * 60 * 24)? parseInt(date_publish/(1000 * 60 * 60 * 24))&&" days ago":parseInt(date_publish/(1000 * 60 * 60))&&" hours ago"
+          }
           </Text>
         </Flex>
 
