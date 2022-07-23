@@ -36,7 +36,7 @@ const Header: React.FC = () => {
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
         >
-          
+          Crypto news curated for value minus the faff
         </Heading>
       </Flex>
     </Grid>
