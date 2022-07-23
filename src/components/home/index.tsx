@@ -99,9 +99,6 @@ export default function NewsFeed() {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         > */}
-        <Heading mt="3" mb="10" size="lg" color="white">
-          Articles
-        </Heading>
         <div
           style={{
             display: "grid",
