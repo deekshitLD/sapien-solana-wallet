@@ -10,7 +10,6 @@ import { SignMessageButton } from "../src/components/signMessageButton";
 import { Heading } from "@chakra-ui/react";
 import router from "next/router";
 import {
-  WalletDisconnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 

@@ -14,7 +14,6 @@ import React, { useEffect, useContext } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 import {
-  WalletDisconnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 
@@ -70,7 +69,6 @@ const Navbar = () => {
           <Box marginRight={"0.5rem"} color={"white"}>
             <WalletMultiButton />
           </Box>
-          <WalletDisconnectButton />
           {/* </Box> */}
         </HStack>
       </Flex>
