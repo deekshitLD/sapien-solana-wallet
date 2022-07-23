@@ -124,7 +124,7 @@ export default function NewsFeed() {
                       content={item.content}
                       author={item.owner}
                       image_url={item.image_url}
-                      date_publish={(Date().getTime() - Date(item.date_publish).getTime())}
+                      date_publish={(new Date().getTime() - new Date(item.date_publish).getTime())}
                       // img={news.img}
                     />
                   </a>
