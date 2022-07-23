@@ -82,7 +82,7 @@ export default function NewsFeed() {
     <>
       <style>{style}</style>
       <script>
-      const notify = ()={
+        notify()={
         toast({
           position: "top",
           title: "Connect Wallet to continue",
@@ -117,7 +117,7 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:notify();`)}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`notify();`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
