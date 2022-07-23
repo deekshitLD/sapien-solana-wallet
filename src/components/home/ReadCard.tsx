@@ -18,7 +18,8 @@ const ReadCard = (props: any) => {
           {heading}
         </Heading>
         <Box color="brand.grey" fontWeight={"bold"} mt="3">
-          Date: {date_publish}
+          {(date_publish)<(1000 * 60 * 60 * 24)? parseInt(date_publish/(1000 * 60 * 60 * 24))&&" days ago":parseInt(date_publish/(1000 * 60 * 60))&&" hours ago"
+          }
       </Box>
         <Box
           mt="3"

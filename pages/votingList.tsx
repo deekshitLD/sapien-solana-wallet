@@ -65,7 +65,7 @@ const VotingList = () => {
                     id={item._id}
                     title={item.heading}
                     content={item.content}
-                    date_publish={item.date_publish ? item.date_publish : ""}
+                    date_publish={item.date_publish ? (Date() - Date(item.date_publish)) : ""}
                     articleUnderVote={true}
                     image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />
