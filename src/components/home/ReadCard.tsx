@@ -13,13 +13,13 @@ const ReadCard = (props: any) => {
         alt=""
         src={image_url}
       ></img>
-      <Box color="brand.grey" fontWeight={"bold"} mt="3">
-          Date: {date_publish}
-      </Box>
       <Box>
         <Heading mt="3" size="lg" color="white">
           {heading}
         </Heading>
+        <Box color="brand.grey" fontWeight={"bold"} mt="3">
+          Date: {date_publish}
+      </Box>
         <Box
           mt="3"
           fontSize="15"
