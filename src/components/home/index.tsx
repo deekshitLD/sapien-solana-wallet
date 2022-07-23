@@ -78,20 +78,21 @@ export default function NewsFeed() {
     await connection.confirmTransaction(signature, "processed");
   };
 
-  const notify = ()=>{
-    toast({
-      position: "top",
-      title: "Connect Wallet to continue",
-      // description: "Successfully saved changes.",
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-     });
-  }
-
   return (
     <>
       <style>{style}</style>
+      <script>
+      const notify = ()={
+        toast({
+          position: "top",
+          title: "Connect Wallet to continue",
+          // description: "Successfully saved changes.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        })
+      };
+      </script>
       <div className="outer-container">
         {/* <Masonry
           breakpointCols={breakpointColumnsObj}
