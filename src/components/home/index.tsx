@@ -81,18 +81,6 @@ export default function NewsFeed() {
   return (
     <>
       <style>{style}</style>
-      <script>
-        function notify(){
-        toast({
-          position: "top",
-          title: "Connect Wallet to continue",
-          // description: "Successfully saved changes.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        })
-      };
-      </script>
       <div className="outer-container">
         {/* <Masonry
           breakpointCols={breakpointColumnsObj}
@@ -117,7 +105,7 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:notify();`)}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`prompt("Please connect wallet to access articles");`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
