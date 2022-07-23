@@ -105,7 +105,7 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (`prompt("Please connect wallet to access articles");`)}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:prompt("Please connect wallet to access articles");`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
