@@ -26,6 +26,7 @@ const Header: React.FC = () => {
           paddingY={['4px', '4px', '12px', '12px', '16px']}
         >
         </Heading>
+        Decentralized News Platform
         <Heading
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
@@ -36,7 +37,7 @@ const Header: React.FC = () => {
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
         >
-          Crypto news curated for value minus the faff
+          Crypto news - aggregated for value minus the junk
         </Heading>
       </Flex>
     </Grid>
