@@ -25,7 +25,6 @@ const Header: React.FC = () => {
           paddingX={['4px', '12px', '12px', '16px', '24px']}
           paddingY={['4px', '4px', '12px', '12px', '16px']}
         >
-          Sapien
         </Heading>
         <Heading
           as="h3"
@@ -37,7 +36,7 @@ const Header: React.FC = () => {
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
         >
-          The 🌎 of Un-biased media
+          
         </Heading>
       </Flex>
     </Grid>

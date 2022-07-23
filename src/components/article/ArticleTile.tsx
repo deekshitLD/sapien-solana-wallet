@@ -22,7 +22,7 @@ interface articleTileProps {
   content: any;
   articleUnderVote: any;
   image_url: string;
-  date_publish: string;
+  date_publish: number;
 }
 const ArticleTile = ({
   id,
