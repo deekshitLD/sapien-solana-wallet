@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import uploadMediaFile from "../../upload.ts";
+import uploadMediaFile from "../../upload.js";
 import dynamic from "next/dynamic";
 
 
