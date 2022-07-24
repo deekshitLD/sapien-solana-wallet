@@ -115,7 +115,7 @@ const AddArticle = () => {
     secretAccessKey:process.argv[3]
   });
 
-  function MyEditor({ handleChange, ...props }) {
+  function MyEditor({ handleChange:any, ...props }) {
     function uploadAdapter(loader) {
       return {
         upload: () => {
