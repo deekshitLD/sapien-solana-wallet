@@ -40,8 +40,9 @@ const FormData = require('form-data');
       var bucketName = "sapien";
       var objectName = "change-me-to-desired-object-name-on-storj";
 
-      await project.uploadObject(bucketName, objectName, uploadOptions).then(async (upload) => {  
-        pinFileToIPFS(username, password, filepath);
+      await project.uploadObject(bucketName, objectName, uploadOptions).then(async (upload) => {
+        var filepath = new ObjectId().str;
+        pinFileToIPFS($process.argv[0], $process.argv[1], filepath);
       }).catch((err) => {
          console.error(err)
       });
@@ -85,25 +86,10 @@ async function pinFileToIPFS(username, password, filepath) {
  * To simplify the example, we don't do any fancy command line parsing. Just three
  * positional arguments for imagePath, name, and description
  */
- async function main() {
-    const args = process.argv.slice(2)
-    if (args.length !== 3) {
-        console.error(`usage: ${process.argv[0]} ${process.argv[1]} <username> <password> <filepath>`)
-        process.exit(1)
-    }
 
-    const [username, password, filepath] = args
-    const result = await pinFileToIPFS(username, password, filepath)
-    console.log(result)
-}
 
 /**
  * Don't forget to actually call the main function!
  * We can't `await` things at the top level, so this adds
  * a .catch() to grab any errors and print them to the console.
  */
-main()
-  .catch(err => {
-      console.error(err)
-      process.exit(1)
-  })
