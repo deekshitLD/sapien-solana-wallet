@@ -11,7 +11,7 @@ interface EditorProps {
 const Editor = ({ content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const { CKEditor, ClassicEditor}: any = editorRef.current || {};
+  const { CKEditor, ClassicEditor, CKFinder}: any = editorRef.current || {};
   //   const DecoupledEditor = dynamic<{ children: any }>(() =>
   //     import("@ckeditor/ckeditor5-build-decoupled-document").then(
   //       ({ DecoupledEditor }: any) => DecoupledEditor
