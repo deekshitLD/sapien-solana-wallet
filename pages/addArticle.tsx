@@ -116,7 +116,7 @@ const AddArticle = () => {
     }
   };
 
-  editor.on( 'fileUploadRequest', function( evt ) {
+  Editor.on( 'fileUploadRequest', function( evt ) {
       var fileLoader = evt.data.fileLoader,
           formData = new FormData();
 
