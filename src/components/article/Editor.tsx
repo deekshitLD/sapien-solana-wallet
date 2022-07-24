@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import uploadMediaFile from "../../upload.ts";
 import dynamic from "next/dynamic";
 
 interface EditorProps {
   content: any;
   setContent: Function;
 }
+
 const Editor = ({ content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
@@ -49,10 +50,33 @@ const Editor = ({ content, setContent }: EditorProps) => {
     //   });
     setEditorLoaded(true);
   }, []);
+
+  export default function MyEditor({ handleChange, ...props }) {
+    function uploadAdapter(loader) {
+      return {
+        upload: () => {
+          return new Promise((resolve, reject) => {
+            const body = new FormData();
+            loader.file.then((file) => {
+              body.append("files", file);
+              uploadMediaFile(body);
+            });
+          });
+        }
+      };
+    }
+  }
+    function uploadPlugin(editor) {
+      editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+        return uploadAdapter(loader);
+      };
+    }
+
   return editorLoaded ? (
     <>
       {console.log(ClassicEditor)}
       <CKEditor
+        config={{extraPlugins: [uploadPlugin]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
