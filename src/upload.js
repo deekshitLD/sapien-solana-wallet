@@ -9,7 +9,7 @@ const fs = require('fs');
 const FormData = require('form-data');
 
 export function uploadMediaFile(filepath){
-pinFileToIPFS($process.argv[0], $process.argv[1], filepath);
+pinFileToIPFS(process.argv[0], process.argv[1], filepath);
 }
 
 
