@@ -115,19 +115,7 @@ const AddArticle = () => {
       router.push("/articleList");
     }
   };
-
-  Editor.on( 'fileUploadRequest', function( evt ) {
-      var fileLoader = evt.data.fileLoader,
-          formData = new FormData();
-
-      formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-      body.append("files", file);
-      s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
-      uploadMediaFile(body);
-
-      // Prevented the default behavior.
-      evt.stop();
-  }, null, null, 4 ); // Listener with a priority 4 will be executed before priority 5.
+ // Listener with a priority 4 will be executed before priority 5.
 
 
   const handleSaveAsDraft = async () => {
