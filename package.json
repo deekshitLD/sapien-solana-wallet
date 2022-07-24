@@ -29,7 +29,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.7.4",
-    "@ckeditor5-build-classic-with-upload-image": "^18.0.13",
+    "@ckeditor/ckeditor5-build-classic": "^32.0.0",
     "@ckeditor/ckeditor5-build-decoupled-document": "^32.0.0",
     "@ckeditor/ckeditor5-react": "^4.0.0",
     "s3fs":"latest",

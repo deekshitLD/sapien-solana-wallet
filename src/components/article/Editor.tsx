@@ -21,7 +21,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
     editorRef.current = {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
-      ClassicEditor: require("@ckeditor5-build-classic-with-upload-image"),
+      ClassicEditor: require("@ckeditor5-build-classic"),
     };
     // @ts-ignore
     // DecoupledEditor.create("<p>Hello world!</p>")
