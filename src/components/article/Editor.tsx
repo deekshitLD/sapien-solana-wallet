@@ -69,7 +69,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
         data={content.length > 0 ? content : ""}
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
-          editor.on( 'fileUploadRequest', function( evt ) {
+          editor.on( 'fileUploadRequest', function( evt ):void {
             var fileLoader = evt.data.fileLoader,
                 formData = new FormData();
       
