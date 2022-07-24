@@ -2,6 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import uploadMediaFile from "../../upload.ts";
 import dynamic from "next/dynamic";
 
+
+var S3FS = require('s3fs');
+var s3fsImpl = new S3FS('sapien/image/uploads',{
+  accessKeyId:$process.argv[2],
+  secretAccessKey:$process.argv[3]
+});
+
 interface EditorProps {
   content: any;
   setContent: Function;
@@ -59,6 +66,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
             const body = new FormData();
             loader.file.then((file) => {
               body.append("files", file);
+              s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
               uploadMediaFile(body);
             });
           });
