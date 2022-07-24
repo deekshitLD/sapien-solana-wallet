@@ -105,14 +105,14 @@ export default function NewsFeed() {
                 className="news-item"
               > */}
                 {/* <VStack> */}
-                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:prompt("Please connect wallet to access articles");`)}>
+                <Link href={loggedIn ? (`/article/${item._id}`) : (`javascript:alert("Please connect wallet to access articles");`)}>
                   <a>
                     <ReadCard
                       heading={item.heading}
                       content={item.content}
                       author={item.owner}
                       image_url={item.image_url}
-                      date_publish={(new Date().getTime() - new Date(item.date_publish).getTime())}
+                      date_publish={(new Date().getTime() - Date(item.date_publish).getTime())}
                       // img={news.img}
                     />
                   </a>
