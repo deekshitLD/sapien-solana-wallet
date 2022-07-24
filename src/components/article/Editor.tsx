@@ -28,6 +28,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor5-build-classic"),
+      CKFinder: requestAnimationFrame("@ckeditor/ckeditor5-ckfinder"),
     };
     // @ts-ignore
     // DecoupledEditor.create("<p>Hello world!</p>")
@@ -62,7 +63,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
     <>
       {console.log(ClassicEditor)}
       <CKEditor
-        config={{extraPlugins: [uploadimage]}}
+        config={{extraPlugins: [CKFinder]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
