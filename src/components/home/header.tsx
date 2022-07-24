@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['60vh', '60vh', '60vh', '70vh']}
+      height={['32vh', '32vh', '32vh', '70vh']}
       templateRows="1fr 1fr 1fr"
     >
       <Flex
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           bg="white"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
-          paddingY={['8px', '8px', '14px', '24px', '14px']}
+          paddingY={['8px', '8px', '14px', '34px', '14px']}
         >
           Quality Crypto News no Noise
         </Heading>

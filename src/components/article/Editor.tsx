@@ -3,34 +3,6 @@ import {uploadMediaFile} from "../../upload.js";
 import dynamic from "next/dynamic";
 
 
-var S3FS = require('s3fs');
-var s3fsImpl = new S3FS('sapien/image/uploads',{
-  accessKeyId:process.argv[2],
-  secretAccessKey:process.argv[3]
-});
-
-export default function MyEditor({ handleChange, ...props }) {
-  function uploadAdapter(loader) {
-    return {
-      upload: () => {
-        return new Promise((resolve, reject) => {
-          const body = new FormData();
-          loader.file.then((file) => {
-            body.append("files", file);
-            s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
-            uploadMediaFile(body);
-          });
-        });
-      }
-    };
-  }
-}
-  function uploadPlugin(editor) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-      return uploadAdapter(loader);
-    };
-  }
-
 interface EditorProps {
   content: any;
   setContent: Function;
@@ -85,7 +57,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
     <>
       {console.log(ClassicEditor)}
       <CKEditor
-       // config={{extraPlugins: [uploadPlugin]}}
+        config={{extraPlugins: [uploadPlugin]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
