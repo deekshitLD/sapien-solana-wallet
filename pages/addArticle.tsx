@@ -60,6 +60,13 @@ const AddArticle = () => {
     "useAnchorWallet is ",
     useAnchorWallet()
   );
+
+  var S3FS = require('s3fs');
+  var s3fsImpl = new S3FS('sapien/image/uploads',{
+    accessKeyId:process.argv[2],
+    secretAccessKey:process.argv[3]
+  });
+
   const today = new Date();
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
@@ -109,34 +116,19 @@ const AddArticle = () => {
     }
   };
 
-  var S3FS = require('s3fs');
-  var s3fsImpl = new S3FS('sapien/image/uploads',{
-    accessKeyId:process.argv[2],
-    secretAccessKey:process.argv[3]
-  });
+  editor.on( 'fileUploadRequest', function( evt ) {
+      var fileLoader = evt.data.fileLoader,
+          formData = new FormData();
 
-  function MyEditor({ handleChange:any, ...props }) {
-    function uploadAdapter(loader) {
-      return {
-        upload: () => {
-          return new Promise((resolve, reject) => {
-            const body = new FormData();
-            loader.file.then((file) => {
-              body.append("files", file);
-              s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
-              uploadMediaFile(body);
-            });
-          });
-        }
-      };
-    }
-  }
+      formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+      body.append("files", file);
+      s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
+      uploadMediaFile(body);
 
-  function uploadPlugin(editor) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-      return uploadAdapter(loader);
-    };
-  }
+      // Prevented the default behavior.
+      evt.stop();
+  }, null, null, 4 ); // Listener with a priority 4 will be executed before priority 5.
+
 
   const handleSaveAsDraft = async () => {
     // let res = await addArticle();
