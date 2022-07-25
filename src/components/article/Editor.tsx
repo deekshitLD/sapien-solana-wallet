@@ -30,6 +30,8 @@ const Editor = ({ content, setContent }: EditorProps) => {
       ClassicEditor: require("@ckeditor5-build-classic"),
       CKFinder: require("@ckeditor/ckeditor5-ckfinder/src/ckfinder"),
     };
+
+    CKFinder=
     // @ts-ignore
     // DecoupledEditor.create("<p>Hello world!</p>")
     //   .then((editor: any) => {
@@ -63,10 +65,11 @@ const Editor = ({ content, setContent }: EditorProps) => {
     <>
       {console.log(ClassicEditor)}
       <CKEditor
-        config={{extraPlugins: [CKFinder]}}
+        config={{extraPlugins: [CKFinder, filetools]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
+        beforeInit={}
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
           editor.on( 'fileUploadRequest', function( evt ):void {
