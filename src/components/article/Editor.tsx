@@ -61,7 +61,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
-        beforeInit={}
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
           editor.plugins.get("FileRepository").createUploadAdapter = (
