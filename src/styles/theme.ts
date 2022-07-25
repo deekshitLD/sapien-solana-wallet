@@ -52,7 +52,7 @@ export const theme = extendTheme({
   //   Button,
   // },
   fonts: {
-    heading: "Playfair Display",
-    body: "Playfair Display",
+    heading: "Open Sans",
+    body: "Open Sans",
   },
 });
