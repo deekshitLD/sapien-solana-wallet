@@ -35,9 +35,9 @@ const Header: React.FC = () => {
           bg="white"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
-          paddingY={['8px', '8px', '14px', '34px', '14px']}
+          paddingY={['8px', '8px', '14px', '14px', '34px']}
         >
-          Quality Crypto News no Noise
+          Crypto for Humans
         </Heading>
       </Flex>
     </Grid>
