@@ -52,7 +52,7 @@ export const theme = extendTheme({
   //   Button,
   // },
   fonts: {
-    heading: "Open Sans",
-    body: "Open Sans",
+    heading: "Roboto",
+    body: "Roboto",
   },
 });
