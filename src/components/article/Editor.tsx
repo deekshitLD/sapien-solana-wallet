@@ -31,7 +31,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
       CKFinder: require("@ckeditor/ckeditor5-ckfinder/src/ckfinder"),
     };
 
-    CKFinder=
     // @ts-ignore
     // DecoupledEditor.create("<p>Hello world!</p>")
     //   .then((editor: any) => {
