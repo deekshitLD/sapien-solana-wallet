@@ -71,6 +71,10 @@ const Editor = ({ content, setContent }: EditorProps) => {
         beforeInit={}
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
+          console.log("Editor is ready to use!", editor);
+        }}
+        onChange={(evt: any, editor: any) => {
+          const data = editor.getData();
           editor.on( 'fileUploadRequest', function( evt ):void {
             var fileLoader = evt.data.fileLoader,
                 formData = new FormData();
@@ -83,10 +87,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
             // Prevented the default behavior.
             evt.stop();
         }, null, null, 4 );
-          console.log("Editor is ready to use!", editor);
-        }}
-        onChange={(event: any, editor: any) => {
-          const data = editor.getData();
           console.log("DATA is: ", data);
           setContent(data);
         }}
