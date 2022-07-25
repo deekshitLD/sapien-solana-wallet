@@ -111,10 +111,11 @@ const ArticleTile = ({
           <img
             width={"200px"}
             height={"200px"}
+            maxHeight={"300px"}
             alt=""
             src={image_url}
           ></img>
-          <Text fontSize="xl" noOfLines={3} marginTop={2} marginBottom={5}>
+          <Text fontSize="xl" noOfLines={2} marginTop={2} marginBottom={5}>
             {title}
           </Text>
           <Text fontSize="sm" noOfLines={2}>
