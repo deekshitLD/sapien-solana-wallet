@@ -44,7 +44,7 @@ const App: FC<AppProps> = ({ Component, pageProps }: any) => {
             gtag('config', 'G-WDND2N05K9');
          `}
     </Script>
-    <script type='text/javascript'>
+    {/* <script type='text/javascript'>
         {`window.smartlook||(function(d) {
           var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
           var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
@@ -52,7 +52,7 @@ const App: FC<AppProps> = ({ Component, pageProps }: any) => {
           })(document);
           smartlook('init', 'e76ca9cc82c02cdc07ead615506798ca9bd94624', { region: 'eu' });
         `}
-</script>
+</script> */}
     <WalletConnectionProvider>
       <WalletModalProvider>
         <ChakraProvider theme={theme}>
