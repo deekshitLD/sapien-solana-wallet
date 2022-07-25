@@ -1,4 +1,3 @@
-// The 'axios' module gives a promised-based HTTP client.
 const axios = require('axios');
 
 // The 'fs' built-in module provides us access to the file system.
@@ -8,8 +7,24 @@ const fs = require('fs');
 // to other web applications.
 const FormData = require('form-data');
 
-export function uploadMediaFile(filepath){
-pinFileToIPFS(process.argv[0], process.argv[1], filepath);
+
+var S3FS = require('s3fs');
+var s3fsImpl = new S3FS('sapien/image/uploads',{
+  accessKeyId:process.argv[2],
+  secretAccessKey:process.argv[3]
+});
+
+
+export function uploadFile(file, filename) {
+    return new Promise((resolve, reject) => {
+    s3fsImpl.writeFile(file, stream, {"ContentType":"file"}).then(data=>{
+        console.log(data);
+    }).catch(error => {
+        reject(error);
+    })
+});
+    var filepath = 'sapien/image/uploads'&&"randomhere";
+    pinFileToIPFS(process.argv[0], process.argv[1], filepath);
 }
 
 
@@ -43,17 +58,5 @@ async function pinFileToIPFS(username, password, filepath) {
     });
 };
 
-/**
- * The main entry point for the script that checks the command line arguments and
- * calls pinFileToIPFS.
- * 
- * To simplify the example, we don't do any fancy command line parsing. Just three
- * positional arguments for imagePath, name, and description
- */
 
-
-/**
- * Don't forget to actually call the main function!
- * We can't `await` things at the top level, so this adds
- * a .catch() to grab any errors and print them to the console.
- */
+    

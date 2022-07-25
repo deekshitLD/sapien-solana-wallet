@@ -61,12 +61,6 @@ const AddArticle = () => {
     useAnchorWallet()
   );
 
-  var S3FS = require('s3fs');
-  var s3fsImpl = new S3FS('sapien/image/uploads',{
-    accessKeyId:process.argv[2],
-    secretAccessKey:process.argv[3]
-  });
-
   const today = new Date();
   const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");

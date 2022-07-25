@@ -17,18 +17,13 @@ const Editor = ({ content, setContent }: EditorProps) => {
   //       ({ DecoupledEditor }: any) => DecoupledEditor
   //     )
   //   );
-  var S3FS = require('s3fs');
-  var s3fsImpl = new S3FS('sapien/image/uploads',{
-    accessKeyId:process.argv[2],
-    secretAccessKey:process.argv[3]
-  });
 
   useEffect(() => {
     editorRef.current = {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor5-build-classic"),
-      CKFinder: require("@ckeditor/ckeditor5-ckfinder/src/ckfinder"),
+
     };
 
     // @ts-ignore
@@ -64,29 +59,23 @@ const Editor = ({ content, setContent }: EditorProps) => {
     <>
       {console.log(ClassicEditor)}
       <CKEditor
-        config={{extraPlugins: [CKFinder, filetools]}}
+        config={{extraPlugins: [CKFinder]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
         beforeInit={}
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
+          editor.plugins.get("FileRepository").createUploadAdapter = (
+            loader
+          ) => {
+            return new UploadAdapter(loader);
+          };
           console.log("Editor is ready to use!", editor);
         }}
         onChange={(evt: any, editor: any) => {
           const data = editor.getData();
-          editor.on( 'fileUploadRequest', function( evt ):void {
-            var fileLoader = evt.data.fileLoader,
-                formData = new FormData();
-      
-            formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-            body.append("files", file);
-            s3fsImpl.writeFile(file, stream, {"ContentType":"file"})
-            uploadMediaFile(body);
 
-            // Prevented the default behavior.
-            evt.stop();
-        }, null, null, 4 );
           console.log("DATA is: ", data);
           setContent(data);
         }}
