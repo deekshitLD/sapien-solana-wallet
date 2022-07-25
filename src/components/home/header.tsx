@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['32vh', '32vh', '32vh', '70vh']}
+      height={['32vh', '32vh', '32vh', '23vh']}
       templateRows="1fr 1fr 1fr"
     >
       <Flex
@@ -18,24 +18,24 @@ const Header: React.FC = () => {
       >
         <Heading
           as="h2"
-          fontSize={['4xl', '5xl', '6xl', '6xl', '6xl']}
+          fontSize={['3xl', '4xl', '5xl', '5xl', '5xl']}
           color="white"
           mb="3"
           width="fit-content"
           paddingX={['4px', '12px', '12px', '16px', '24px']}
-          paddingY={['4px', '4px', '12px', '12px', '16px']}
+          paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
           Decentralized News
         </Heading>
         <Heading
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
-          textTransform="uppercase"
           color="black"
           bg="white"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
-          paddingY={['8px', '8px', '14px', '14px', '34px']}
+          paddingY={['8px', '8px', '14px', '14px', '14px']}
+          margin={['20px']}
         >
           Crypto for Humans
         </Heading>
