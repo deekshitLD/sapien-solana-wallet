@@ -58,7 +58,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
     <>
       {console.log(ClassicEditor)}
       <CKEditor
-        config={{extraPlugins: [CKFinder]}}
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
