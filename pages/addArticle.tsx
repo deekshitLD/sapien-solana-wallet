@@ -15,7 +15,7 @@ import {
   Spacer,
   Spinner,
 } from "@chakra-ui/react";
-import Editor from "../src/components/article/Editor";
+//import Editor from "../src/components/article/Editor";
 
 import { NextPage } from "next";
 import { useRouter } from "next/router";
