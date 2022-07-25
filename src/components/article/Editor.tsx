@@ -64,7 +64,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
         onReady={(editor: any) => {
           // You can store the "editor" and use when it is needed.
           editor.plugins.get("FileRepository").createUploadAdapter = (
-            loader
+            loader: any
           ) => {
             return new UploadAdapter(loader);
           };
