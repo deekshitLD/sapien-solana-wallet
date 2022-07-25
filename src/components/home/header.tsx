@@ -3,15 +3,15 @@ import { Flex, Grid, Heading } from '@chakra-ui/react'
 
 const Header: React.FC = () => {
   return (
-/*     <Grid
+    <Grid
       backgroundImage="../../banner.jpg" 
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['32vh', '32vh', '32vh', '32vh']}
+      height={['0', '0', '0', '0']}
       templateRows="1fr 1fr 1fr"
     >
-      <Flex
+      {/* <Flex
         flexDirection="column"
         gridRow="3 / 3"
         paddingX={['1.5em', '1.5em', '1.5em', '15%']}
@@ -39,8 +39,8 @@ const Header: React.FC = () => {
         >
           Crypto for Humans
         </Heading>
-      </Flex>
-    </Grid> */
+      </Flex> */}
+    </Grid>
   )
 }
 
