@@ -3,12 +3,12 @@ import { Flex, Grid, Heading } from '@chakra-ui/react'
 
 const Header: React.FC = () => {
   return (
-    <Grid
+/*     <Grid
       backgroundImage="../../banner.jpg" 
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['23vh', '23vh', '23vh', '23vh']}
+      height={['32vh', '32vh', '32vh', '32vh']}
       templateRows="1fr 1fr 1fr"
     >
       <Flex
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           Crypto for Humans
         </Heading>
       </Flex>
-    </Grid>
+    </Grid> */
   )
 }
 
