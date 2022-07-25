@@ -111,7 +111,6 @@ const ArticleTile = ({
           <img
             width={"200px"}
             height={"200px"}
-            maxHeight={"300px"}
             alt=""
             src={image_url}
           ></img>
