@@ -23,7 +23,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-      uploadadapter: require("@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter"),
       FileRepository: require("@ckeditor/ckeditor5-upload/src/filerepository"),
 
     };
@@ -63,7 +62,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
       <CKEditor
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
-        config={{ plugins: [FileRepository, uploadadapter]}}
+        config={{ plugins: [FileRepository]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
           editor.plugins.get("FileRepository").createUploadAdapter = (
