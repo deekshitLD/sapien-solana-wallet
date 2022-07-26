@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Component } from "react";
 import UploadAdapter from "../../UploadAdapter";
 import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
