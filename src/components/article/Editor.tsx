@@ -17,7 +17,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
   //       ({ DecoupledEditor }: any) => DecoupledEditor
   //     )
   //   );
-  const CustomUploadAdapterPlugin = (editor) => {
+  const CustomUploadAdapterPlugin = (editor:any) => {
   editor.plugins.get("FileRepository").createUploadAdapter = (
     loader: any
    ) => {
