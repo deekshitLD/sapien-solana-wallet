@@ -17,13 +17,22 @@ const Editor = ({ content, setContent }: EditorProps) => {
   //       ({ DecoupledEditor }: any) => DecoupledEditor
   //     )
   //   );
+  const CustomUploadAdapterPlugin = (editor) => {
+  editor.plugins.get("FileRepository").createUploadAdapter = (
+    loader: any
+   ) => {
+      loader.onUpload = editor.onUpload;
+      loader.accessToken = editor.accessToken;
+      return new UploadAdapter(loader);
+   }
+  }}
 
   useEffect(() => {
     editorRef.current = {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-      FileRepository: require("@ckeditor/ckeditor5-upload"),
+    //  FileRepository: require("@ckeditor/ckeditor5-upload"),
 
     };
 
@@ -65,11 +74,8 @@ const Editor = ({ content, setContent }: EditorProps) => {
         config={{ plugins: [FileRepository]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
-          editor.plugins.get("FileRepository").createUploadAdapter = (
-            loader: any
-           ) => {
-             return new UploadAdapter(loader);
-           }
+          editor.onUpload = this.props.onUpload; //append event
+          editor.accessToken = this.props.accessToken;
         }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
