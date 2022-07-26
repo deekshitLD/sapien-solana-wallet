@@ -61,13 +61,13 @@ const Editor = ({ content, setContent }: EditorProps) => {
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
-        onInit={
+        onInit={(editor) => {
           CKEditor.plugins.get("FileRepository").createUploadAdapter = (
             loader: any
            ) => {
              return new UploadAdapter(loader);
            }
-        }
+        }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
         }}
