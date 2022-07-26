@@ -33,6 +33,7 @@
     "@ckeditor/ckeditor5-build-decoupled-document": "^32.0.0",
     "@ckeditor/ckeditor5-react": "^4.0.0",
     "@ckeditor/ckeditor5-upload":"latest",
+    "prop-types":"latest"
     "s3fs":"latest",
     "form-data":"latest",
     "@emotion/react": "^11",

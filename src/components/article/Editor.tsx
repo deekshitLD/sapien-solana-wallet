@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import UploadAdapter from "../../UploadAdapter";
 import dynamic from "next/dynamic";
+import PropTypes from "prop-types";
 
 
 interface EditorProps {
@@ -26,6 +27,16 @@ const Editor = ({ content, setContent }: EditorProps) => {
       return new UploadAdapter(loader);
    }
   }
+
+  class Editor extends Component {
+    static get propTypes() {
+      return {
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+        accessToken: PropTypes.string,
+        onUpload: PropTypes.func,
+      };
+    }
 
   useEffect(() => {
     editorRef.current = {
@@ -74,8 +85,8 @@ const Editor = ({ content, setContent }: EditorProps) => {
         config={{ extraPlugins: [CustomUploadAdapterPlugin]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
-          editor.onUpload = this.onUpload; //append event
-          editor.accessToken = this.accessToken;
+          editor.onUpload = this.props.onUpload; //append event
+          editor.accessToken = this.props.accessToken;
         }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
