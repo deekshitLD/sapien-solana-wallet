@@ -5,12 +5,12 @@ import dynamic from "next/dynamic";
 
 
 interface EditorProps {
+  onUpload: Function;
   content: any;
   setContent: Function;
-  onUpload: Function;
 }
 
-const Editor = ({ content, setContent, onUpload }: EditorProps) => {
+const Editor = ({ onUpload, content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { CKEditor, ClassicEditor, FileRepository}: any = editorRef.current || {};
