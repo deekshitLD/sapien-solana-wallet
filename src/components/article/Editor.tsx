@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import UploadAdapter from "../../UploadAdapter";
 import dynamic from "next/dynamic";
-import PropTypes from "prop-types";
 
 
 interface EditorProps {
@@ -19,6 +18,14 @@ const Editor = ({ content, setContent }: EditorProps) => {
   //       ({ DecoupledEditor }: any) => DecoupledEditor
   //     )
   //   );
+  const CustomUploadAdapterPlugin = (editor) => {
+  editor.plugins.get("FileRepository").createUploadAdapter = (
+    loader: any
+   ) => {
+      loader.onUpload = editor.onUpload;
+     return new UploadAdapter(loader);
+   }
+  }
 
   useEffect(() => {
     editorRef.current = {
@@ -58,37 +65,15 @@ const Editor = ({ content, setContent }: EditorProps) => {
     setEditorLoaded(true);
   }, []);
 
-  class Editor extends Component {
-    static get propTypes() {
-      return {
-        value: PropTypes.string,
-        onChange: PropTypes.func,
-        accessToken: PropTypes.string,
-        onUpload: PropTypes.func,
-      };
-    }
-
-    const CustomUploadAdapterPlugin = (editor:any) => {
-      editor.plugins.get("FileRepository").createUploadAdapter = (
-        loader: any
-       ) => {
-          loader.onUpload = editor.onUpload;
-          loader.accessToken = editor.accessToken;
-          return new UploadAdapter(loader);
-       }
-      }
-
   return editorLoaded ? (
     <>
       {console.log(ClassicEditor)}
       <CKEditor
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
-        config={{ extraPlugins: [CustomUploadAdapterPlugin]}}
+        config={{ plugins: [FileRepository]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
-          editor.onUpload = this.props.onUpload; //append event
-          editor.accessToken = this.props.accessToken;
         }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
@@ -104,6 +89,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
   ) : (
     <div>Editor loading</div>
   );
-};}
+};
 
 export default Editor;
