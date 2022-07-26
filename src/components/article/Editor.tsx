@@ -25,7 +25,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
       loader.accessToken = editor.accessToken;
       return new UploadAdapter(loader);
    }
-  }}
+  }
 
   useEffect(() => {
     editorRef.current = {
