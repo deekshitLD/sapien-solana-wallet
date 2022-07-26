@@ -71,7 +71,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
       <CKEditor
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
-        config={{ plugins: [FileRepository]}}
+        config={{ extraPlugins: [CustomUploadAdapterPlugin]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
           editor.onUpload = this.props.onUpload; //append event
