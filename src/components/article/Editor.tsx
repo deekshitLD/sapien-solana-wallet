@@ -61,7 +61,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
-        onInit={(editor) => {
+        onInit={(editor:any) => {
           editor.plugins.get("FileRepository").createUploadAdapter = (
             loader: any
            ) => {
