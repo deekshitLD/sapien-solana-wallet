@@ -62,7 +62,7 @@ const AddArticle = () => {
   );
 
   const today = new Date();
-  const [content, setContent] = useState("");
+  const [content, setContent, onUpload] = useState("");
   const [heading, setHeading] = useState("");
   const [loading, setLoading] = useState(true);
   const [reportAccountPublicKey, setReportAccountPublicKey] = useState<any>();
@@ -452,7 +452,7 @@ const AddArticle = () => {
             />
 
             <Box marginBottom={"50px"}>
-              <Editor onUpload={UploadAdapter} content={content} setContent={setContent} />
+              <Editor onUpload={onUpload} content={content} setContent={setContent} />
             </Box>
           </>
         )}
