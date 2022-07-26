@@ -452,7 +452,7 @@ const AddArticle = () => {
             />
 
             <Box marginBottom={"50px"}>
-              <Editor onUpload={onUpload} content={content} setContent={setContent} />
+              <Editor onUpload={UploadAdapter} content={content} setContent={setContent} />
             </Box>
           </>
         )}
