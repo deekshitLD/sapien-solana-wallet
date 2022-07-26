@@ -62,7 +62,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
         editor={ClassicEditor}
         data={content.length > 0 ? content : ""}
         onInit={(editor) => {
-          CKEditor.plugins.get("FileRepository").createUploadAdapter = (
+          editor.plugins.get("FileRepository").createUploadAdapter = (
             loader: any
            ) => {
              return new UploadAdapter(loader);
