@@ -9,7 +9,7 @@ interface EditorProps {
   onUpload: Function;
 }
 
-const Editor = ({ content, setContent }: EditorProps) => {
+const Editor = ({ content, setContent, onUpload }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { CKEditor, ClassicEditor}: any = editorRef.current || {};
