@@ -5,15 +5,14 @@ import dynamic from "next/dynamic";
 
 
 interface EditorProps {
-  onUpload: Function;
   content: any;
   setContent: Function;
 }
 
-const Editor = ({ onUpload, content, setContent }: EditorProps) => {
+const Editor = ({ content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const { CKEditor, ClassicEditor, FileRepository}: any = editorRef.current || {};
+  const { CKEditor, ClassicEditor}: any = editorRef.current || {};
   //   const DecoupledEditor = dynamic<{ children: any }>(() =>
   //     import("@ckeditor/ckeditor5-build-decoupled-document").then(
   //       ({ DecoupledEditor }: any) => DecoupledEditor
@@ -25,7 +24,6 @@ const Editor = ({ onUpload, content, setContent }: EditorProps) => {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-      FileRepository: require("@ckeditor/ckeditor5-upload").FileRepository,
 
     };
 
@@ -55,8 +53,17 @@ const Editor = ({ onUpload, content, setContent }: EditorProps) => {
     //   .catch((err: any) => {
     //     console.error(err.stack);
     //   });
+
+    function uploadPlugin(editor) {
+      editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+        return uploadAdapter(loader);
+      };
+    }
+
     setEditorLoaded(true);
   }, []);
+
+
 
   return editorLoaded ? (
     <>
@@ -64,16 +71,8 @@ const Editor = ({ onUpload, content, setContent }: EditorProps) => {
       <CKEditor
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
-        config={{ plugins: [FileRepository]}}
+        config={{ extraPlugins: [uploadPlugin]}}
         data={content.length > 0 ? content : ""}
-        onInit={(editor:any) => {
-          editor.plugins.get("FileRepository").createUploadAdapter = (
-            loader: any
-           ) => {
-              loader.onUpload = editor.onUpload;
-             return new UploadAdapter(loader);
-           }
-        }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
         }}
