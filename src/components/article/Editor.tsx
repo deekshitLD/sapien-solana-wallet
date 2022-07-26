@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 interface EditorProps {
   content: any;
   setContent: Function;
+  onUpload: Function;
 }
 
 const Editor = ({ content, setContent }: EditorProps) => {
@@ -18,25 +19,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
   //       ({ DecoupledEditor }: any) => DecoupledEditor
   //     )
   //   );
-  const CustomUploadAdapterPlugin = (editor:any) => {
-  editor.plugins.get("FileRepository").createUploadAdapter = (
-    loader: any
-   ) => {
-      loader.onUpload = editor.onUpload;
-      loader.accessToken = editor.accessToken;
-      return new UploadAdapter(loader);
-   }
-  }
-
-  class Editor extends Component {
-    static get propTypes() {
-      return {
-        value: PropTypes.string,
-        onChange: PropTypes.func,
-        accessToken: PropTypes.string,
-        onUpload: PropTypes.func,
-      };
-    }
 
   useEffect(() => {
     editorRef.current = {
@@ -76,6 +58,26 @@ const Editor = ({ content, setContent }: EditorProps) => {
     setEditorLoaded(true);
   }, []);
 
+  class Editor extends Component {
+    static get propTypes() {
+      return {
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+        accessToken: PropTypes.string,
+        onUpload: PropTypes.func,
+      };
+    }
+
+    const CustomUploadAdapterPlugin = (editor:any) => {
+      editor.plugins.get("FileRepository").createUploadAdapter = (
+        loader: any
+       ) => {
+          loader.onUpload = editor.onUpload;
+          loader.accessToken = editor.accessToken;
+          return new UploadAdapter(loader);
+       }
+      }
+
   return editorLoaded ? (
     <>
       {console.log(ClassicEditor)}
@@ -102,6 +104,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
   ) : (
     <div>Editor loading</div>
   );
-};
+};}
 
 export default Editor;
