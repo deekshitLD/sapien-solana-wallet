@@ -74,8 +74,8 @@ const Editor = ({ content, setContent }: EditorProps) => {
         config={{ extraPlugins: [CustomUploadAdapterPlugin]}}
         data={content.length > 0 ? content : ""}
         onInit={(editor:any) => {
-          editor.onUpload = this.props.onUpload; //append event
-          editor.accessToken = this.props.accessToken;
+          editor.onUpload = this.EditorProps.onUpload; //append event
+          editor.accessToken = this.EditorProps.accessToken;
         }}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);
