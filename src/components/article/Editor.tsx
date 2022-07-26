@@ -23,7 +23,7 @@ const Editor = ({ content, setContent }: EditorProps) => {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-      FileRepository: require("@ckeditor/ckeditor5-upload/src/filerepository"),
+      FileRepository: require("@ckeditor/ckeditor5-upload"),
 
     };
 
