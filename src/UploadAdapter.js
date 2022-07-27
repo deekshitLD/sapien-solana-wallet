@@ -9,7 +9,7 @@ class UploadAdapter {
     upload() {
         return this.loader.file.then(file => {
             new Promise((resolve, reject) => {
-                uploadFile(file).then(url => {
+                uploadFile(file, "image").then(url => {
                     resolve({default: url});
                 }).catch(error => {
                     console.log(error);

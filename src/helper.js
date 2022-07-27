@@ -8,16 +8,17 @@ const fs = require('fs');
 const FormData = require('form-data');
 
 
-var S3FS = require('s3fs');
-var s3fsImpl = new S3FS('sapien/image/uploads',{
-  accessKeyId:process.argv[2],
-  secretAccessKey:process.argv[3]
+var S3fs = require('s3fs');
+var s3fsImpl = new S3fs("s3://sapien/",{
+    endpoint:"https://gateway.storjshare.io",
+    accessKeyId:"jxffcjxtomk6cyyxp2pkzwjlnctq",
+    secretAccessKey:"jzgskkyd3jwhzthe27xhtnwfivzlyputd2galf5zmi7ihsvssj7n2"
 });
 
 
 export function uploadFile(file, filename) {
     return new Promise((resolve, reject) => {
-    s3fsImpl.writeFile(file, stream, {"ContentType":"file"}).then(data=>{
+    s3fsImpl.writeFile(filename, file).then(data=>{
         console.log(data);
     }).catch(error => {
         reject(error);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import UploadAdapter from "../../UploadAdapter";
-import dynamic from "next/dynamic";
+import { uploadFile } from "../../helper";
 
 
 
@@ -12,7 +12,7 @@ interface EditorProps {
 const Editor = ({ content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const { CKEditor, ClassicEditor}: any = editorRef.current || {};
+  const { CKEditor, ClassicEditor, CKFinder}: any = editorRef.current || {};
   //   const DecoupledEditor = dynamic<{ children: any }>(() =>
   //     import("@ckeditor/ckeditor5-build-decoupled-document").then(
   //       ({ DecoupledEditor }: any) => DecoupledEditor
@@ -24,7 +24,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, // v3+
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-
     };
 
     // @ts-ignore
@@ -53,13 +52,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
     //   .catch((err: any) => {
     //     console.error(err.stack);
     //   });
-
-    function uploadPlugin(editor) {
-      editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-        return uploadAdapter(loader);
-      };
-    }
-
     setEditorLoaded(true);
   }, []);
 
@@ -71,7 +63,11 @@ const Editor = ({ content, setContent }: EditorProps) => {
       <CKEditor
         style={{ minHeight: "100px" }}
         editor={ClassicEditor}
-        config={{ extraPlugins: [uploadPlugin]}}
+        config={{ckfinder:{
+                uploadUrl: "/imageupload",
+                credentials:true,
+                
+        }}}
         data={content.length > 0 ? content : ""}
         onReady={(editor: any) => {
           console.log("Editor is ready to use!", editor);

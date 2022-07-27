@@ -62,7 +62,7 @@ const AddArticle = () => {
   );
 
   const today = new Date();
-  const [content, setContent, onUpload] = useState("");
+  const [content, setContent] = useState("");
   const [heading, setHeading] = useState("");
   const [loading, setLoading] = useState(true);
   const [reportAccountPublicKey, setReportAccountPublicKey] = useState<any>();
