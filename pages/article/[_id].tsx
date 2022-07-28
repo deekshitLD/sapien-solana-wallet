@@ -7,7 +7,6 @@ import { useToast, Box, Container, Heading, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Layout from "../../src/components/Layout";
 
-
 const Article = () => {
   const router = useRouter();
   const { _id } = router.query;
