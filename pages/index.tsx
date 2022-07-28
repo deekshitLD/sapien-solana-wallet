@@ -81,21 +81,14 @@ const HomePage: any = () => {
 
       <main className={styles.main}>
         <Header />
-
-        {/* <Heading as="h1" size="4xl">
+        {/*
+         <Heading as="h1" size="4xl">
           <span className={styles.animateCharcter}>
             {" "}
-            <Image
-              src="/Sapiens News.jpeg"
-              alt="Sapiens news logo"
-              width={60}
-              height={60}
-            />
-            <span style={{ position: "relative", bottom: "6px", left: "6px" }}>
-              apien News
-            </span>
+
           </span>
         </Heading>
+
         <Heading as="h2" size="lg" margin={10}>
           The 🌎 of Un-biased media
         </Heading> */}

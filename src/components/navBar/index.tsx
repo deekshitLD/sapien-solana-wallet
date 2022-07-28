@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
+  Image,
   Link
 } from "@chakra-ui/react";
 import { MdSearch } from "react-icons/md";
@@ -38,8 +39,15 @@ const Navbar = () => {
         background="brand.greyDark"
         padding={"4"}
       >
-
-        <div></div>
+        <div>
+        <a href="https://sapien.news">
+        <Image
+              src="/SapienNews.jpeg"
+              alt="Sapiens news logo"
+              width={12}
+              height={12}
+              style={{float:'left'}}
+            /><span style={{position:'relative',top:12}}>apien News</span></a></div>
         {/* {loggedIn && (
           <>
             <InputGroup maxWidth={"20rem"} alignItems={"center"}>
