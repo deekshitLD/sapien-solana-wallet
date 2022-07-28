@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import UploadAdapter from "../../UploadAdapter";
-import { uploadFile } from "../../helper";
-
-
 
 interface EditorProps {
   content: any;
@@ -12,7 +8,7 @@ interface EditorProps {
 const Editor = ({ content, setContent }: EditorProps) => {
   const editorRef = useRef({});
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const { CKEditor, ClassicEditor, CKFinder}: any = editorRef.current || {};
+  const { CKEditor, ClassicEditor}: any = editorRef.current || {};
   //   const DecoupledEditor = dynamic<{ children: any }>(() =>
   //     import("@ckeditor/ckeditor5-build-decoupled-document").then(
   //       ({ DecoupledEditor }: any) => DecoupledEditor
@@ -56,7 +52,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
   }, []);
 
 
-
   return editorLoaded ? (
     <>
       {console.log(ClassicEditor)}
@@ -65,8 +60,6 @@ const Editor = ({ content, setContent }: EditorProps) => {
         editor={ClassicEditor}
         config={{ckfinder:{
                 uploadUrl: "/imageupload",
-                credentials:true,
-                
         }}}
         data={content.length > 0 ? content : ""}
         onReady={(editor: any) => {
