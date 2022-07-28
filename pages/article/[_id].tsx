@@ -6,7 +6,7 @@ import { listArticles, getArticle } from "../../src/api/article";
 import { useToast, Box, Container, Heading, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Layout from "../../src/components/Layout";
-import Parser from "html-react-parser";
+
 
 const Article = () => {
   const router = useRouter();
