@@ -5909,7 +5909,7 @@
     "prop-types" "^15.5.0"
     "react-async-script" "^1.1.1"
 
-"react-html-parser@^2.0.2", "react-html-parser@latest":
+"react-html-parser@^2.0.2":
   "integrity" "sha512-XeerLwCVjTs3njZcgCOeDUqLgNIt/t+6Jgi5/qPsO/krUWl76kWKXMeVs2LhY2gwM6X378DkhLjur0zUQdpz0g=="
   "resolved" "https://registry.npmjs.org/react-html-parser/-/react-html-parser-2.0.2.tgz"
   "version" "2.0.2"

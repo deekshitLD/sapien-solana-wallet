@@ -47,7 +47,7 @@ const Navbar = () => {
               width={12}
               height={12}
               style={{float:'left'}}
-            /><span style={{position:'relative',top:12}}>apien News</span></a></div>
+            /><span style={{position:'relative',fontWeight:900,fontSize:30,top:8}}>apien News</span></a></div>
         {/* {loggedIn && (
           <>
             <InputGroup maxWidth={"20rem"} alignItems={"center"}>
