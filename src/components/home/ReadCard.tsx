@@ -14,7 +14,7 @@ const ReadCard = (props: any) => {
         src={image_url}
       ></img>
       <Box>
-        <Heading mt="3" size="lg" color="white">
+        <Heading mt="3" size="md" color="white">
           {heading}
         </Heading>
         <Box color="brand.grey" fontWeight={"bold"} mt="3">
