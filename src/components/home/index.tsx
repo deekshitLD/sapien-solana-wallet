@@ -92,9 +92,9 @@ export default function NewsFeed() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gridGap: "1rem",
-            gridAutoRows: "minmax(100px, auto)",
+            gridAutoRows: "minmax(1fr, auto)",
             gridAutoFlow: "row dense",
-            gridAutoColumns: "minmax(300px, 1fr)",
+            gridAutoColumns: "minmax(1fr, auto)",
           }}
         >
           {publishedArticle.length > 0 &&
