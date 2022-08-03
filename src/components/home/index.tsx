@@ -90,7 +90,7 @@ export default function NewsFeed() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit)",
+            gridTemplateColumns: "masonry",
             gridGap: "1rem",
             gridAutoRows: "minmax(1fr, auto)",
             gridAutoFlow: "row dense",
