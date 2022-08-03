@@ -8,13 +8,14 @@ const ReadCard = (props: any) => {
   return (
     <Box p="5" maxW="300" bg="brand.greyDark">
       <img
-        width={"200px"}
-        height={"200px"}
+        width={"max"}
         alt=""
         src={image_url}
       ></img>
       <Box>
-        <Heading mt="3" size="md" color="white">
+        <Heading mt="3" size="md" color="white" style={{
+            maxHeight: "2.3em",
+          }}>
           {heading}
         </Heading>
         <Box color="brand.grey" fontWeight={"bold"} mt="3">
