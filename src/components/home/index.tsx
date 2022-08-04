@@ -82,11 +82,11 @@ export default function NewsFeed() {
     <>
       <style>{style}</style>
       <div className="outer-container">
-        {/* <Masonry
+       <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
-        > */}
+        >
         <div
           style={{
             display: "grid",
@@ -129,7 +129,7 @@ export default function NewsFeed() {
               </div>
             ))}
         </div>
-        {/* </Masonry> */}
+        </Masonry>
       </div>
     </>
   );
