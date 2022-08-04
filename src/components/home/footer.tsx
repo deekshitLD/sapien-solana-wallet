@@ -30,13 +30,13 @@ const Footer: React.FC = () => {
           mt="8"
         >
           <Link href="https://discord.gg/hQZmR3V5pn">
-            <Box as={FaDiscord} size="22px" color="green" mr="12px" />
+            <Box as={FaDiscord} size="22px" color="#7289DA" mr="12px" />
           </Link>
           <Link href="https://twitter.com/SapienNews">
             <Box as={FaTwitter} size="22px" color="#1DA1F2" mr="12px" />
           </Link>
           <Link href="https://www.youtube.com/channel/UCdd-cjlpn13PLg8SG-72YNg">
-            <Box as={FaYoutube} size="22px" color="E6E8E6" />
+            <Box as={FaYoutube} size="22px" color="#E6E8E6" />
           </Link>
         </Flex>
       </Flex>
