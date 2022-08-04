@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['43vh']}
+      height={['45vh']}
       width={['auto']}
       templateRows="1fr 1fr 1fr"
     >
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
-          margin={['5vh']}
+          marginBottom={['5vh']}
         >
           Join the waitlist
         </Heading>
