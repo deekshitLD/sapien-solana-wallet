@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
-          margin={['15vh']}
+          margin={['0','0','15vh','0']}
         >
           Join the waitlist
         </Heading>
