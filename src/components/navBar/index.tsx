@@ -36,7 +36,7 @@ const Navbar = () => {
     <nav style={{ width: "100%" }}>
       <Flex
         justifyContent={"space-between"}
-        background="brand.greyDark"
+        background="000000"
         padding={"4"}
       >
         <div>
