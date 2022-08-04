@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           color="white"
           mb="3"
           width="fit-content"
-          paddingX={['4px', '12px', '12px', '16px', '16px']}
+          paddingX={['4px', '12px', '12px', '0px', '16px']}
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
           Be a Crypto Sapien<br/>Be Crypto Aware
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
           color="black"
-          borderRadius={"10"}
+          borderRadius={"3"}
           bg="#FDCA40"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
