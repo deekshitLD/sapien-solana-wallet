@@ -26,7 +26,7 @@ const Header: React.FC = () => {
           paddingX={['4px', '12px', '12px', '16px', '24px']}
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
-          Be Crypto Aware<br/>News from everywhere
+          Be Crypto Aware<br/>News from the MetaVerse
         </Heading>
         <Heading
           as="h3"
