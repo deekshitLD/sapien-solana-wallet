@@ -16,7 +16,6 @@ const Header: React.FC = () => {
         flexDirection="column"
         gridRow="3 / 3"
         paddingX={['1.5em', '1.5em', '1.5em', '15%']}
-        margin="auto"
       >
         <Heading
           as="h2"
@@ -24,17 +23,17 @@ const Header: React.FC = () => {
           color="white"
           mb="3"
           width="fit-content"
-          text-align="center"
           paddingX={['4px', '12px', '12px', '16px', '24px']}
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
-          Be Crypto Aware<br/>Be a Crypto Sapien
+          Be a Crypto Sapien<br/>Be Crypto Aware
         </Heading>
         <Heading
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
           color="black"
-          bg="#F52929"
+          borderRadius={"10"}
+          bg="#FDCA40"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
