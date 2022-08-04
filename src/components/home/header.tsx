@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['32']}
+      height={['59vh']}
       width={['auto']}
       templateRows="1fr 1fr 1fr"
     >
@@ -27,6 +27,7 @@ const Header: React.FC = () => {
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
         </Heading>
+        Be Crypto Aware<br/>News from everywhere
         <Heading
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
