@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['300px']}
+      height={['32']}
       width={['auto']}
       templateRows="1fr 1fr 1fr"
     >

@@ -13,7 +13,7 @@ export const theme = extendTheme({
       primaryRed: "#FF0000",
       purpleLight: "#DED9FF",
       purpleDark: "#4C4096",
-      white: "#FFFFFF",
+      white: "#E6E8E6",
       900: "#1a365d",
       800: "#153e75",
       700: "#2a69ac",

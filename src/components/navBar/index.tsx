@@ -74,8 +74,8 @@ const Navbar = () => {
           )}
           {/* <Link>Connect</Link> */}
           {/* <Box marginRight={"0.5rem"}> */}
-          <Box marginRight={"0.5rem"} background={"#E6E8E6"} borderRadius={"100"}>
-            <WalletMultiButton color={"#000000"} />
+          <Box marginRight={"0.5rem"} background={"#000000"} borderRadius={"100"}>
+            <WalletMultiButton/>
           </Box>
           {/* </Box> */}
         </HStack>
