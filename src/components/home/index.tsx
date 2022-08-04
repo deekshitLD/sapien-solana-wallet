@@ -145,7 +145,7 @@ const style = `
   .outer-container {
     width:100vw;
     padding:30px;
-    background-color: #000000;
+    background-color: #111119;
   }
 
   .title {

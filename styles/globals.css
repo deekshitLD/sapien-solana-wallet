@@ -27,9 +27,6 @@ a {
 }
 
 .wallet-adapter-button-trigger {
-  background-color: black !important;
+  background-color: #E6E8E6 !important;
 }
 
-.wallet-adapter-button-trigger:hover {
-  background-color: rgb(61, 61, 61) !important;
-}

@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <Box as={FaTwitter} size="22px" color="#1DA1F2" mr="12px" />
           </Link>
           <Link href="https://www.youtube.com/channel/UCdd-cjlpn13PLg8SG-72YNg">
-            <Box as={FaYoutube} size="22px" color="red" />
+            <Box as={FaYoutube} size="22px" color="E6E8E6" />
           </Link>
         </Flex>
       </Flex>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
         paddingX="8"
         mt={["12", "12", "12", "0", "0"]}
       >
-        <Text color="#6E64E7" fontWeight="bold" fontSize="20px" mb="8px">
+        <Text color="#E6E8E6" fontWeight="bold" fontSize="20px" mb="8px">
           POWERED BY
         </Text>
         <Text mb="6px" fontStyle="italic" >
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
         paddingX={["8", "8", "8", "2", "2"]}
         mt={["12", "12", "12", "0", "0"]}
       >
-        <Text color="#6E64E7" fontWeight="bold" fontSize="20px" mb="8px">
+        <Text color="#E6E8E6" fontWeight="bold" fontSize="20px" mb="8px">
           CONTACT US
         </Text>
         <Text mb="6px">Address: Bengaluru, Karnataka</Text>
