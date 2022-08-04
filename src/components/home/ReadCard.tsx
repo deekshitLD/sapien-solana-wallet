@@ -6,7 +6,7 @@ const ReadCard = (props: any) => {
   const { heading, content, author, image_url, date_publish } = props;
 
   return (
-    <Box p="5" bg="brand.greyDark">
+    <Box p="5" bg="brand.black">
       <img
         width={"max"}
         alt=""

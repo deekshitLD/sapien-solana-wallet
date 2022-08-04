@@ -8,8 +8,8 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['0px']}
-      width={['0px']}
+      height={['300px']}
+      width={['auto']}
       templateRows="1fr 1fr 1fr"
     >
       <Flex
