@@ -16,17 +16,19 @@ const Header: React.FC = () => {
         flexDirection="column"
         gridRow="3 / 3"
         paddingX={['1.5em', '1.5em', '1.5em', '15%']}
+        margin="auto"
       >
         <Heading
           as="h2"
-          fontSize={['3xl', '4xl', '5xl', '5xl', '5xl']}
+          fontSize={['2xl', '3xl', '4xl', '5xl', '5xl']}
           color="white"
           mb="3"
           width="fit-content"
+          text-align="center"
           paddingX={['4px', '12px', '12px', '16px', '24px']}
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
-          Be Crypto Aware<br/>News from the MetaVerse
+          Be Crypto Aware<br/>Be a Crypto Sapien
         </Heading>
         <Heading
           as="h3"
