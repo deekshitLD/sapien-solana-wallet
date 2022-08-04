@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
         paddingX={["8", "8", "8", "2", "2"]}
         mt={["12", "12", "12", "0", "0"]}
       >
-        <Text color="#6E64E7" fontWeight="bold" fontSize="20px" mb="8px">
+        <Text color="#E6E8E6" fontWeight="bold" fontSize="20px" mb="8px">
         <a target="_blank" href="/Sapien - Whitepaper.pdf">READ OUR WHITEPAPER</a>
         </Text>
         <Text mb="6px">We are Open To Feedback and Suggestions </Text>
