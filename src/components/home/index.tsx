@@ -87,17 +87,6 @@ export default function NewsFeed() {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gridTemplateRows:"masonry",
-            gridGap: "1rem",
-            gridAutoRows: "minmax(1fr, auto)",
-            gridAutoFlow: "row dense",
-            gridAutoColumns: "minmax(1fr, auto)",
-          }}
-        >
           {publishedArticle.length > 0 &&
             publishedArticle.map((item: any, index: number) => (
               <div key={index}>
@@ -128,7 +117,6 @@ export default function NewsFeed() {
                 {/* </Center> */}
               </div>
             ))}
-        </div>
         </Masonry>
       </div>
     </>
