@@ -32,11 +32,13 @@ const Header: React.FC = () => {
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
           color="black"
+          bg="#F52929"
           width="fit-content"
           paddingX={['24px', '24px', '30px', '30px', '30px']}
           paddingY={['8px', '8px', '14px', '14px', '14px']}
           margin={['20px']}
         >
+          Join the waitlist
         </Heading>
       </Flex>
     </Grid>
