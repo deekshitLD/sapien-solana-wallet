@@ -28,7 +28,7 @@ const Header: React.FC = () => {
         >
           Be a Crypto Sapien<br/>Be Crypto Aware
         </Heading>
-        <a href="https://forms.gle/g3jTbSboHDNNfz9H6" target="_blank">
+        <a href="https://forms.gle/g3jTbSboHDNNfz9H6" target="_blank" rel="noreferrer">
         <Heading
           as="h3"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
