@@ -105,9 +105,18 @@ const VotingList = () => {
               </>
             )}
             {loading && (
-              <Center>
+              //Loading spinner in the center of the page
+              <Flex
+                justifyItems={"center"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                flexDirection={"column"}
+                wrap={"wrap"}
+                textAlign="center"
+                margin={"auto"}
+              >
                 <Spinner size={"xl"} />
-              </Center>
+              </Flex>
             )}
           </Flex>
         </>

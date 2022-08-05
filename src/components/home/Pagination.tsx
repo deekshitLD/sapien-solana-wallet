@@ -1,6 +1,5 @@
 //Changed to Component Header and also Routed to Header on Index Page
 //Hence This Component is no longer Required
-//
 import React, { FC, ChangeEvent, useEffect, useState } from "react";
 import {Grid,Center,Select,ButtonProps,Text,Button,ChakraProvider} from "@chakra-ui/react";
 import { Paginator,Container,Previous,usePaginator,Next,PageGroup } from "chakra-paginator";
@@ -60,9 +59,9 @@ const fetchArticles = (pageSize: number, offset: number) => {
     const normalStyles: ButtonProps = {
       ...baseStyles,
       _hover: {
-        bg: "green.300"
+        bg: "gray.100",
       },
-      bg: "red.300"
+      bg: "yellow.300"
     };
 
     const activeStyles: ButtonProps = {
@@ -75,7 +74,7 @@ const fetchArticles = (pageSize: number, offset: number) => {
 
     const separatorStyles: ButtonProps = {
       w: 7,
-      bg: "green.200"
+      bg: "yellow.200"
     };
 
     // handlers
@@ -128,6 +127,7 @@ const fetchArticles = (pageSize: number, offset: number) => {
             <option value="50">50</option>
           </Select>
         </Center>
+        {/* This is the current page that is showing the Grid of Pokemon To be changed to sapien news*/}
         <Grid
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(5, 1fr)"
@@ -136,7 +136,7 @@ const fetchArticles = (pageSize: number, offset: number) => {
           mt={20}
         >
           {articles?.map(({ name }) => ( //changed to articles here
-            <Center p={4} bg="green.100" key={name}>
+            <Center p={4} bg="#3d38d6" key={name}>
               <Text>{name}</Text>
             </Center>
           ))}
