@@ -391,7 +391,7 @@ const AddArticle = () => {
       <VStack
         spacing="24px"
         justifyContent={"center"}
-        background={"brand.greyDark"}
+        background={"#000000"}
         color={"white"}
       >
         <Heading textAlign={"center"}>Start writing </Heading>
@@ -400,7 +400,7 @@ const AddArticle = () => {
           justifyContent={"space-between"}
           flexGrow={1}
           flexBasis={0}
-          background={"brand.greyDark"}
+          background={"#000000"}
         >
           {/* <Button
             leftIcon={<ArrowLeftIcon />}
@@ -425,6 +425,7 @@ const AddArticle = () => {
                   variant={mode === "Edit" ? "solid" : "outline"}
                   style={{ borderRadius: "0 2rem 2rem 0" }}
                 >
+                 justifyContent={"center"} 
                   Edit
                 </Button>
               </>
@@ -437,7 +438,7 @@ const AddArticle = () => {
       <Container maxW="container.lg" background={"brand.greyDark"}>
         {loading && (
           <>
-            <div style={{ margin: "auto" }}>
+            <div style={{ margin: "auto"}} >
               <Spinner size="xl" />
             </div>
           </>
@@ -452,7 +453,7 @@ const AddArticle = () => {
             />
 
             <Box marginBottom={"50px"}>
-              <Editor content={content} setContent={setContent} />
+              <Editor content={content} setContent={setContent} bg={"#000000"}/>
             </Box>
           </>
         )}
