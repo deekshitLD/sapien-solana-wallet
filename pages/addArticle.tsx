@@ -453,7 +453,7 @@ const AddArticle = () => {
             />
 
             <Box marginBottom={"50px"}>
-              <Editor content={content} setContent={setContent} bg={"#000000"}/>
+              <Editor content={content} setContent={setContent}/>
             </Box>
           </>
         )}

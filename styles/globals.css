@@ -26,6 +26,18 @@ a {
   background: #323232;
 }
 
+.ck.ck-editor__main{
+  background-color: #000000;
+  color:#FFFFFF;
+}
+
+.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+
+  background-color: black;
+  color: white;
+ 
+ }
+
 .wallet-adapter-button-trigger {
   background-color: #000000 !important;
   border-color: E6E8E6;
