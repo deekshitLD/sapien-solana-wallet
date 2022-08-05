@@ -35,7 +35,7 @@ import {
 } from "@solana/spl-token";
 import Header from "../src/components/home/header";
 import Footer from "../src/components/home/footer";
-import Pagination from "../src/components/home/Pagination";
+//import Pagination from "../src/components/home/Pagination";
 
 import Home from "../src/components/home";
 
@@ -99,9 +99,9 @@ const HomePage: any = () => {
           </>
 
           {/* Pagination */}
-          <>
+          {/* <>
             <Pagination />
-          </>
+          </> */}
       </main>
       <Footer />
       <div></div>
