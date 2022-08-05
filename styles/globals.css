@@ -31,6 +31,11 @@ a {
   color:#FFFFFF;
 }
 
+.ck.ck-editor__main>.ck-editor__editable{
+  background-color: #000000;
+  color:#FFFFFF;
+}
+
 .ck.ck-reset_all, .ck.ck-reset_all * {
   color: #ffffff;
 }
