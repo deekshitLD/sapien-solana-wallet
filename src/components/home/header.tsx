@@ -20,13 +20,15 @@ const Header: React.FC = () => {
         <Heading
           as="h2"
           fontSize={['2xl', '3xl', '4xl', '5xl', '5xl']}
+          fontFamily={"Blanka"}
+          fontWeight={"500"}
           color="white"
           mb="3"
           width="fit-content"
           paddingX={['0px', '0px', '0px', '0px', '0px']}
           paddingY={['4px', '4px', '12px', '12px', '12px']}
         >
-          Be a Crypto Sapien<br/>Be Crypto Aware
+          Press for Crypto Sapiens
         </Heading>
         <a href="https://forms.gle/g3jTbSboHDNNfz9H6" target="_blank" rel="noreferrer">
         <Heading

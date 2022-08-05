@@ -1,11 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap");
+@font-face { 
+  font-family: "Space_Grotesk";
+  src: url("./Space_Grotesk/SpaceGrotesk-Regular.ttf") format("truetype");
+}
+
+@font-face { 
+  font-family: "Blanka";
+  src: url("./blanka/Blanka-Regular.ttf") format("truetype");
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
   height: 100%;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Space Grotesk";
 }
 
 a {
