@@ -31,10 +31,13 @@ a {
   color:#FFFFFF;
 }
 
+.ck.ck-reset_all, .ck.ck-reset_all * {
+  color: #ffffff;
+}
+
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
 
   background-color: black;
-  color: white;
  
  }
 
