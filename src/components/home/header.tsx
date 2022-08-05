@@ -20,6 +20,7 @@ const Header: React.FC = () => {
         <Heading
           as="h2"
           fontSize={['2xl', '3xl', '4xl', '5xl', '5xl']}
+          fontFamily={"Blanka"}
           color="white"
           mb="3"
           width="fit-content"

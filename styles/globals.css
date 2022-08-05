@@ -5,6 +5,11 @@
   src: url('./Space_Grotesk/SpaceGrotesk-Regular.ttf') format('ttf');
 }
 
+@font-face { 
+  font-family: 'Blanka';
+  src: url('./blanka/Blanka-Regular.ttf') format('ttf');
+}
+
 html,
 body {
   padding: 0;
