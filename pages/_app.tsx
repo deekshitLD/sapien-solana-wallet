@@ -10,6 +10,7 @@ import "../src/api/interceptor";
 import { theme } from "../src/styles/theme";
 import { NextPage } from "next";
 import Script from "next/script";
+import
 // glib.js
 export const GA_TRACKING_ID = process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS"]
 // Use require instead of import, and order matters
