@@ -26,7 +26,12 @@ a {
   background: #323232;
 }
 
-.ck.ck-editor__main{
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+  background-color: #000000;
+  color:#FFFFFF;
+}
+
+.ck.ck-editor__main>.ck-editor__editable{
   background-color: #000000;
   color:#FFFFFF;
 }
