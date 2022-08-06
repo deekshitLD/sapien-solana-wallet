@@ -61,13 +61,13 @@ const VotingList = () => {
               articlesUnderVote.map((item: any) => {
                 return (
                   <ArticleTile
-                    // key={item._id}
-                    // id={item._id}
-                    // title={item.heading}
-                    // content={item.content}
-                    // date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
-                    // articleUnderVote={true}
-                    // image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
+                    key={item._id}
+                    id={item._id}
+                    title={item.heading}
+                    content={item.content}
+                    date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
+                    articleUnderVote={true}
+                    image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />
                 );
               })}
