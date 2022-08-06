@@ -66,12 +66,12 @@ const Navbar = () => {
                 <Link color="brand.white">Whitepaper</Link>
               </NextLink>
         <NextLink href="/addArticle">
-                <Link color="brand.white"> Write </Link>
+                <Link color="brand.white"> Write an Article </Link>
               </NextLink>
           {loggedIn && (
             <>
               <NextLink href="/votingList">
-                <Link color="brand.white"> Publish</Link>
+                <Link color="brand.white"> Publishing</Link>
               </NextLink>
             </>
           )}
