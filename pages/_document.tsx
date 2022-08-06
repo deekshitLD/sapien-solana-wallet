@@ -11,10 +11,10 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
           <link rel="shortcut icon" href="/static/favicon.ico" />
-          {/* <link
+          <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Space_Grotesk:300,400,500,700&display=swap"
-          /> */}
+            href="https://github.com/Sapien-news/sapien-solana-wallet/blob/main/styles/Space_Grotesk/SpaceGrotesk-Regular.ttf?raw=true"
+          />
         </Head>
         <body>
           <Main />

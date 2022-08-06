@@ -70,6 +70,7 @@ const VotingList = () => {
                     image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />
                 );
+                {console.log("Articles under vote-2 ", articlesUnderVote)}
               })}
             {articlesUnderVote?.length === 0 && loading === false && (
               <>
