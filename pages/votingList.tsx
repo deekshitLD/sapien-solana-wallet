@@ -65,11 +65,12 @@ const VotingList = () => {
                     id={item._id}
                     title={item.heading}
                     content={item.content}
-                    date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
+                    //date_publish={item.date_publish ? new Date(item.date_publish).getTime() : 0}
                     articleUnderVote={true}
                     image_url={item.image_url ? item.image_url : "/Sapiens News.jpeg"}
                   />
                 );
+                {console.log("Articles under vote-2 ", articlesUnderVote)}
               })}
             {articlesUnderVote?.length === 0 && loading === false && (
               <>
