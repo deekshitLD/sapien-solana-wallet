@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/static/favicon.ico" />
           <link
             rel="stylesheet"
-            href="https://github.com/Sapien-news/sapien-solana-wallet/blob/main/styles/Space_Grotesk/SpaceGrotesk-Regular.ttf"
+            href="https://github.com/Sapien-news/sapien-solana-wallet/blob/main/styles/Space_Grotesk/SpaceGrotesk-Regular.ttf?raw=true"
           />
         </Head>
         <body>
