@@ -65,13 +65,14 @@ const Navbar = () => {
               <NextLink href="https://www.sapien.news/Sapien%20-%20Whitepaper.pdf">
                 <Link color="brand.white">Whitepaper</Link>
               </NextLink>
-        <NextLink href="/addArticle">
-                <Link color="brand.white"> Write an Article </Link>
-              </NextLink>
+
           {loggedIn && (
             <>
+              <NextLink href="/addArticle">
+                <Link color="brand.white"> Write a Post </Link>
+              </NextLink>
               <NextLink href="/votingList">
-                <Link color="brand.white"> Publishing</Link>
+                <Link color="brand.white"> Publish Post</Link>
               </NextLink>
             </>
           )}
