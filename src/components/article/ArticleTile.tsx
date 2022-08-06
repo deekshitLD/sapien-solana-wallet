@@ -30,7 +30,7 @@ const ArticleTile = ({
   content,
   articleUnderVote,
   image_url,
-  date_publish,
+  //date_publish,
 }: articleTileProps) => {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const toast = useToast();
