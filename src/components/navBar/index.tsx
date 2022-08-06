@@ -59,14 +59,17 @@ const Navbar = () => {
           </>
         )} */}
         <HStack>
-          {loggedIn && (
-            <>
-              <NextLink href="/" passHref>
-                <Link color={"brand.white"}> Read</Link>
+        <NextLink href="https://prezi.com/view/AAN5K3LWUnwfxY1FcWyP/">
+                <Link color="brand.white"> Pitch Deck </Link>
               </NextLink>
-              <NextLink href="/addArticle">
+              <NextLink href="https://www.sapien.news/Sapien%20-%20Whitepaper.pdf">
+                <Link color="brand.white">Whitepaper</Link>
+              </NextLink>
+        <NextLink href="/addArticle">
                 <Link color="brand.white"> Write </Link>
               </NextLink>
+          {loggedIn && (
+            <>
               <NextLink href="/votingList">
                 <Link color="brand.white"> Publish</Link>
               </NextLink>
