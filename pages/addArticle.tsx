@@ -409,7 +409,7 @@ const AddArticle = () => {
           >
             Article list
           </Button> */}
-          {/* 
+          {/*
           <ButtonGroup variant="outline" spacing="0">
             {(articleStatus === "DRAFT" || !articleId) && (
               <>
@@ -425,7 +425,7 @@ const AddArticle = () => {
                   variant={mode === "Edit" ? "solid" : "outline"}
                   style={{ borderRadius: "0 2rem 2rem 0" }}
                 >
-                 justifyContent={"center"} 
+                 justifyContent={"center"}
                   Edit
                 </Button>
               </>
@@ -435,7 +435,7 @@ const AddArticle = () => {
           {/* <Spacer /> */}
         </Flex>
       </VStack>
-      <Container maxW="container.lg" background={"brand.greyDark"}>
+      <Container maxW="container.lg" background={"#000000"}>
         {loading && (
           <>
             <div style={{ margin: "auto"}} >

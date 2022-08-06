@@ -1,9 +1,9 @@
-@font-face { 
+@font-face {
   font-family: "Space_Grotesk";
   src: url("./Space_Grotesk/SpaceGrotesk-Regular.ttf") format("truetype");
 }
 
-@font-face { 
+@font-face {
   font-family: "Blanka";
   src: url("./blanka/Blanka-Regular.ttf") format("truetype");
 }
@@ -13,7 +13,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  font-family: "Space Grotesk";
+  font-family: "Space_Grotesk";
 }
 
 a {
@@ -51,7 +51,7 @@ a {
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
 
   background-color: black;
- 
+
  }
 
 .wallet-adapter-button-trigger {
