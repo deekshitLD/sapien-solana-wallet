@@ -62,7 +62,7 @@ const Navbar = () => {
               <NextLink href="https://www.sapien.news/Sapien%20-%20Whitepaper.pdf">
                 <Link color="brand.white">Whitepaper</Link>
               </NextLink>
-              <NextLink href="https://prezi.com/view/AAN5K3LWUnwfxY1FcWyP/">
+              <NextLink href="https://prezi.com/view/AAN5K3LWUnwfxY1FcWyP">
                 <Link color="brand.white"> Pitch Deck </Link>
               </NextLink>
 
