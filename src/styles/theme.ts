@@ -53,7 +53,7 @@ export const theme = extendTheme({
   //   Button,
   // },
   fonts: {
-    heading: "Roboto",
-    body: "Roboto",
+    heading: "Space_Grotesk",
+    body: "Space_Grotesk",
   },
 });

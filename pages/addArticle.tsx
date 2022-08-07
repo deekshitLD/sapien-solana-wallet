@@ -439,7 +439,17 @@ const AddArticle = () => {
         {loading && (
           <>
             <div style={{ margin: "auto"}} >
-              <Spinner size="xl" />
+            <Flex
+          justifyItems={"center"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDirection={"column"}
+          wrap={"wrap"}
+          textAlign="center"
+          margin={"auto"}
+        >
+          <Spinner size={"xl"} />
+        </Flex>
             </div>
           </>
         )}
