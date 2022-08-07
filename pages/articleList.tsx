@@ -125,9 +125,17 @@ const ArticleList = () => {
           </>
         )}
         {loading && (
-          <Center>
-            <Spinner size={"xl"} />
-          </Center>
+          <Flex
+          justifyItems={"center"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDirection={"column"}
+          wrap={"wrap"}
+          textAlign="center"
+          margin={"auto"}
+        >
+          <Spinner size={"xl"} />
+        </Flex>
         )}
       </Flex>
       <Divider />
