@@ -439,15 +439,15 @@ const AddArticle = () => {
         {loading && (
           <>
             <div style={{ margin: "auto"}} >
-            <Flex
-          justifyItems={"center"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          flexDirection={"column"}
-          wrap={"wrap"}
-          textAlign="center"
-          margin={"auto"}
-        >
+         <Flex
+              justifyItems={"center"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              flexDirection={"column"}
+              wrap={"wrap"}
+              textAlign="center"
+              margin={"auto"}
+            >
           <Spinner size={"xl"} />
         </Flex>
             </div>
@@ -485,14 +485,22 @@ const AddArticle = () => {
           )}
 
           {articleId && articleStatus === "VOTING" && (
-            <Button
+
+            <><Button backgroundColor={"blue.500"}
               onClick={() => {
                 handlePublishArticle(wallet, reportAccountPublicKey, articleId);
-              }}
+              } }
             >
               Publish
-            </Button>
+            </Button><Button backgroundColor={"green.500"}
+              onClick={() => {
+                handlePublishArticle(wallet, reportAccountPublicKey, articleId);
+              } }
+            >
+                Censor
+              </Button></>
           )}
+
         </Stack>
       </Flex>
       {showUnsavedAlert && (

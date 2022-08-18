@@ -12,7 +12,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  height: 100%; 
+  height: 100%;
 }
 
 a {
@@ -25,31 +25,43 @@ a {
 }
 
 .ck {
-  background: #323232;
+  /* background: #323232; */
   color: black;
 }
 .ck-content {
   min-height: 400px;
-  background: #323232;
+  background-color: #323232;
+  color: black;
 }
 
-.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+.ck.ck-editor__main {
   background-color: #000000;
   color:#FFFFFF;
 }
 
 .ck.ck-editor__main>.ck-editor__editable{
   background-color: #000000;
-  color:#FFFFFF;
+  /* color:#FFFFFF; */
 }
 
 .ck.ck-reset_all, .ck.ck-reset_all * {
-  color: #ffffff;
+  /* color: #ffffff; */
+  background-color: #000000;
 }
 
-.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+.ck-toolbar__items {
 
-  background-color: black;
+  background-color: #000000;
+
+  color: #000000;
+
+  border-radius: 5px;
+
+  margin: 5px;
+
+  font-size: 1.2em;
+
+  font-family: "Space_Grotesk";
 
  }
 
@@ -58,3 +70,4 @@ a {
   border-color: E6E8E6;
 }
 
+/* .ck.ck-toolbar.ck-toolbar_grouping> */
